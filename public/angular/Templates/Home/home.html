@@ -1,0 +1,138 @@
+<style>
+	.transaction-header {
+		background-color: rgba(42,63,84, .9);
+		color: rgba(235,235,235,1);
+	}
+
+	.card {
+		background-color: rgba(200,200,200,1);
+		-webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+	}
+	.cell-header {
+		background-color: rgba(42,63,84, .7);
+		color: rgba(235,235,235,1);
+	}
+	.cell-content {
+		border-bottom: 1px solid rgba(30,30,30,0.7);
+		border-left: 1px solid rgba(30,30,30,0.7);
+		border-right: 1px solid rgba(30,30,30,0.7);
+	}
+	
+</style>
+<div flex layout="column" layout layout-align="start stretch">
+	<div flex="10" class="assessment-card" layout="column" layout-align="start stretch" my-setter padding="10">
+        <div flex layout="column" layout-align="start stretch">
+            <span class="header-title">Transactions Page</span>
+        </div>
+        <div flex></div>
+        <div flex layout layout-align="start stretch">
+            <span class="header-subtitle">Page for viewing today until the next 7 days transactions.</span>
+        </div>
+	</div>
+	<div flex layout="column" layout-align="start stretch" layout-padding>
+		<div flex layout="row" layout layout-align="start stretch">
+			<div flex layout="column" layout-align="start stretch"  class="card">
+				<div flex="10" layout layout-align="center center" class="transaction-header"> Inventory </div>
+				<div flex layout="column" layout-align="center center" ng-if="inventoryList.length == 0"> No new inventory transactions for today. </div>
+				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="inventoryList.length != 0">
+					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
+						<div flex layout layout-align="center center">Product Name</div>
+						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
+						<div flex layout layout-align="center center">Supplier Name</div>
+					</div>
+					<div flex layout="column" layout-align="start stretch">
+						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in inventoryList" class="cell-content">
+							<div flex layout layout-align="center center"> {{list.po_id}} </div>
+							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
+							<div flex layout layout-align="center center"> {{list.supplier_name}} </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div flex="none" my-setter width-in-percent="0.5"></div>
+			<div flex layout="column" layout-align="start stretch"  class="card">
+				<div flex="10" layout layout-align="center center" class="transaction-header"> Payables </div>
+				<div flex layout="column" layout-align="center center" ng-if="payablesList.length == 0"> No new payable transactions for today. </div>
+				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="payablesList.length != 0">
+					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
+						<div flex="30"layout layout-align="center center">PO Number</div>
+						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
+						<div flex layout layout-align="center center">Supplier Name</div>
+					</div>
+					<div flex layout="column" layout-align="start stretch">
+						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in payablesList" class="cell-content">
+							<div flex="30" layout layout-align="center center"> {{list.po_id}} </div>
+							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
+							<div flex layout layout-align="center center"> {{list.supplier_name}} </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div flex="none" my-setter width-in-percent="0.5"></div>
+			<div flex layout="column" layout-align="start stretch"  class="card">
+				<div flex="10" layout layout-align="center center" class="transaction-header"> Receivables </div>
+				<div flex layout="column" layout-align="center center" ng-if="receivablesList.length == 0"> No new receivable transactions for today. </div>
+				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="receivablesList.length != 0">
+					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
+						<div flex layout layout-align="center center">PO Number</div>
+						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
+						<div flex layout layout-align="center center">Customer Name</div>
+					</div>
+					<div flex layout="column" layout-align="start stretch">
+						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in receivablesList" class="cell-content">
+							<div flex="30" layout layout-align="center center"> {{list.po_id}} </div>
+							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
+							<div flex layout layout-align="center center"> {{list.customer_name}} </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div flex layout="row" layout layout-align="start stretch">
+			<div flex layout="column" layout-align="start stretch"  class="card">
+				<div flex="10" layout layout-align="center center" class="transaction-header"> Purchase Order </div>
+				<div flex layout="column" layout-align="center center" ng-if="poList.length == 0"> No new purchase order transactions for today. </div>
+				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="poList.length != 0">
+					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
+						<div flex layout layout-align="center center">PO Number</div>
+						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
+						<div flex layout layout-align="center center">Customer Name</div>
+					</div>
+					<div flex layout="column" layout-align="start stretch">
+						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in receivablesList" class="cell-content">
+							<div flex="30" layout layout-align="center center"> {{list.po_id}} </div>
+							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
+							<div flex layout layout-align="center center"> {{list.customer_name}} </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div flex="none" my-setter width-in-percent="0.5"></div>
+			<div flex layout="column" layout-align="start stretch"  class="card">
+				<div flex="10" layout layout-align="center center" class="transaction-header"> Outbound Delivery </div>
+				<div flex layout="column" layout-align="center center"> No outbound delivery transactions for today. </div>
+				<!-- <div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="deliveryList.length != 0">
+					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
+						<div flex layout layout-align="center center">PO Number</div>
+						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
+						<div flex layout layout-align="center center">Customer Name</div>
+					</div>
+					<div flex layout="column" layout-align="start stretch">
+						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in deliveryList" class="cell-content">
+							<div flex="30" layout layout-align="center center"> {{list.po_id}} </div>
+							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
+							<div flex layout layout-align="center center"> {{list.customer_name}} </div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+			<!-- <div flex="none" my-setter width-in-percent="0.5"></div>
+			<div flex layout="column" layout-align="start stretch"  class="card">
+				<div flex="10" layout layout-align="center center" class="transaction-header"> Reports Generated</div>
+				<div flex layout="column" layout-align="center center"> No outbound delivery transactions for today. </div>
+			</div> -->
+		</div>
+	</div>
+</div>

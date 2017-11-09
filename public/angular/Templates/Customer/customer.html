@@ -1,0 +1,73 @@
+
+<div layout="column" layout-align="start stretch" flex style="background-color:whitesmoke">
+    <div flex="10" class="assessment-card" layout="column" layout-align="start stretch" my-setter padding="10">
+        <div flex layout="column" layout-align="start stretch">
+            <span class="header-title">Customer Page</span>
+        </div>
+        <div flex></div>
+        <div flex layout layout-align="start stretch">
+            <span class="header-subtitle">Page for viewing, adding and modifying Migatsu's clients.</span>
+        </div>
+    </div>
+    <div flex layout layout-align="start stretch" my-setter padding="10">
+        <div layout="column" flex layout layout-align="start stretch">
+            <div flex="none" my-setter height-in-percent="8" layout="row" layout-align="start stretch" class="table-menu">
+                <div flex></div>
+                <div flex="20" layout="row" layout-align="center stretch" class="settings pointer add-button" ng-click="AddNewCustomer($event);">
+                    <div flex layout layout-align="center center" > Add Customers </div>
+                </div>
+                <div flex="5"></div>
+                <div flex="25" layout layout-align="center stretch">
+                    <md-icon md-svg-src="{{SVG.search}}" my-setter padding="10"></md-icon>
+                    <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchList">
+                </div>
+            </div>
+            <div flex="none" my-setter height-in-percent="8" layout="row" layout layout-align="start stretch" class="table table-header">
+                <div flex="35" layout layout-align="center center"> 
+                    <div flex="none" my-setter width-in-percent="3"></div>
+                    <div flex layout layout-align="center center"> Company Name </div>
+                </div>
+                    <div flex="35" layout layout-align="center center"> 
+                    <div flex="none" my-setter width-in-percent="3"></div>
+                    <div flex layout layout-align="center center"> Address </div>
+                </div>
+                    <div flex="20" layout layout-align="center center"> 
+                    <div flex layout layout-align="center center"> Tin Number </div>
+                </div>
+                <div flex="10" layout layout-align="center center"></div>
+            </div>
+            <div flex="10" layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="customerList.length == 0">
+                <div flex layout layout-align="center center"> No data Available </div>
+            </div>
+            <div flex layout="column" layout-align="start stretch">
+                <div layout="row" flex="none" my-setter height-in-percent="10" layout layout-align="start stretch" class="table-values" ng-repeat="list in customerList | filter:searchList | limitTo:10:(currentPage-1)*10">
+                    <div flex="35" layout layout-align="center center" layout-padding> {{list.name}} </div>
+                    <div flex="35" layout layout-align="center center" layout-padding> {{list.address}} </div>
+                    <div flex="20" layout layout-align="center center" layout-padding> {{list.tin}} </div>
+                    <div flex="10" layout layout-align="start stretch">
+                        <div flex layout layout-align="start stretch" class="pointer" ng-click="EditCustomer(list, $event)">
+                            <md-tooltip md-direction="top">Edit customer details</md-tooltip>
+                            <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                        </div>
+                        <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteCustomer(list, $event)">
+                            <md-tooltip md-direction="top">Delete customer details</md-tooltip>
+                            <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+     <div flex="10" layout="row" layout-align="center stretch">
+        <div flex="15" layout layout-align="center center">
+            <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
+            <select flex
+                ng-model="currentPage" 
+                ng-options="i for i in _.range(1,(customerList.length/10))">
+            </select>
+            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= customerList.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+        </div>
+    </div>  
+    <div flex="5"></div>
+</div>

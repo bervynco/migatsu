@@ -1,0 +1,55 @@
+<div layout="column" layout-align="start stretch" flex style="background-color:whitesmoke">
+    <div flex="10" class="assessment-card" layout="column" layout-align="start stretch" my-setter padding="10">
+        <div flex layout="column" layout-align="start stretch">
+            <span class="header-title">Outbound Delivery Page</span>
+        </div>
+        <div flex></div>
+        <div flex layout layout-align="start stretch">
+            <span class="header-subtitle">Page for viewing, adding and modifying Migatsu's outbound deliveries.</span>
+        </div>
+    </div>
+    <div flex layout layout-align="start stretch" my-setter padding="10">
+        <div layout="column" flex layout layout-align="start stretch">
+            <div flex="10" layout="row" layout-align="start stretch" class="table-menu">
+                <div flex></div>
+                <!-- <div flex="10" layout="row" layout-align="start stretch" class="settings">
+                    <div flex="30" layout layout-align="start stretch">
+                        <md-icon flex layout layout-align="center center" md-svg-src="{{SVG.search}}"></md-icon>
+                    </div>
+                    <div flex layout layout-align="start center"> Add Item </div>
+                </div> -->
+                <div flex="5"></div>
+                <div flex="25" layout layout-align="center stretch">
+                    <md-icon md-svg-src="{{SVG.search}}" my-setter padding="10"></md-icon>
+                    <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?">
+                </div>
+            </div>
+            <div layout="row" flex="10" layout layout-align="start stretch" class="table table-header">
+                <div flex layout layout-align="center center" ng-repeat="field in tableFieldNames">{{field}}</div>
+                <div flex layout layout-align="center center"></div>
+            </div>
+            <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="outboundDeliveryList.length == 0">
+                <div flex layout layout-align="center center"> No data Available </div>
+            </div>
+            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values" ng-repeat="list in outboundDeliveryList | limitTo:10:(currentPage-1)*10+1">
+                <div flex layout layout-align="center center"> {{list.customer_name}} </div>
+                <div flex layout layout-align="center center"> {{list.customer_po_id}} </div>
+                <div flex layout layout-align="center center"> {{list.amount}} </div>
+                <div flex layout layout-align="center center"> {{list.promised_delivery_date}} </div>
+                <div flex layout layout-align="center center"> {{list.invoice_id}} </div>
+                <div flex layout layout-align="center center"> {{list.supplier_dr_id}} </div>
+                <div flex layout layout-align="center center"> {{list.actual_delivery_date}} </div>
+                <!-- <div flex layout layout-align="center center"> {{list.overdue_days}} </div> -->
+                <div flex layout layout-align="center center"> {{list.remarks}} </div>
+                <div flex layout layout-align="start stretch">
+                    <div flex layout layout-align="start stretch" class="pointer" ng-click="MoveToDelivery(list, $event)">
+                        <md-tooltip md-direction="top">Change Delivery Date</md-tooltip>
+                        <md-icon md-svg-src="{{SVG.delivery}}" layout layout-align="center center"></md-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div flex="10" layout-layout-align="start stretch"style="background-color: pink;"></div>
+    <div flex="5"></div>
+</div>

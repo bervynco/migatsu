@@ -1,0 +1,30 @@
+
+<md-dialog my-setter width-in-percent="30" height-in-percent="30" layout="column" layout-align="start stretch">
+    <div flex="25" layout layout-align="start stretch" class="dialog-header">
+        <div flex layout layout-align="start center" > {{dialogHeading}} </div>
+        <div flex="20" layout layout-align="end stretch" class="pointer" ng-click="Close()">
+            <md-icon md-svg-src="{{SVG.clear}}" layout layout-align="center end"></md-icon>
+        </div>
+    </div>
+     <div flex class="dialog-content" layout="column" layout-align="start stretch">
+        <div flex="35" layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Promised Delivery Date: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="date" placeholder="Promised Delivery Date" ng-model="outboundDelivery.promised_delivery_date">
+        </div>
+        <div flex="35" layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Actual Delivery Date: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="date" placeholder="Actual Delivery Date" ng-model="outboundDelivery.actual_delivery_date">
+        </div>
+        <div flex="10" layout layout-align="start stretch">
+            <div flex></div>
+            <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewDeliveryDetails()">Submit</md-button>
+        </div> 
+        <div flex></div>
+    </div> 
+</md-dialog>

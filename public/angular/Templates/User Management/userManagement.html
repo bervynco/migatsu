@@ -1,0 +1,64 @@
+
+<div layout="column" layout-align="start stretch" flex style="background-color:whitesmoke">
+    <div flex="10" class="assessment-card" layout="column" layout-align="start stretch" my-setter padding="10">
+        <div flex layout="column" layout-align="start stretch">
+            <span class="header-title">User Management Page</span>
+        </div>
+        <div flex></div>
+        <div flex layout layout-align="start stretch">
+            <span class="header-subtitle">Page for viewinng, adding and modifying user access to the site.</span>
+        </div>
+    </div>
+    <div flex layout layout-align="start stretch" my-setter padding="10">
+        <div layout="column" flex layout layout-align="start stretch">
+            <div flex="10" layout="row" layout-align="start stretch" class="table-menu">
+                <div flex></div>
+                <div flex="20" layout="row" layout-align="center stretch" class="settings pointer add-button" ng-click="AddNewUser($event);">
+                    <div flex layout layout-align="center center" > Add New User </div>
+                </div>
+                <div flex="5"></div>
+                <div flex="25" layout layout-align="center stretch">
+                    <md-icon md-svg-src="{{SVG.search}}" my-setter padding="10"></md-icon>
+                    <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?">
+                </div>
+            </div>
+            <div layout="row" flex="10" layout layout-align="start stretch" class="table table-header">
+                <div flex layout layout-align="center center" ng-repeat="field in tableFieldNames">{{field}}</div>
+                <div flex="20" layout layout-align="center center"></div>
+            </div>
+            <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="userList.length == 0">
+                <div flex layout layout-align="center center"> No data Available </div>
+            </div>
+            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values" ng-repeat="list in userList | limitTo:10:(currentPage-1)*10+1">
+                <div flex layout layout-align="center center"> {{list.name}} </div>
+                <div flex layout layout-align="center center"> {{list.username}} </div>
+                <div flex layout layout-align="center center"> {{list.role}} </div>
+                <div flex="20" layout layout-align="start stretch">
+                    <div flex layout layout-align="start stretch" class="pointer" ng-click="ChangePassword(list, $event)">
+                        <md-tooltip md-direction="top">Change Password</md-tooltip>
+                        <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                    </div>
+                    <div flex layout layout-align="start stretch" class="pointer" ng-click="EditUser(list, $event)">
+                        <md-tooltip md-direction="top">Edit user details</md-tooltip>
+                        <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                    </div>
+                    <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteUser(list, $event)">
+                        <md-tooltip md-direction="top">Delete user details</md-tooltip>
+                        <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div flex="10" layout="row" layout-align="center stretch">
+        <div flex="15" layout layout-align="center center">
+            <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
+            <select flex
+                ng-model="currentPage" 
+                ng-options="i for i in _.range(1,(userList.length/10))">
+            </select>
+            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= userList.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+        </div>
+    </div>>
+    </div>
+</div>

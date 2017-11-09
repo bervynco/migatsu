@@ -1,0 +1,80 @@
+
+<md-dialog my-setter width-in-percent="50" height-in-percent="80" layout="column" layout-align="start stretch">
+    <div flex="10" layout layout-align="start stretch" class="dialog-header">
+        <div flex layout layout-align="start center" > {{dialogHeading}} </div>
+        <div flex="5" layout layout-align="start stretch" class="pointer" ng-click="Close()">
+            <md-icon md-svg-src="{{SVG.clear}}" layout layout-align="center center"></md-icon>
+        </div>
+    </div>
+    <div flex class="dialog-content" layout="column" layout-align="start stretch">
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Supplier Name: </div>
+            </div>
+            <div flex="5"></div>
+            <select flex
+                ng-model="inventory.supplier_id" 
+                ng-options="list.id as list.name for list in supplierList"
+                >
+            </select>
+            <!-- <select flex ng-model="selectedSupplier" ng-change="ChangeSupplier(selectedSupplier)">
+                <option value="" disabled selected>Select supplier</option>
+                <option ng-repeat="list in supplierList" value = "{{list.id}}" >{{list.name}}</option>
+            </select> -->
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Product Code: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="text" placeholder="Product Code" ng-model="inventory.product_id">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Description: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="text" placeholder="Product Description" ng-model="inventory.product_description">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Purchase Price: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="number" placeholder="Purchase Price" ng-model="inventory.purchase_price">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Balance: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="number" placeholder="Balance" ng-model="inventory.balance">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Threshold: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="number" placeholder="Threshold" ng-model="inventory.threshold">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+           <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Location: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="text" placeholder="Location" ng-model="inventory.location">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Remarks: </div>
+            </div>
+            <div flex="5"></div>
+            <textarea flex ng-model="inventory.remarks" rows="4" cols="70"></textarea>
+        </div>
+        <div flex></div>
+        <div flex="10" layout layout-align="start stretch">
+            <div flex></div>
+            <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewInventoryDetails()">Submit</md-button>
+        </div>
+    </div>
+</md-dialog>

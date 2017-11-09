@@ -1,0 +1,59 @@
+<div layout="column" layout-align="start stretch" flex style="background-color:whitesmoke">
+    <div flex="10" class="assessment-card" layout="column" layout-align="start stretch" my-setter padding="10">
+        <div flex layout="column" layout-align="start stretch">
+            <span class="header-title">Generate Reports Page</span>
+        </div>
+        <div flex></div>
+        <div flex layout layout-align="start stretch">
+            <span class="header-subtitle">Page for generating various reports for Migatsu.</span>
+        </div>
+	</div>
+	<div flex="10"></div>
+    <div flex layout layout-align="center stretch" my-setter padding="10">
+		<div flex="20" layout="column" layout-align="start stretch" my-setter margin="10">
+			<div flex="20" layout layout-align="center center">Step 1. Choose report type</div>
+			<div flex="20" layout layout-align="start stretch">
+				<select flex ng-model="selectedReport" ng-change="ChangeReport(selectedReport)">
+					<option value="" disabled selected>Select report</option>
+					<option ng-repeat="list in reportList" value = "{{list}}" >{{list}}</option>
+				</select>
+			</div>
+			<div flex></div>
+		</div>
+		<div flex="20" layout="column" layout-align="start stretch" my-setter margin="10">
+			<div flex="20" layout layout-align="center center">Step 2. Choose Filter type</div>
+			<div flex="20" layout layout-align="start stretch">
+				<select flex ng-model="selectedReportType" ng-change="ChangeReportType(selectedReportType)">
+					<option value="" disabled selected>Select report type</option>
+					<option ng-repeat="list in reportTypeList" value = "{{list}}" >{{list}}</option>
+				</select>
+			</div>
+			<div flex></div>
+		</div>
+		<div flex layout="column" layout-align="start stretch" my-setter margin="10" 
+		ng-if="selectedReportType != null && selectedReportType == 'Custom'">
+			<div flex="20" layout layout-align="center center">Step 3. Choose start Date</div>
+			<div flex="20" layout layout-align="start stretch">
+				 <input flex type="date" ng-model="generateReport.start_date">
+			</div>
+			<div flex></div>
+		</div>
+		<div flex layout="column" layout-align="start stretch" my-setter margin="10"
+		ng-if="selectedReportType != null && selectedReportType == 'Custom'">
+			<div flex="20" layout layout-align="center center">Step 4. Choose end Date</div>
+			<div flex="20" layout layout-align="start stretch">
+				<input flex type="date" ng-model="generateReport.end_date">
+			</div>
+			<div flex></div>
+		</div>
+		<div flex="20" layout="column" layout-align="center stretch" my-setter margin="10">
+			<div flex="20"></div>
+			<md-button class="md-raised button-accept" ng-click="GenerateReport()">Generate Report</md-button>
+			<a ng-href="" download="yourFilename"></a>
+			<div flex></div>
+		</div>
+	</div>
+	<div flex></div>
+    <div flex="10" layout-layout-align="start stretch"></div>
+    <div flex="5"></div>
+</div>

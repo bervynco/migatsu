@@ -1,0 +1,80 @@
+
+<md-dialog my-setter width-in-percent="50" height-in-percent="70" layout="column" layout-align="start stretch">
+    <div flex="10" layout layout-align="start stretch" class="dialog-header">
+        <div flex layout layout-align="start center" > {{dialogHeading}} </div>
+        <div flex="5" layout layout-align="start stretch" class="pointer" ng-click="Close()">
+            <md-icon md-svg-src="{{SVG.clear}}" layout layout-align="center center"></md-icon>
+        </div>
+    </div>
+    <div flex class="dialog-content" layout="column" layout-align="start stretch">
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Customer Name: </div>
+            </div>
+            <div flex="5"></div>
+            <select flex
+                ng-model="receivable.customer_id" 
+                ng-options="list.id as list.name for list in customerList"
+                >
+            </select>
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Purchase Order ID: </div>
+            </div>
+            <div flex="5"></div>
+            <select flex ng-model="selectedPurchaseOrder" ng-change="ChangePurchaseOrder(selectedPurchaseOrder)">
+                <option value="" disabled selected>Select purchase order</option>
+                <option ng-repeat="list in purchaseOrderList" value = "{{list.customer_po_id}}" >{{list.customer_po_id}}</option>
+            </select>
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Delivery Date: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="date" ng-model="receivable.delivery_date" format="dd/MM/yyyy">
+        </div>
+        
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Amount: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="number" placeholder="Amount" ng-model="receivable.amount">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+            <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Invoice ID: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="number" placeholder="Invoice ID" ng-model="receivable.invoice_id">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+             <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Terms: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="number" placeholder="Terms" ng-model="receivable.terms">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+             <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Due Date: </div>
+            </div>
+            <div flex="5"></div>
+            <input flex type="date" ng-model="receivable.due_date">
+        </div>
+        <div flex layout layout-align="start stretch" my-setter padding="10">
+             <div flex="20" layout layout-align="start stretch">
+                <div flex layout layout-align="end center"> Remarks: </div>
+            </div>
+            <div flex="5"></div>
+            <textarea flex ng-model="receivable.remarks" rows="4" cols="80"></textarea>
+        </div>
+        <div flex></div>
+        <div flex="10" layout layout-align="start stretch">
+            <div flex></div>
+            <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewReceivableDetails()">Submit</md-button>
+        </div>
+    </div>
+</md-dialog>

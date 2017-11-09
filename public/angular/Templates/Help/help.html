@@ -1,0 +1,76 @@
+<div flex layout="column" layout-align="start stretch" ng-if="intruders == true">
+	<div flex="none" hud-setter height-in-percent="10"></div>
+	<div flex="30" layout="row" layout-align="center stretch">
+		<md-icon flex md-svg-src="{{SVG.locked}}" layout layout-align="center center" hud-setter height-in-percent="100"></md-icon>
+	</div>
+	<div flex="none" hud-setter height-in-percent="10"></div>
+	<div flex layout="column" layout-align="center stretch" >
+		<div flex layout layout-align="center start" style="font-size: 3em; letter-spacing:3px"> You are not logged in! </div>
+		<div flex layout layout-align="center start" style="font-size: 3em; letter-spacing:3px">You will be redirected to AMAT Login Page</div>
+	</div>
+</div><div flex layout="column" layout-align="start stretch" ng-if="intruders == false">
+	<!-- <div flex="none" hud-setter height-in-percent="15"></div>
+	<div flex="30" layout="row" layout-align="center stretch">
+		<md-icon flex md-svg-src="{{SVG.sad}}" layout layout-align="center center" hud-setter height-in-percent="30"></md-icon>
+	</div>
+	<div flex="none" hud-setter height-in-percent="15"></div> -->
+	
+	<div flex layout="column" layout-align="start stretch" hud-setter padding="15" >
+		<div flex="5"></div>
+		<div flex="10" layout layout-align="center start" style="font-size: 3em; letter-spacing:3px">Hi, {{userDetail.name}}. What would you like to know? </div>
+		<div flex layout layout-align="start stretch">
+			<div flex layout="column" layout-align="start stretch">
+				<div flex layout layout-align="start stretch">
+					<div flex="20"></div>
+					<div flex class="help-card" layout="column" layout-align="start stretch">
+						<div flex layout layout-align="start stretch">
+							<img src="{{SVG.manual}}">
+							<div flex style="background-color: yellow"></div>
+							<div flex></div>
+							<!-- <div flex="20"></div>
+							<div flex layout layout-align="start stretch" style="background-color: yellow;">
+								
+							</div>
+							<div flex="20"></div> -->
+							<!-- <md-icon md-svg-src="{{SVG.manual}}" style="color: rgba(190,190,190,1);" hud-setter width-in-percent="75"> </md-icon> -->
+						</div>
+						<!-- <md-icon flex md-svg-src="{{SVG.manual}}" style="color: rgba(190,190,190,1);" hud-setter width-in-percent="50"> </md-icon> -->
+					</div>
+					<div flex="20"></div>
+				</div>
+				<div flex="none" hud-setter height-in-percent="1"></div>
+				<div flex layout layout-align="start stretch">
+					<div flex="20"></div>
+					<div flex class="help-card"></div>
+					<div flex="20"></div>
+				</div>
+			</div>
+			<div flex layout="column" layout-align="start stretch">
+				<div flex layout layout-align="start stretch">
+					<div flex="20"></div>
+					<div flex class="help-card" ></div>
+					<div flex="20"></div>
+				</div>
+				<div flex="none" hud-setter height-in-percent="1"></div>
+				<div flex layout layout-align="start stretch">
+					<div flex="20"></div>
+					<div flex class="help-card"></div>
+					<div flex="20"></div>
+				</div>
+			</div>
+			<div flex layout="column" layout-align="start stretch">
+				<div flex layout layout-align="start stretch">
+					<div flex="20"></div>
+					<div flex class="help-card"></div>
+					<div flex="20"></div>
+				</div>
+				<div flex="none" hud-setter height-in-percent="1"></div>
+				<div flex layout layout-align="start stretch">
+					<div flex="20"></div>
+					<div flex class="help-card"></div>
+					<div flex="20"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
