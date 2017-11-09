@@ -15,6 +15,7 @@
 
     DataFactory.GetUserList().success(function(response){
         $scope.userList = response;
+        console.log($scope.userList);
     }).error(function(error){
 
     });
@@ -38,7 +39,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/User Management/userManagementDialog.html",
+            templateUrl: "./public/angular/Templates/User Management/userManagementDialog.html",
             locals: {
                  action: 'Add',
                  data: ''
@@ -55,7 +56,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/User Management/userManagementDialog.html",
+            templateUrl: "./public/angular/Templates/User Management/userManagementDialog.html",
             locals: {
                  action: 'Edit',
                  data: user
@@ -72,7 +73,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/User Management/changePasswordDialog.html",
+            templateUrl: "./public/angular/Templates/User Management/changePasswordDialog.html",
             locals: {
                  action: 'Change Password',
                  data: user

@@ -47,7 +47,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         SetPageLog: function(logDetail){
             return $http({
                 method: "POST",
-                url: locationString + "logs/set",
+                url: "index.php/LogManagement/setPageLog",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -57,7 +57,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetPageLogs: function(){
             return $http({
                 method: "GET",
-                url: locationString + "logs/get",
+                url: "index.php/LogManagement/getPageLogs",
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -347,7 +347,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetUserList: function(){
             return $http({
                 method: "GET",
-                url: locationString + "um/get/list",
+                url: "index.php/UserManagement/getAllUsers",
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -356,7 +356,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         AddNewUser: function(user){
             return $http({
                 method: "POST",
-                url: locationString + "um/add",
+                url: "index.php/UserManagement/addNewUser",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -366,7 +366,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         EditUser: function(user){
             return $http({
                 method: "POST",
-                url: locationString + "um/edit",
+                url: "index.php/UserManagement/editUser",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -376,7 +376,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         DeleteUser: function(user){
             return $http({
                 method: "DELETE",
-                url: locationString + "um/delete",
+                url: "index.php/UserManagement/deleteUser",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -387,7 +387,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
             console.log(user);
             return $http({
                 method: "POST",
-                url: locationString + "um/changepassword",
+                url: "index.php/UserManagement/changePassword",
                 headers: {
                     'Content-Type': 'application/json'
                 },
