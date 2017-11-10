@@ -371,7 +371,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
                     'Content-Type': 'application/json'
                 },
                 data:user
-            })
+            });
         },
         DeleteUser: function(user){
             return $http({

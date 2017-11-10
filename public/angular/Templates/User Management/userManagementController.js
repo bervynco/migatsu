@@ -103,6 +103,7 @@
                             .position("top right")
                             .hideDelay(4000)
                     );
+                    $window.location.reload();
                 }
                 
             }).error(function(error){

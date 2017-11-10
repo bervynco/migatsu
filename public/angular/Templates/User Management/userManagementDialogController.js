@@ -4,6 +4,12 @@
     $scope.SVG = ConfigurableItems.SVG;
     $scope.action = action;
     $scope.errorMessage = null;
+
+    console.log($scope.action);
+    $scope.password = {
+        password: '',
+        confirmPassword: ''
+    }
     if($scope.action == "Add"){
         $scope.dialogHeading = "Add New User";
         $scope.user = {
@@ -12,6 +18,7 @@
             password: '',
             role: ''
         }
+        $scope.confirmPassword = null;
     }
     else if($scope.action == "Change Password"){
         $scope.dialogHeading = "Change Password";
@@ -43,11 +50,17 @@
         $scope.user.role = list;
     }
     $scope.SubmitNewUserDetails = function(){
-        
+        // $scope.errorMessage = null;
         if($scope.action == "Add"){
-            if($scope.user.password == $scope.confirmPassword){
+            console.log($scope.password);
+            if($scope.password.password == $scope.password.confirmPassword){
+                $scope.user.password = $scope.password.password;
                 DataFactory.AddNewUser($scope.user).success(function(response){
-                    $mdDialog.hide("Success");
+                    if(response == "Successful")
+                        $mdDialog.hide("Success");
+                    else{
+                        $scope.errorMessage = response;
+                    }
                 }).error(function(error){
 
                 });
@@ -55,7 +68,11 @@
         }
         else if($scope.action == "Edit"){
             DataFactory.EditUser($scope.user).success(function(response){
-                $mdDialog.hide("Success");
+                if(response == "Successful")
+                    $mdDialog.hide("Success");
+                else{
+                    $scope.errorMessage = response;
+                }
             }).error(function(error){
 
             });
@@ -70,7 +87,9 @@
 
                 $scope.errorMessage = null;
                 DataFactory.ChangePassword(userData).success(function(response){
-                    $mdDialog.hide("Success");
+                    console.log(response);
+                    if(response == "Successful")
+                        $mdDialog.hide("Success");
                 }).error(function(error){
 
                 });
