@@ -76,7 +76,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetInventoryList: function(){
             return $http({
                 method: "GET",
-                url: locationString + "inventory/get/list",
+                url: 'index.php/InventoryManagement/getAllInventory',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -85,7 +85,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         AddNewInventory: function(inventory){
             return $http({
                 method: "POST",
-                url: locationString + "inventory/add",
+                url: 'index.php/InventoryManagement/addNewInventory',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -95,7 +95,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         EditInventoryItem: function(inventory){
             return $http({
                 method: "POST",
-                url: locationString + "inventory/edit",
+                url: 'index.php/InventoryManagement/editInventory',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -105,7 +105,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         DeleteInventoryItem: function(inventory){
             return $http({
                 method: "DELETE",
-                url: locationString + "inventory/delete",
+                url: 'index.php/InventoryManagement/deleteInventory',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -116,7 +116,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetCustomerList: function(){
             return $http({
                 method: "GET",
-                url: locationString + "customer/get/list",
+                url: 'index.php/CustomerManagement/getAllCustomers',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -125,7 +125,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         AddNewCustomer: function(customer){
             return $http({
                 method: "POST",
-                url: locationString + "customer/add",
+                url: 'index.php/CustomerManagement/addNewCustomer',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -135,7 +135,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         EditCustomer: function(customer){
             return $http({
                 method: "POST",
-                url: locationString + "customer/edit",
+                url: 'index.php/CustomerManagement/editCustomer',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -145,7 +145,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         DeleteCustomer: function(customer){
             return $http({
                 method: "DELETE",
-                url: locationString + "customer/delete",
+                url: 'index.php/CustomerManagement/deleteCustomer',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -157,7 +157,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetReceivablesToday: function(){
             return $http({
                 method: "GET",
-                url: locationString + "receivables/get/today",
+                url: 'index.php/ReceivableManagement/getAllReceivable',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -166,7 +166,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetReceivableList: function(){
             return $http({
                 method: "GET",
-                url: locationString + "receivables/get/list",
+                url: 'index.php/ReceivableManagement/getAllReceivable',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -175,7 +175,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         AddNewReceivable: function(receivable){
             return $http({
                 method: "POST",
-                url: locationString + "receivables/add",
+                url: 'index.php/ReceivableManagement/addNewReceivable',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -185,7 +185,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         EditReceivable: function(receivable){
             return $http({
                 method: "POST",
-                url: locationString + "receivables/edit",
+                url: 'index.php/ReceivableManagement/editReceivable',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -195,7 +195,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         DeleteReceivable: function(receivable){
             return $http({
                 method: "DELETE",
-                url: locationString + "receivables/delete",
+                url: 'index.php/ReceivableManagement/deleteReceivable',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -207,7 +207,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetPayablesToday: function(){
             return $http({
                 method: "GET",
-                url: locationString + "payables/get/today",
+                url: "index.php/PayableManagement/getAllPayable",
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -216,7 +216,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetPayableList: function(){
             return $http({
                 method: "GET",
-                url: locationString + "payables/get/list",
+                url: "index.php/PayableManagement/getAllPayable",
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -225,7 +225,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         AddNewPayable: function(payable){
             return $http({
                 method: "POST",
-                url: locationString + "payables/add",
+                url: "index.php/PayableManagement/addNewPayable",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -235,7 +235,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         EditPayable: function(payable){
             return $http({
                 method: "POST",
-                url: locationString + "payables/edit",
+                url: "index.php/PayableManagement/editPayable",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -245,7 +245,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         DeletePayable: function(payable){
             return $http({
                 method: "DELETE",
-                url: locationString + "payables/delete",
+                url: "index.php/PayableManagement/deletePayable",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -266,7 +266,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetPurchaseOrderList: function(){
             return $http({
                 method: "GET",
-                url: locationString + "po/get/list",
+                url: "index.php/PurchaseOrderManagement/getAllPurchaseOrder",
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -292,6 +292,16 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
                 data: po
             })
         },
+        DeletePurchaseOrder: function(po){
+            return $http({
+                method: "POST",
+                url: "index.php/PurchaseOrderManagement/deletePurchaseOrder",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: po
+            })
+        },
         ApplyInventoryChanges: function(po){
             return $http({
                 method: "POST",
@@ -307,7 +317,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetSupplierList: function(){
             return $http({
                 method: "GET",
-                url: locationString + "supplier/get/list",
+                url: 'index.php/SupplierManagement/getAllSuppliers',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -316,7 +326,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         AddNewSupplier: function(supplier){
             return $http({
                 method: "POST",
-                url: locationString + "supplier/add",
+                url: 'index.php/SupplierManagement/addNewSupplier',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -326,7 +336,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         EditSupplier: function(supplier){
             return $http({
                 method: "POST",
-                url: locationString + "supplier/edit",
+                url: 'index.php/SupplierManagement/editSupplier',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -336,7 +346,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         DeleteSupplier: function(supplier){
             return $http({
                 method: "DELETE",
-                url: locationString + "supplier/delete",
+                url: 'index.php/SupplierManagement/deleteSupplier',
                 headers: {
                     'Content-Type': 'application/json'
                 },
