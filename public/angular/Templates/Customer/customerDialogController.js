@@ -23,8 +23,8 @@
         console.log($scope.customer);
         if($scope.action == "Add"){
             DataFactory.AddNewCustomer($scope.customer).success(function(response){
-                
-                $mdDialog.hide("Successful");
+                if(response == "Successful")
+                    $mdDialog.hide("Successful");
             }).error(function(error){
 
             });
@@ -32,7 +32,7 @@
         else{
             DataFactory.EditCustomer($scope.customer).success(function(response){
                 
-                $mdDialog.hide("Successful");
+                // $mdDialog.hide("Successful");
             }).error(function(error){
 
             });

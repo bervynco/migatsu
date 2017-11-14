@@ -36,7 +36,7 @@
          $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Customer/customerDialog.html",
+            templateUrl: "public/angular/Templates/Customer/customerDialog.html",
             locals: {
                  action: 'Add',
                  data: ''
@@ -60,7 +60,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Customer/customerDialog.html",
+            templateUrl: "public/angular/Templates/Customer/customerDialog.html",
             locals: {
                  action: 'Edit',
                  data: customer
