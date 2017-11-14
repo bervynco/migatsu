@@ -22,14 +22,16 @@
     $scope.SubmitNewSupplierDetails = function(){
         if($scope.action == "Add"){
             DataFactory.AddNewSupplier($scope.supplier).success(function(response){
-                $mdDialog.hide("Successful");
+                if(response == "Successful")
+                    $mdDialog.hide("Successful");
             }).error(function(error){
 
             });
         }
         else if($scope.action == "Edit"){
             DataFactory.EditSupplier($scope.supplier).success(function(response){
-                $mdDialog.hide("Successful");
+                if(response == "Successful")
+                    $mdDialog.hide("Successful");
             }).error(function(error){
 
             });
