@@ -12,12 +12,15 @@
 
     });
     
-    DataFactory.GetSupplierList().success(function(response){
-        $scope.supplierList = response;
-        console.log(response);
-    }).error(function(error){
+    function getData(){
+        DataFactory.GetSupplierList().success(function(response){
+            $scope.supplierList = response;
+            console.log(response);
+        }).error(function(error){
 
-    });
+        });
+    }
+    
 
     $scope.ChangePage = function(i){
     }
@@ -53,9 +56,8 @@
                 }).error(function(error){
 
                 });
-                $window.location.reload();
+                getData();
             }
-            console.log(data);
         });
     }
 
@@ -79,7 +81,7 @@
                 }).error(function(error){
 
                 });
-                $window.location.reload();
+                getData();
             }
             console.log(data);
         });
@@ -102,7 +104,14 @@
                             .position("top right")
                             .hideDelay(4000)
                     );
-                    $window.location.reload();
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'Suppliers Page', action: 'Delete'};
+
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
+
+                    });
+                    getData();
                 }
                 
             }).error(function(error){
@@ -113,4 +122,6 @@
             
         });
     }
+
+    getData();
 });
