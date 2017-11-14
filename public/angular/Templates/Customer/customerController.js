@@ -9,13 +9,15 @@
     }).error(function(error){
 
     });
-    
-    DataFactory.GetCustomerList().success(function(response){
-        $scope.customerList = response;
-        $scope.$parent.ChangeLoadBarState(false);
-    }).error(function(error){
+    function getData(){
+        DataFactory.GetCustomerList().success(function(response){
+            $scope.customerList = response;
+            $scope.$parent.ChangeLoadBarState(false);
+        }).error(function(error){
 
-    });
+        });
+    }
+    
 
     $scope.ChangePage = function(i){
     }
@@ -51,7 +53,7 @@
                 }).error(function(error){
 
                 });
-                $window.location.reload();
+                getData();
             }
         });
     }
@@ -75,7 +77,7 @@
                 }).error(function(error){
 
                 });
-                $window.location.reload();
+               getData();
             }
         });
     }
@@ -105,7 +107,7 @@
                     }).error(function(error){
 
                     });
-                    $window.location.reload();
+                    getData();
                 }
             }).error(function(error){
 
@@ -115,4 +117,5 @@
             
         });
     }
+    getData();
 });
