@@ -50,6 +50,13 @@
             controller: 'UserManagementDialogController'
         }).then(function(data){
             if(data == "Success"){
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'User Management Page', action: 'Add'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
                 getData();
             }
         });
@@ -67,6 +74,13 @@
             controller: 'UserManagementDialogController'
         }).then(function(data){
             if(data == "Success"){
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'User Management Page', action: 'Edit'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
                 getData();
             }
         });
@@ -106,6 +120,13 @@
                             .position("top right")
                             .hideDelay(4000)
                     );
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'User Management Page', action: 'Delete'};
+
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
+
+                    });
                     getData();
                 }
                 
