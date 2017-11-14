@@ -13,11 +13,14 @@
 
     });
 
-    DataFactory.GetPayableList().success(function(response){
-        $scope.payableList = response;
-    }).error(function(error){
+    function getData(){
+        DataFactory.GetPayableList().success(function(response){
+            $scope.payableList = response;
+        }).error(function(error){
 
-    });
+        });
+    }
+    
 
     $scope.CheckDueDate = function(list){
         var a = moment();
@@ -55,7 +58,14 @@
             controller: 'PayableDialogController'
         }).then(function(data){
             if(data == "Successful"){
-                $window.location.reload();
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Payables Page', action: 'Add'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
         });
     }
@@ -71,7 +81,14 @@
             controller: 'PayableDialogController'
         }).then(function(data){
             if(data == "Successful"){
-                $window.location.reload();
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Payables Page', action: 'Edit'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
         });
     }
@@ -93,7 +110,14 @@
                             .position("top right")
                             .hideDelay(4000)
                     );
-                    $window.location.reload();
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'Payables Page', action: 'Delete'};
+
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
+
+                    });    
+                    getData();
                 }
                 
             }).error(function(error){
