@@ -14,12 +14,15 @@
 
     });
 
-    DataFactory.GetReceivableList().success(function(response){
-        $scope.receivableList = response;
-        console.log(response);
-    }).error(function(error){
+    function getData(){
+        DataFactory.GetReceivableList().success(function(response){
+            $scope.receivableList = response;
+            console.log(response);
+        }).error(function(error){
 
-    });
+        });
+    }
+    
 
     $scope.ChangePage = function(i){
     }
@@ -57,7 +60,14 @@
             controller: 'ReceivableDialogController'
         }).then(function(data){
             if(data == "Successful"){
-                $window.location.reload();
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Receivables Page', action: 'Add'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
         });
     }
@@ -73,7 +83,14 @@
             controller: 'ReceivableDialogController'
         }).then(function(data){
             if(data == "Successful"){
-                $window.location.reload();
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Receivables Page', action: 'Edit'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
         });
     }
@@ -94,7 +111,14 @@
                             .position("top right")
                             .hideDelay(4000)
                     );
-                    $window.location.reload();
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'Receivables Page', action: 'Delete'};
+
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
+
+                    });
+                    getData();
                 }
                 
             }).error(function(error){
@@ -105,4 +129,5 @@
             
         });
     }
+    getData();
 });
