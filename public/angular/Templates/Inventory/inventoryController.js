@@ -11,12 +11,15 @@
     }).error(function(error){
 
     });
+    
+    function getData(){
+        DataFactory.GetInventoryList().success(function(response){
+            $scope.inventoryList = response;
+        }).error(function(error){
 
-    DataFactory.GetInventoryList().success(function(response){
-        $scope.inventoryList = response;
-    }).error(function(error){
-
-    });
+        });
+    }
+    
 
     $scope.CheckThreshold = function(list){
         if(list.threshold > list.balance){
@@ -53,7 +56,14 @@
             controller: 'InventoryDialogController'
         }).then(function(data){
             if(data == "Successful"){
-                $window.location.reload();
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Inventory Page', action: 'Add'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
         });
     }
@@ -69,7 +79,14 @@
             controller: 'InventoryDialogController'
         }).then(function(data){
             if(data == "Successful"){
-                $window.location.reload();
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Inventory Page', action: 'Edit'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
         });
     }
@@ -91,7 +108,14 @@
                             .position("top right")
                             .hideDelay(4000)
                     );
-                    $window.location.reload();
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'Inventory Page', action: 'Delete'};
+
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
+
+                    });
+                    getData();
                 }
             }).error(function(error){
 
