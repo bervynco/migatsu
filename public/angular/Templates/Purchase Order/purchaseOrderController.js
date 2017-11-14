@@ -15,12 +15,15 @@
 
     });
 
-    DataFactory.GetPurchaseOrderList().success(function(response){
-        console.log(response);
-        $scope.purchaseOrderList = response;
-    }).error(function(error){
+    function getData(){
+        DataFactory.GetPurchaseOrderList().success(function(response){
+            console.log(response);
+            $scope.purchaseOrderList = response;
+        }).error(function(error){
 
-    });
+        });
+    }
+   
 
     $scope.ChangePage = function(i){
     }
@@ -49,7 +52,14 @@
             controller: 'PurchaseOrderDialogController'
         }).then(function(data){
             if(data == "Successful"){
-                $window.location.reload();
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Add'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
         });
     }
@@ -66,7 +76,14 @@
             controller: 'PurchaseOrderDialogController'
         }).then(function(data){
             if(data == "Successful"){
-                $window.location.reload();
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Edit'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
         });
     }
@@ -77,7 +94,17 @@
 
         DataFactory.EditPurchaseOrder(list).success(function(response){
             console.log(response);
-            $window.location.reload();
+            if(response == "Successful"){
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Move Delivery Data'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
+            }
+            
         }).error(function(error){
 
         });
@@ -86,7 +113,15 @@
         DataFactory.ApplyInventoryChanges(list).success(function(response){
             console.log(response);
             if(response == "Successful" || response == "Conditional Success"){
-                $window.location.reload();
+                
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Apply Inventory Changes'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
             }
             else{
 
