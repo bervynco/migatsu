@@ -12,13 +12,16 @@
     }).error(function(error){
 
     });
+    function getData(){
+        $scope.userList = null;
+        DataFactory.GetUserList().success(function(response){
+            $scope.userList = response;
+            console.log($scope.userList);
+        }).error(function(error){
 
-    DataFactory.GetUserList().success(function(response){
-        $scope.userList = response;
-        console.log($scope.userList);
-    }).error(function(error){
-
-    });
+        });
+    }
+    
 
     $scope.ChangePage = function(i){
     }
@@ -47,7 +50,7 @@
             controller: 'UserManagementDialogController'
         }).then(function(data){
             if(data == "Success"){
-                $window.location.reload();
+                getData();
             }
         });
     }
@@ -64,7 +67,7 @@
             controller: 'UserManagementDialogController'
         }).then(function(data){
             if(data == "Success"){
-                $window.location.reload();
+                getData();
             }
         });
     }
@@ -82,7 +85,7 @@
         }).then(function(data){
             console.log(data);
             if(data == "Success"){
-                $window.location.reload();
+                getData();
             }
         });
     }
@@ -103,7 +106,7 @@
                             .position("top right")
                             .hideDelay(4000)
                     );
-                    $window.location.reload();
+                    getData();
                 }
                 
             }).error(function(error){
@@ -114,4 +117,6 @@
             
         });
     }
+
+    getData();
 });
