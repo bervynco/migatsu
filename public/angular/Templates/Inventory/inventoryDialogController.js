@@ -37,8 +37,9 @@
         console.log($scope.inventory);
         if($scope.action == "Add"){
             DataFactory.AddNewInventory($scope.inventory).success(function(response){
-                console.log(response);
-                $mdDialog.hide("Successful");
+                if(response == "Successful"){
+                    $mdDialog.hide("Successful");
+                }
             }).error(function(error){
 
             }); 
@@ -46,13 +47,15 @@
         else{
             DataFactory.EditInventoryItem($scope.inventory).success(function(response){
                 console.log(response);
-                $mdDialog.hide("Successful");
+                if(response == "Successful"){
+                    $mdDialog.hide("Successful");
+                }
             }).error(function(error){
 
             }); 
-        }
-         
+        }  
     }
+
     $scope.Close = function(){
         $mdDialog.hide("Cancel");
     }

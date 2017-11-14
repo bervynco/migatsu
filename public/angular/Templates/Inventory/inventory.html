@@ -29,8 +29,8 @@
                 <div flex layout layout-align="center center"> No data Available </div>
             </div>
             <div layout="row" flex="none" my-setter min-height-in-percent="7" layout layout-align="start stretch" class="table-values" 
-            ng-class="CheckThreshold(inventory) === 'warning' ? 'warning' : ''" ng-repeat="inventory in inventoryList | limitTo:10:(currentPage-1)*10+1" >
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.supplier_name}} </div>
+            ng-class="CheckThreshold(inventory) === 'warning' ? 'warning' : ''" ng-repeat="inventory in inventoryList" >
+                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.name}} </div>
                 <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.product_id}} </div>
                 <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.product_description}} </div>
                 <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.purchase_price}} </div>

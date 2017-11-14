@@ -45,7 +45,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Inventory/inventoryDialog.html",
+            templateUrl: "public/angular/Templates/Inventory/inventoryDialog.html",
             locals: {
                  action: 'Add',
                  data: ''
@@ -61,7 +61,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Inventory/inventoryDialog.html",
+            templateUrl: "public/angular/Templates/Inventory/inventoryDialog.html",
             locals: {
                  action: 'Edit',
                  data: inventory
