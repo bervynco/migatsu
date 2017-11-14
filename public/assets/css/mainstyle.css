@@ -666,7 +666,7 @@ body{
     color: rgba(255, 255, 255, 1);
     cursor: pointer;
     transition: 0.5s;
-    border-bottom: 1.75px solid white;
+    /* border-bottom: 1.75px solid white; */
 }
 .table .list .item:hover md-icon{
     color: rgba(23, 23, 23, 1);
@@ -884,4 +884,11 @@ select {
 
 .warning-message {
     color: rgba(178, 0, 0, 1);
+}
+
+.state-active {
+     background: rgba(31,47,63,1) !important;
+}
+.state-active-bar {
+    background-color: rgba(151,178,205,1) !important;
 }

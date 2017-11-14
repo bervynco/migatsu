@@ -98,7 +98,8 @@
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <div flex layout layout-align="start center"> Menu</div>
                 </div>
-                 <div class="item" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('home')">
+                 <div class="item" my-setter height-in-percent="7" layout layout-align="start stretch" ng-class="{'state-active': MainState == 'transactions'}" ng-click="ChangeState('home')">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'transactions'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.note}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -106,7 +107,9 @@
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <div flex layout layout-align="start center">Transactions</div>
                 </div> 
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('customer')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('customer')" 
+                    ng-class="{'state-active': MainState == 'customer'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'customer'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -114,7 +117,9 @@
                     <md-tooltip md-direction="right">View your clients here.</md-tooltip>
                     <div flex layout layout-align="start center">Customers</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('supplier')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('supplier')"
+                    ng-class="{'state-active': MainState == 'supplier'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'supplier'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -122,7 +127,9 @@
                     <md-tooltip md-direction="right">View your suppliers here.</md-tooltip>
                     <div flex layout layout-align="start center">Suppliers</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('inventory')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('inventory')"
+                    ng-class="{'state-active': MainState == 'inventory'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'inventory'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -130,7 +137,9 @@
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Inventory</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('receivables')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('receivables')"
+                    ng-class="{'state-active': MainState == 'receivables'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'receivables'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -138,7 +147,9 @@
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Receivables</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('payables')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('payables')"
+                    ng-class="{'state-active': MainState == 'payables'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'payables'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -146,7 +157,9 @@
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Payables</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('purchase-order')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('po')"
+                    ng-class="{'state-active': MainState == 'po'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'po'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -154,7 +167,9 @@
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Purchase Order</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('outbound-delivery')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('delivery')"
+                    ng-class="{'state-active': MainState == 'delivery'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'delivery'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -162,7 +177,9 @@
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Outbound Delivery Page</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('user-management')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('user-management')"
+                    ng-class="{'state-active': MainState == 'user-management'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'user-management'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -178,7 +195,9 @@
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Reports</div>
                 </div> -->
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('logs')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('logs')"
+                    ng-class="{'state-active': MainState == 'logs'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'logs'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -186,7 +205,9 @@
                     <md-tooltip md-direction="right">View Inventory System's activities</md-tooltip>
                     <div flex layout layout-align="start center">System Logs</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('reports')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('reports')"
+                    ng-class="{'state-active': MainState == 'reports'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'reports'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
@@ -194,12 +215,14 @@
                     <md-tooltip md-direction="right">Generate various reports</md-tooltip>
                     <div flex layout layout-align="start center">Reports</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('help')">
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('help')"
+                    ng-class="{'state-active': MainState == 'help'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'help'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
                     <span flex="none" my-setter width-in-percent="5"></span>
-                    <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
+                    <md-tooltip md-direction="right">More details regarding the system</md-tooltip>
                     <div flex layout layout-align="start center">Help</div>
                 </div>
             </div>
