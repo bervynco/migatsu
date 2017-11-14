@@ -40,13 +40,13 @@
                 <div flex layout layout-align="center center"> No data Available </div>
             </div>
             <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values" ng-repeat="list in purchaseOrderList | limitTo:10:(currentPage-1)*10+1">
-                <div flex layout layout-align="center center"> {{list.customer_name}} </div>
+                <div flex layout layout-align="center center"> {{list.name}} </div>
                 <div flex layout layout-align="center center"> {{list.customer_po_id}} </div>
                 <!-- <div flex layout layout-align="center center"> {{list.quantity}} </div> -->
                 <div flex layout layout-align="center center"> {{list.amount}} </div>
                 <div flex layout layout-align="center center"> {{list.promised_delivery_date}} </div>
                 <div flex layout layout-align="center center"> {{list.invoice_id}} </div>
-                <div flex layout layout-align="center center"> {{list.supplier_dr_id}} </div>
+                <div flex layout layout-align="center center"> {{list.dr_id}} </div>
                 <div flex layout layout-align="center center"> {{list.actual_delivery_date}} </div>
                 <!-- <div flex layout layout-align="center center"> {{list.overdue_days}} </div> -->
                 <div flex layout layout-align="center center"> {{list.remarks}} </div>
