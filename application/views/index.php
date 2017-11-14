@@ -157,9 +157,9 @@
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Payables</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('po')"
-                    ng-class="{'state-active': MainState == 'po'}">
-                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'po'}"></span>
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('purchase-order')"
+                    ng-class="{'state-active': MainState == 'purchase-order'}">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'purchase-order'}"></span>
                     <span flex="none" my-setter width-in-percent="15" layout layout-align="center stretch">
                         <md-icon md-svg-src="{{SVG.info}}" layout layout-align="center center"></md-icon>
                     </span>
