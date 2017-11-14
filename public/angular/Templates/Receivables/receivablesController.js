@@ -49,7 +49,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Receivables/receivablesDialog.html",
+            templateUrl: "public/angular/Templates/Receivables/receivablesDialog.html",
             locals: {
                  action: 'Add',
                  data:  ''
@@ -65,7 +65,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Receivables/receivablesDialog.html",
+            templateUrl: "public/angular/Templates/Receivables/receivablesDialog.html",
             locals: {
                  action: 'Edit',
                  data:  receivable
