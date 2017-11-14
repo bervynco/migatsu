@@ -30,11 +30,12 @@
                 <div flex layout layout-align="end center"> Purchase Order ID: </div>
             </div>
             <div flex="5"></div>
-            <select flex
+            <input flex type="text" ng-model="payable.po_id">
+            <!-- <select flex
                 ng-model="payable.po_id" 
                 ng-options="list.customer_po_id as list.customer_po_id for list in purchaseOrderList"
                 >
-            </select>
+            </select> -->
             <!-- <select flex ng-model="selectedPurchaseOrder" ng-change="ChangePurchaseOrder(selectedPurchaseOrder)">
                 <option value="" disabled selected>Select purchase order</option>
                 <option ng-repeat="list in purchaseOrderList" value = "{{list.customer_po_id}}" >{{list.customer_po_id}}</option>

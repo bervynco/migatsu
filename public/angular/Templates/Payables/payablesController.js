@@ -47,7 +47,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Payables/payablesDialog.html",
+            templateUrl: "public/angular/Templates/Payables/payablesDialog.html",
             locals: {
                  action: 'Add',
                  data: ''
@@ -63,7 +63,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Payables/payablesDialog.html",
+            templateUrl: "public/angular/Templates/Payables/payablesDialog.html",
             locals: {
                  action: 'Edit',
                  data: payable
