@@ -5,6 +5,7 @@
     $scope.action = action;
 
     DataFactory.GetInventoryList().success(function(response){
+        console.log(response);
         $scope.inventoryList = response;
     }).error(function(error){
 
@@ -22,7 +23,8 @@
             customer_po_id: '',
             order_list : [
                 {
-                    product_id: '',
+                    
+                    id: '',
                     quantity: '',
                     description: ''
                 }
@@ -40,13 +42,13 @@
         $scope.po = angular.copy(data);
         $scope.po.promised_delivery_date = new Date($scope.po.promised_delivery_date);
         $scope.po.actual_delivery_date = new Date($scope.po.actual_delivery_date);
-        
+        $scope.po.order_list = JSON.parse($scope.po.order_list);
         console.log($scope.po);
     }
 
     $scope.AddNewOrder = function(){
         $scope.po.order_list.push({
-            product_id: '',
+            id: '',
             quantity: '',
             description: ''
         });
@@ -54,22 +56,35 @@
     }
 
     $scope.SubmitNewPurchaseOrderDetails = function(){
-        for(var k = 0; k < $scope.po.orderList.length; k++){
-            if($scope.po.orderList[k].product_id == "" || $scope.po.orderList[k].quantity == ""){
+        console.log($scope.po);
+        for(var k = 0; k < $scope.po.order_list.length; k++){
+            if($scope.po.order_list[k].id == "" || $scope.po.order_list[k].quantity == ""){
                 console.log("Complete all fields");
-                $scope.po.orderList.splice(k, 1);
+                $scope.po.order_list.splice(k, 1);
             }
         }
         $scope.po.promised_delivery_date = moment( $scope.po.promised_delivery_date).
             format("YYYY-MM-DD HH:mm");
         $scope.po.actual_delivery_date = moment($scope.po.due_date).
             format("YYYY-MM-DD HH:mm");
-        DataFactory.AddPurchaseOrder($scope.po).success(function(response){
-            console.log(response);
-            $mdDialog.hide("Successful");
-        }).error(function(error){
 
-        });
+        if($scope.action == "Add"){
+            DataFactory.AddPurchaseOrder($scope.po).success(function(response){
+                console.log(response);
+                $mdDialog.hide("Successful");
+            }).error(function(error){
+
+            });
+        }
+        else if($scope.action == "Edit"){
+            DataFactory.EditPurchaseOrder($scope.po).success(function(response){
+                console.log(response);
+                $mdDialog.hide("Successful");
+            }).error(function(error){
+
+            });
+        }
+        
     }
     $scope.Close = function(){
         $mdDialog.hide("Cancel");

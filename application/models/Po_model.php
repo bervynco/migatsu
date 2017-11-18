@@ -7,10 +7,47 @@ class po_model extends CI_Model {
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
 
-    function insertLog($arrLog){
-        $query = $this->db->insert('logs', $arrLog);
+    function insertPurchaseOrder($arrPurchaseOrderDetail){
+        $query = $this->db->insert('purchase_orders', $arrPurchaseOrderDetail);
 
         return $this->db->insert_id();
+    }
+
+    function updatePurchaseOrder($arrPurchaseOrderDetail){
+        /*$arrColumns = array('id', 'customer_id', 'customer_po_id', 'order_list', 'promised_delivery_date', 'actual_delivery_date', 'invoice_id', 'amount', 'dr_id', 'remarks');*/
+        $query = $this->db->where('id', $arrPurchaseOrderDetail['id'])
+                          ->update(
+                                'purchase_orders', 
+                                array(
+                                    'customer_id'=> $arrPurchaseOrderDetail['customer_id'], 
+                                    'customer_po_id' => $arrPurchaseOrderDetail['customer_po_id'], 
+                                    'order_list' => $arrPurchaseOrderDetail['order_list'],
+                                    'promised_delivery_date' => $arrPurchaseOrderDetail['promised_delivery_date'],
+                                    'actual_delivery_date' => $arrPurchaseOrderDetail['actual_delivery_date'],
+                                    'invoice_id' => $arrPurchaseOrderDetail['invoice_id'],
+                                    'amount' => $arrPurchaseOrderDetail['amount'],
+                                    'dr_id' => $arrPurchaseOrderDetail['dr_id'],
+                                    'remarks' => $arrPurchaseOrderDetail['remarks'],
+                                )
+                            );
+        return $this->db->affected_rows();
+    }
+
+    function deletePurchaseOrder($arrPurchaseOrderDetail){
+        $query = $this->db->where('id', $arrPurchaseOrderDetail['id'])->delete('purchase_orders');
+
+        return $this->db->affected_rows();
+    }
+
+    function updateInventorySaved($arrPurchaseOrderDetail){
+        $query = $this->db->where('id', $arrPurchaseOrderDetail['id'])
+                                    ->update(
+                                        'purchase_orders', 
+                                        array(
+                                            'inventory_saved'=> 1
+                                        )
+                                    );
+        return $this->db->affected_rows();
     }
 }
 

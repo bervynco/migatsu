@@ -45,7 +45,7 @@
                     <div flex layout layout-align="end center"> Invoice Number: </div>
                 </div>
                 <div flex="5"></div>
-                <input flex type="number" placeholder="Invoice Number" ng-model="po.invoice_id">
+                <input flex type="text" placeholder="Invoice Number" ng-model="po.invoice_id">
             </div>
             <div flex layout layout-align="start stretch" my-setter padding="10">
                 <div flex="30" layout layout-align="start stretch">
@@ -59,7 +59,7 @@
                     <div flex layout layout-align="end center"> DR Number: </div>
                 </div>
                 <div flex="5"></div>
-                <input flex type="number" placeholder="DR Number" ng-model="po.dr_id">
+                <input flex type="text" placeholder="DR Number" ng-model="po.dr_id">
             </div> 
             <div flex layout layout-align="start stretch" my-setter padding="10">
                 <div flex="30" layout layout-align="start stretch">
@@ -79,8 +79,8 @@
                     <div flex layout="row" layout-align="start stretch" ng-repeat="list in po.order_list track by $index" my-setter padding="5">
                         <div flex="20" layout layout-align="start stretch">
                             <select flex
-                                ng-model="po.order_list[$index].product_id" 
-                                ng-options="list.product_id as list.product_id for list in inventoryList"
+                                ng-model="po.order_list[$index].id" 
+                                ng-options="list.id as list.product_id for list in inventoryList"
                                 >
                             </select>
                         </div>

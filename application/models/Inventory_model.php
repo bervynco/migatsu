@@ -33,5 +33,25 @@ class inventory_model extends CI_Model {
 
         return $this->db->affected_rows();
     }
+
+    function updateInventoryItemCount($arrOrderList){
+        foreach($arrOrderList as $index => $arrItem){
+            print_r($arrItem);
+            $query = $this->db->select(array('id', 'balance'))->from('inventory')->where('id', $arrItem->id)->get();
+            $item = $query->result_array();
+
+            foreach($item as $indexItem => $arrInventoryItem){
+                $queryInventory = $this->db->where('id', $arrInventoryItem['id'])
+                                    ->update(
+                                        'inventory', 
+                                        array(
+                                            'balance'=> $arrInventoryItem['balance'] - $arrItem->quantity
+                                        )
+                                    );
+            }
+        }
+
+        return true;
+    }
 }
 ?>

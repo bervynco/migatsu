@@ -44,7 +44,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Purchase Order/purchaseOrderDialog.html",
+            templateUrl: "public/angular/Templates/Purchase Order/purchaseOrderDialog.html",
             locals: {
                  action: 'Add',
                  data: ''
@@ -68,7 +68,7 @@
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
-            templateUrl: "./angular/Templates/Purchase Order/purchaseOrderDialog.html",
+            templateUrl: "public/angular/Templates/Purchase Order/purchaseOrderDialog.html",
             locals: {
                  action: 'Edit',
                  data: list
@@ -87,6 +87,43 @@
             }
         });
     }
+
+    $scope.DeletePurchaseOrder = function(purchaseOrder, ev){
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to delete ' + purchaseOrder.name + "'s" + ' purchase order?')
+            .textContent("There's no turning back after deleting it.")
+            .targetEvent(ev)
+            .ok('Yes, Delete it!')
+            .cancel('No');
+
+        $mdDialog.show(confirm).then(function() {
+            DataFactory.DeletePurchaseOrder(purchaseOrder).success(function(response){
+                if(response == "Successful"){
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent(purchaseOrder.name + "s" + ' purchase order has been deleted')
+                            .position("top right")
+                            .hideDelay(4000)
+                    );
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Delete'};
+
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
+
+                    });    
+                    getData();
+                }
+                
+            }).error(function(error){
+
+            });
+            
+        }, function() {
+            
+        });
+    }
+
     $scope.MoveToDelivery = function(list){
         var now = moment().format("YYYY-MM-DD HH:mm");
         console.log(now);

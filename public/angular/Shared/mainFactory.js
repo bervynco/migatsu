@@ -275,7 +275,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         AddPurchaseOrder: function(po){
             return $http({
                 method: "POST",
-                url: locationString + "po/add",
+                url: "index.php/PurchaseOrderManagement/addNewPurchaseOrder",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -285,7 +285,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         EditPurchaseOrder: function(po){
             return $http({
                 method: "POST",
-                url: locationString + "po/edit",
+                url: "index.php/PurchaseOrderManagement/editPurchaseOrder",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -305,7 +305,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         ApplyInventoryChanges: function(po){
             return $http({
                 method: "POST",
-                url: locationString + "po/changes/inventory",
+                url: "index.php/PurchaseOrderManagement/applyInventoryChanges",
                 headers: {
                     'Content-Type': 'application/json'
                 },
