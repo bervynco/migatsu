@@ -4,25 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PayableManagement extends CI_Controller
 {
-    /*
-        public function getTransactionsToday(){
+    public function getTransactions(){
         $today = new DateTime(date("Y-m-d"));
         $date = new DateTime(date("Y-m-d"));
         $date->modify('+7 day');
         $nextDate = new DateTime($date->format('Y-m-d'));
 
-        $reportData = Payables::with('supplier')
-                    ->whereBetween('due_date', array($today, $nextDate))
-                    ->get();
-    
-        foreach($reportData as $index => $row){
-            $reportData[$index]['supplier_name'] = $row['supplier']['name'];
-            unset($reportData[$index]['supplier']);
-        }
+        $transactions = $this->payable_model->selectToday($today->format('Y-m-d'), $date->format('Y-m-d'));
 
-        echo json_encode($reportData);
+        echo json_encode($transactions);
     }
-    */
     public function assignDataToArray($postData, $arrColumns){
         foreach($arrColumns as $col){
             $insertArray[$col] = (!empty($postData[$col])) ? $postData[$col] : null;

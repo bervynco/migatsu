@@ -1,5 +1,14 @@
 <?php
 class payable_model extends CI_Model {
+    function selectToday($today, $nextDate){
+        $query = $this->db->select(array('payables.*', 'suppliers.name'))->from('payables')
+                           ->join('suppliers','suppliers.id = payables.supplier_id')
+                           ->where('payables.due_date >=', $today)
+                           ->where('payables.due_date <', $nextDate)
+                           ->order_by('suppliers.name', 'asc')->get();
+                           
+        return($query->num_rows() > 0) ? $query->result_array(): array();
+    }
     function selectAllPayable(){
 
         $query = $this->db->select(array('payables.*', 'suppliers.name'))->from('payables')

@@ -4,6 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ReceivableManagement extends CI_Controller
 {
+    public function getTransactions(){
+        $today = new DateTime(date("Y-m-d"));
+        $date = new DateTime(date("Y-m-d"));
+        $date->modify('+7 day');
+        $nextDate = new DateTime($date->format('Y-m-d'));
+
+        $transactions = $this->receivable_model->selectToday($today->format('Y-m-d'), $date->format('Y-m-d'));
+
+        echo json_encode($transactions);
+    }
     public function assignDataToArray($postData, $arrColumns){
         foreach($arrColumns as $col){
             $insertArray[$col] = (!empty($postData[$col])) ? $postData[$col] : null;

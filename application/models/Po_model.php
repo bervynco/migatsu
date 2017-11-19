@@ -1,5 +1,13 @@
 <?php
 class po_model extends CI_Model {
+    function selectToday($today, $nextDate){
+        $query = $this->db->select(array('purchase_orders.*', 'customers.name'))
+                          ->from('purchase_orders')->join('customers','customers.id = purchase_orders.customer_id')
+                          ->where('purchase_orders.promised_delivery_date >=', $today)
+                          ->where('purchase_orders.promised_delivery_date <', $nextDate)
+                          ->order_by('customers.name', 'asc')->get();
+        return($query->num_rows() > 0) ? $query->result_array(): array();
+    }
     function selectAllPurchaseOrders(){
         $query = $this->db->select(array('purchase_orders.*', 'customers.name'))
                           ->from('purchase_orders')->join('customers','customers.id = purchase_orders.customer_id')

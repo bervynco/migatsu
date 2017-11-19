@@ -4,6 +4,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class InventoryManagement extends CI_Controller
 {
+    public function getTransactions(){
+        $arrInventory = $this->inventory_model->selectAllInventory();
+
+        foreach($arrInventory as $index => $row){
+            $row['status'] = 'bad';
+            $computedBalance = $row['balance'] / $row['threshold'];
+            if($computedBalance > 2){
+                unset($arrInventory[$index]);
+            }
+            else{
+                if($computedBalance > 1 && $computedBalance < 1.5){
+                    $arrInventory[$index]['status'] = 'warning';
+                }
+                else{
+                    $arrInventory[$index]['status'] = 'bad';
+                }
+
+                $arrInventory[$index]['threshold'] = floatval($arrInventory[$index]['threshold']);
+                $arrInventory[$index]['balance'] = floatval($arrInventory[$index]['balance']);
+            }
+            
+        }
+        echo json_encode($arrInventory);
+    }
     public function assignDataToArray($postData, $arrColumns){
         foreach($arrColumns as $col){
             $insertArray[$col] = (!empty($postData[$col])) ? $postData[$col] : null;
