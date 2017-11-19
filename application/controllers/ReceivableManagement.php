@@ -25,17 +25,11 @@ class ReceivableManagement extends CI_Controller
         $arrReceivable = $this->receivable_model->selectAllReceivable();
 
         foreach($arrReceivable as $index => $row){
-            // $row['status'] = 'bad';
-            // $computedBalance = $row['balance'] / $row['threshold'];
-            // if($computedBalance > 2){
-            //     $arrInventory[$index]['status'] = 'good';
-            // }
-            // else if($computedBalance > 1 && $computedBalance < 1.5){
-            //     $arrInventory[$index]['status'] = 'warning';
-            // }
-            // else{
-            //     $arrInventory[$index]['status'] = 'bad';
-            // }
+            $currDateTime = new DateTime();
+            $dueDateTime = new DateTime($row['due_date']);
+            $diff = $dueDateTime->diff($currDateTime);
+            $interval = $diff->format('%a');
+            $arrReceivable[$index]['overdue_days'] = $interval;
 
             $arrReceivable[$index]['amount'] = floatval($arrReceivable[$index]['amount']);
             $arrReceivable[$index]['terms'] = intval($arrReceivable[$index]['terms']);
