@@ -67,7 +67,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetInventoryToday: function(){
             return $http({
                 method: "GET",
-                url: locationString + "inventory/get/today",
+                url: 'index.php/InventoryManagement/getTransactions',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -157,7 +157,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetReceivablesToday: function(){
             return $http({
                 method: "GET",
-                url: 'index.php/ReceivableManagement/getAllReceivable',
+                url: 'index.php/ReceivableManagement/getTransactions',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -207,7 +207,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetPayablesToday: function(){
             return $http({
                 method: "GET",
-                url: "index.php/PayableManagement/getAllPayable",
+                url: "index.php/PayableManagement/getTransactions",
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -257,7 +257,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetPurchaseOrderToday: function(){
             return $http({
                 method: "GET",
-                url: locationString + "po/get/today",
+                url: "index.php/PurchaseOrderManagement/getTransactions",
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -413,6 +413,15 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
                     'Content-Type': 'application/json'
                 },
                 data:report
+            })
+        },
+        GetOutboundDeliveryToday: function(){
+            return $http({
+                method: "GET",
+                url: "index.php/OutboundDeliveryManagement/getTransactions",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
         },
         GetOutboundDeliveryList: function(){

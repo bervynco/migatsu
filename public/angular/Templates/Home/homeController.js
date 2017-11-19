@@ -38,7 +38,7 @@ app.controller('HomeController', function ($scope, $rootScope, $interval, DataFa
 	});
 
 	
-	DataFactory.GetOutboundDeliveryList().success(function(response){
+	DataFactory.GetOutboundDeliveryToday().success(function(response){
 		console.log(response);
 		$scope.deliveryList = response;
 	}).error(function(error){

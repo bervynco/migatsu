@@ -38,15 +38,19 @@
 				<div flex layout="column" layout-align="center center" ng-if="inventoryList.length == 0"> No new inventory transactions for today. </div>
 				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="inventoryList.length != 0">
 					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
-						<div flex layout layout-align="center center">Product Name</div>
+						<div flex layout layout-align="center center">Product</div>
 						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex layout layout-align="center center">Supplier Name</div>
+						<div flex="20" layout layout-align="center center">Balance</div>
+						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
+						<div flex="20" layout layout-align="center center">Threshold</div>
 					</div>
 					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in inventoryList" class="cell-content">
-							<div flex layout layout-align="center center"> {{list.po_id}} </div>
+						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in inventoryList" class="cell-content">
+							<div flex layout layout-align="center center"> {{list.product_id}} </div>
 							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex layout layout-align="center center"> {{list.supplier_name}} </div>
+							<div flex="20" layout layout-align="center center"> {{list.balance}} </div>
+							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
+							<div flex="20" layout layout-align="center center"> {{list.threshold}} </div>
 						</div>
 					</div>
 				</div>
@@ -57,15 +61,15 @@
 				<div flex layout="column" layout-align="center center" ng-if="payablesList.length == 0"> No new payable transactions for today. </div>
 				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="payablesList.length != 0">
 					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
-						<div flex="30"layout layout-align="center center">PO Number</div>
+						<div flex="30"layout layout-align="center center">Supplier Name</div>
 						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex layout layout-align="center center">Supplier Name</div>
+						<div flex layout layout-align="center center">PO Number</div>
 					</div>
 					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in payablesList" class="cell-content">
-							<div flex="30" layout layout-align="center center"> {{list.po_id}} </div>
+						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in payablesList" class="cell-content">
+							<div flex="30" layout layout-align="center center"> {{list.name}} </div>
 							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex layout layout-align="center center"> {{list.supplier_name}} </div>
+							<div flex layout layout-align="center center"> {{list.po_id}} </div>
 						</div>
 					</div>
 				</div>
@@ -76,15 +80,15 @@
 				<div flex layout="column" layout-align="center center" ng-if="receivablesList.length == 0"> No new receivable transactions for today. </div>
 				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="receivablesList.length != 0">
 					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
-						<div flex layout layout-align="center center">PO Number</div>
-						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
 						<div flex layout layout-align="center center">Customer Name</div>
+						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
+						<div flex="30" layout layout-align="center center">Amount</div>
 					</div>
 					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in receivablesList" class="cell-content">
-							<div flex="30" layout layout-align="center center"> {{list.po_id}} </div>
+						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in receivablesList" class="cell-content">
+							<div flex layout layout-align="center center"> {{list.name}} </div>
 							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex layout layout-align="center center"> {{list.customer_name}} </div>
+							<div flex="30" layout layout-align="center center"> {{list.amount}} </div>
 						</div>
 					</div>
 				</div>
@@ -98,13 +102,13 @@
 					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
 						<div flex layout layout-align="center center">PO Number</div>
 						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex layout layout-align="center center">Customer Name</div>
+						<div flex layout layout-align="center center">Promised Delivery Date</div>
 					</div>
 					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in receivablesList" class="cell-content">
-							<div flex="30" layout layout-align="center center"> {{list.po_id}} </div>
+						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in poList" class="cell-content">
+							<div flex layout layout-align="center center"> {{list.customer_po_id}} </div>
 							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex layout layout-align="center center"> {{list.customer_name}} </div>
+							<div flex layout layout-align="center center"> {{list.promised_delivery_date}} </div>
 						</div>
 					</div>
 				</div>
@@ -112,21 +116,21 @@
 			<div flex="none" my-setter width-in-percent="0.5"></div>
 			<div flex layout="column" layout-align="start stretch"  class="card">
 				<div flex="10" layout layout-align="center center" class="transaction-header"> Outbound Delivery </div>
-				<div flex layout="column" layout-align="center center"> No outbound delivery transactions for today. </div>
-				<!-- <div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="deliveryList.length != 0">
+				<div flex layout="column" layout-align="center center" ng-if="deliveryList.length == 0"> No outbound delivery transactions for today. </div>
+				 <div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="deliveryList.length != 0">
 					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
 						<div flex layout layout-align="center center">PO Number</div>
 						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex layout layout-align="center center">Customer Name</div>
+						<div flex layout layout-align="center center">Promised Delivery Date</div>
 					</div>
 					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-repeat="list in deliveryList" class="cell-content">
-							<div flex="30" layout layout-align="center center"> {{list.po_id}} </div>
+						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in deliveryList" class="cell-content">
+							<div flex layout layout-align="center center"> {{list.customer_po_id}} </div>
 							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex layout layout-align="center center"> {{list.customer_name}} </div>
+							<div flex layout layout-align="center center"> {{list.promised_delivery_date}} </div>
 						</div>
 					</div>
-				</div> -->
+				</div> 
 			</div>
 			<!-- <div flex="none" my-setter width-in-percent="0.5"></div>
 			<div flex layout="column" layout-align="start stretch"  class="card">
