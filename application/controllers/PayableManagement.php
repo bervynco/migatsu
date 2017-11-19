@@ -24,22 +24,13 @@ class PayableManagement extends CI_Controller
     public function getAllPayable(){
         $arrPayable = $this->payable_model->selectAllPayable();
 
-        // foreach($arrInventory as $index => $row){
-        //     $row['status'] = 'bad';
-        //     $computedBalance = $row['balance'] / $row['threshold'];
-        //     if($computedBalance > 2){
-        //         $arrInventory[$index]['status'] = 'good';
-        //     }
-        //     else if($computedBalance > 1 && $computedBalance < 1.5){
-        //         $arrInventory[$index]['status'] = 'warning';
-        //     }
-        //     else{
-        //         $arrInventory[$index]['status'] = 'bad';
-        //     }
-
-        //     $arrInventory[$index]['threshold'] = floatval($arrInventory[$index]['threshold']);
-        //     $arrInventory[$index]['balance'] = floatval($arrInventory[$index]['balance']);
-        // }
+        foreach($arrPayable as $index => $payable){
+            $currDateTime = new DateTime();
+            $dueDateTime = new DateTime($payable['due_date']);
+            $diff = $dueDateTime->diff($currDateTime);
+            $interval = $diff->format('%a');
+            $arrPayable[$index]['overdue_days'] = $interval;
+        }
         echo json_encode($arrPayable);
     }
 
