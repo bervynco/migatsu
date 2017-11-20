@@ -98,7 +98,8 @@
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <div flex layout layout-align="start center"> Menu</div>
                 </div>
-                 <div class="item" my-setter height-in-percent="7" layout layout-align="start stretch" ng-class="{'state-active': MainState == 'home'}" ng-click="ChangeState('home')">
+                <div class="item" my-setter height-in-percent="7" layout layout-align="start stretch" 
+                 ng-class="{'state-active': MainState == 'home'}" ng-click="ChangeState('home')" ng-if="userDetails.role ==='Administrator'">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'home'}"></span>
                     <md-tooltip md-direction="right">This is your today's transactions</md-tooltip>
                     <span flex="none" my-setter width-in-percent="5"></span>
@@ -126,35 +127,35 @@
                     <div flex layout layout-align="start center">Inventory</div>
                 </div>
                 <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('receivables')"
-                    ng-class="{'state-active': MainState == 'receivables'}">
+                    ng-class="{'state-active': MainState == 'receivables'}" ng-if="userDetails.role ==='Administrator'">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'receivables'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Receivables</div>
                 </div>
                 <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('payables')"
-                    ng-class="{'state-active': MainState == 'payables'}">
+                    ng-class="{'state-active': MainState == 'payables'}" ng-if="userDetails.role ==='Administrator'">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'payables'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Payables</div>
                 </div>
                 <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('purchase-order')"
-                    ng-class="{'state-active': MainState == 'purchase-order'}">
+                    ng-class="{'state-active': MainState == 'purchase-order'}" ng-if="userDetails.role ==='Administrator'">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'purchase-order'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Purchase Order</div>
                 </div>
                 <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('delivery')"
-                    ng-class="{'state-active': MainState == 'delivery'}">
+                    ng-class="{'state-active': MainState == 'delivery'}" ng-if="userDetails.role ==='Administrator'">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'delivery'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
-                    <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
+                    <md-tooltip md-direction="right">Scheduled Delivery for today</md-tooltip>
                     <div flex layout layout-align="start center">Outbound Delivery Page</div>
                 </div>
                 <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('user-management')"
-                    ng-class="{'state-active': MainState == 'user-management'}">
+                    ng-class="{'state-active': MainState == 'user-management'}" ng-if="userDetails.role ==='Administrator'">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'user-management'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <md-tooltip md-direction="right">Add and modify user access.</md-tooltip>
@@ -169,14 +170,14 @@
                     <div flex layout layout-align="start center">Reports</div>
                 </div> -->
                 <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('logs')"
-                    ng-class="{'state-active': MainState == 'logs'}">
+                    ng-class="{'state-active': MainState == 'logs'}" ng-if="userDetails.role ==='Administrator'">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'logs'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <md-tooltip md-direction="right">View Inventory System's activities</md-tooltip>
                     <div flex layout layout-align="start center">System Logs</div>
                 </div>
                 <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('reports')"
-                    ng-class="{'state-active': MainState == 'reports'}">
+                    ng-class="{'state-active': MainState == 'reports'}" ng-if="userDetails.role ==='Administrator'">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'reports'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <md-tooltip md-direction="right">Generate various reports</md-tooltip>
