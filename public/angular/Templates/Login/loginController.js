@@ -14,7 +14,13 @@
 
                 DataFactory.SetPageLog($scope.logDetails).success(function(response){
                     console.log(response);
-                    $scope.$parent.ChangeState("home");
+                    if($scope.loggedInUser.role === "Administrator"){
+                        $scope.$parent.ChangeState("home");
+                    }
+                    else{
+                        $scope.$parent.ChangeState("customer");
+                    }
+                    
                 }).error(function(error){
 
                 });
