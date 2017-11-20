@@ -101,10 +101,11 @@ app.controller('MainController', function ($mdDialog, $mdToast, $state, $mdSiden
     $scope.SignOut = function(ev){
         localStorage.removeItem("user");
         $scope.userDetails = null;
-        $scope.ChangeState('login');
-        $state.go('login');
         $scope.LoginState = "Login";
         $scope.MainState = "Login";
+        $scope.ChangeState('login');
+        $state.go('login');
+        
     }
     
     $scope.LoadSessionData();

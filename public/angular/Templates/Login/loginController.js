@@ -1,4 +1,5 @@
  app.controller('LoginController', function ($scope, $rootScope, $interval, DataFactory, $state, $mdDialog, $mdToast, $window) {
+    $scope.ChangeLoadBarState(false);
     $scope.SVG = $scope.ConfigurableItems.SVG;
     $scope.user = {
         username: '',
