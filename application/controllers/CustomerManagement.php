@@ -17,7 +17,7 @@ class CustomerManagement extends CI_Controller
     }
 
     public function addNewCustomer(){
-        $arrColumns = array('name', 'phone_number', 'tin');
+        $arrColumns = array('name', 'phone_number', 'tin', 'address');
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrCustomerDetail = $this->assignDataToArray($postData, $arrColumns);
         $customer = $this->customer_model->insertCustomer($arrCustomerDetail);

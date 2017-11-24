@@ -25,7 +25,7 @@
     $scope.ChangePage = function(i){
     }
     $scope.NextPage = function(i){
-        if(($scope.currentPage + 1 )* 10 <= $scope.supplierList.length){
+        if(($scope.currentPage + 1 )* 10 <= $scope.filtered.length){
             $scope.currentPage = $scope.currentPage + 1;
             // modifyArray($scope.currentPage);
         }
@@ -73,6 +73,7 @@
             },
             controller: 'SupplierDialogController'
         }).then(function(data) {
+            console.log(data);
             if(data == "Successful"){
                 $scope.logDetails = {name: $scope.userDetails.name, page: 'Suppliers Page', action: 'Edit'};
 

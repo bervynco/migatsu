@@ -32,7 +32,7 @@
         else{
             DataFactory.EditCustomer($scope.customer).success(function(response){
                 
-                // $mdDialog.hide("Successful");
+                $mdDialog.hide("Successful");
             }).error(function(error){
 
             });

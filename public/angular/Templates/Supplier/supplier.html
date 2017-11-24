@@ -27,11 +27,15 @@
                     <div flex="none" my-setter width-in-percent="3"></div>
                     <div flex layout layout-align="center center"> Company Name </div>
                 </div>
-                    <div flex="35" layout layout-align="center center"> 
+                <div flex="25" layout layout-align="center center"> 
                     <div flex="none" my-setter width-in-percent="3"></div>
                     <div flex layout layout-align="center center"> Address </div>
                 </div>
-                    <div flex="10" layout layout-align="center center"> 
+                <div flex="15" layout layout-align="center center"> 
+                    <div flex="none" my-setter width-in-percent="3"></div>
+                    <div flex layout layout-align="center center"> Phone Number </div>
+                </div>
+                <div flex="15" layout layout-align="center center"> 
                     <div flex layout layout-align="center center"> Tin Number </div>
                 </div>
                 <div flex="10" layout layout-align="center center"></div>
@@ -39,11 +43,12 @@
             <div layout="row" flex="10" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="supplierList.length == 0">
                 <div flex layout layout-align="center center"> No data Available </div>
             </div>
-            <div flex layout="column" layout-align="start stretch" class="scroll">
-                <div layout="row" flex="none" my-setter height-in-percent="10" layout layout-align="start stretch" class="table-values" ng-repeat="list in supplierList | filter: searchList | limitTo:10:(currentPage-1)*10">
-                    <div flex="35" layout layout-align="center center" layout-padding> {{list.name}} </div>
-                    <div flex="35" layout layout-align="center center" layout-padding> {{list.address}} </div>
-                    <div flex="20" layout layout-align="center center" layout-padding> {{list.tin}} </div>
+            <div flex layout="column" layout-align="start stretch">
+                <div layout="row" flex="none" my-setter height-in-percent="10" layout layout-align="start stretch" class="table-values no-animation" ng-repeat="list in filtered = (supplierList | filter: searchList) | limitTo:10:(currentPage-1)*10">
+                    <div flex="35" layout layout-align="start center" layout-padding> {{list.name}} </div>
+                    <div flex="25" layout layout-align="start center" layout-padding> {{list.address}} </div>
+                    <div flex="15" layout layout-align="start center" layout-padding> {{list.phone_number}} </div>
+                    <div flex="15" layout layout-align="start center" layout-padding> {{list.tin}} </div>
                     <div flex="10" layout layout-align="start stretch">
                         <div flex layout layout-align="start stretch" class="pointer" ng-click="EditSupplier(list, $event)">
                             <md-tooltip md-direction="top">Edit supplier details</md-tooltip>
@@ -59,11 +64,8 @@
             <div flex="10" layout="row" layout-align="center stretch">
                 <div flex="15" layout layout-align="center center">
                     <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
-                    <select flex
-                        ng-model="currentPage" 
-                        ng-options="i for i in _.range(1,(supplierList.length/10))">
-                    </select>
-                    <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= supplierList.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+                    <div flex layout layout-align="center center">{{currentPage}}</div>
+                    <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
                 </div>
             </div> 
         </div>

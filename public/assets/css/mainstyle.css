@@ -892,3 +892,7 @@ select {
 .state-active-bar {
     background-color: rgba(151,178,205,1) !important;
 }
+
+.no-animation{
+    animation: none !important;
+}

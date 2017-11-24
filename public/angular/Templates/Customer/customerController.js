@@ -22,9 +22,9 @@
     $scope.ChangePage = function(i){
     }
     $scope.NextPage = function(i){
-        if(($scope.currentPage + 1 )* 10 <= $scope.customerList.length){
+        if(($scope.currentPage + 1 )* 10 <= $scope.filtered.length){
             $scope.currentPage = $scope.currentPage + 1;
-            modifyArray($scope.currentPage);
+            //modifyArray($scope.currentPage);
         }
         
     }

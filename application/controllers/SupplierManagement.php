@@ -17,7 +17,7 @@ class SupplierManagement extends CI_Controller
     }
 
     public function addNewSupplier(){
-        $arrColumns = array('name', 'phone_number', 'tin');
+        $arrColumns = array('name', 'phone_number', 'tin', 'address');
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrSupplierDetail = $this->assignDataToArray($postData, $arrColumns);
         $supplier = $this->supplier_model->insertSupplier($arrSupplierDetail);

@@ -9,7 +9,9 @@
         $scope.dialogHeading = "Add New Supplier";
         $scope.supplier = {
             name: '',
-            phone_number: ''
+            phone_number: '',
+            tin: '',
+            address: ''
         }
     }
     else{
@@ -20,6 +22,7 @@
 
     
     $scope.SubmitNewSupplierDetails = function(){
+        console.log($scope.supplier);
         if($scope.action == "Add"){
             DataFactory.AddNewSupplier($scope.supplier).success(function(response){
                 if(response == "Successful")
