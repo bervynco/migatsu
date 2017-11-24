@@ -52,7 +52,7 @@
     <script src="public/angular/Templates/Outbound Delivery/outboundDeliveryDialogController.js"></script>
     <script src="public/angular/Templates/Supplier/supplierController.js"></script>
     <script src="public/angular/Templates/Supplier/supplierDialogController.js"></script>
-    
+    <script src="public/angular/Templates/Modals/notificationController.js"></script>
     <!--build:css css/styles.min.css-->
     <link rel="stylesheet" href="public/assets/css/jquery.scrollbar.css">
     <link rel="stylesheet" href="public/assets/css/material.css">

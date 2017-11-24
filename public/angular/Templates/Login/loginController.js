@@ -6,8 +6,8 @@
         password: ''
     }
     $scope.Login = function(){
+        $scope.$parent.ShowCustomToast(null, 'loading', 'login');
         DataFactory.SignIn($scope.user).success(function(response){
-            console.log(response);
             $scope.loggedInUser = response[0];
             if(response.length != 0){
                 localStorage.setItem("user", JSON.stringify($scope.loggedInUser));
@@ -15,7 +15,9 @@
 
                 DataFactory.SetPageLog($scope.logDetails).success(function(response){
                     console.log(response);
+                    $scope.$parent.ShowCustomToast(null, 'success', 'login');
                     if($scope.loggedInUser.role === "Administrator"){
+                        
                         $scope.$parent.ChangeState("home");
                     }
                     else{
@@ -28,6 +30,7 @@
                 
             }
             else{
+                $scope.$parent.ShowCustomToast(null, 'invalid', 'login');
                 $scope.errorMessage = "Username and/or password invalid";
             }
             

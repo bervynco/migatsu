@@ -63,7 +63,8 @@ mainConfigManager.provider('ConfigurableItems', function ConfigurableItemsProvid
         right: svgsrc + "right-arrow.svg",
         delivery: svgsrc + "delivery.svg",
         move_to: svgsrc + "move-to.svg",
-        lock: svgsrc + "lock.svg"
+        lock: svgsrc + "lock.svg",
+        hourglass: svgsrc + "hourglass.svg"
     }
 
     this.$get = function () {

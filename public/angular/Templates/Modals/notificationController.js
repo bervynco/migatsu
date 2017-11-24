@@ -4,11 +4,24 @@ app.controller('NotificationController', function ($scope, $rootScope, $interval
 	$scope.page = page;
 	$scope.action = action;
 
-	if($scope.page == "request-access"){
-		if($scope.action == "granted")
-			$scope.message = "Access granted to " + $scope.parameters.name;
-		else if($scope.action == "denied")
-			$scope.message = "Access denied to " + $scope.parameters.name;
+	if($scope.page == "login"){
+		if($scope.action == "success"){
+			$scope.icon = Scope.SVG.accept;
+			$scope.message = "Login successful";
+		}
+		else if($scope.action == "invalid"){
+			$scope.icon = $scope.SVG.reject;
+			$scope.message = "Invalid credentials";
+		}
+		else if($scope.action == "loading"){
+			$scope.icon = $scope.SVG.hourglass;
+			$scope.message = "Validating your credentials";
+		}
+		else{
+			$scope.icon = $scope.SVG.reject;
+			$scope.message = "Unexpected error occured";
+		}
+			
 	}
 
 });
