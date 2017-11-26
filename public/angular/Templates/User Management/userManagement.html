@@ -55,7 +55,7 @@
         <div flex="15" layout layout-align="center center">
             <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
             <div flex layout layout-align="center center">{{currentPage}}</div>
-            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= userList.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
         </div>
     </div>
     </div>
