@@ -93,5 +93,23 @@ class PurchaseOrderManagement extends CI_Controller
             echo "Error";
         }
     }
+
+    public function togglePurchaseOrderDone(){
+        $arrColumns = array('id', 'customer_id', 'customer_po_id', 'order_list', 'quantity', 'amount', 'promised_delivery_date'
+        , 'invoice_id', 'dr_id', 'actual_delivery_date', 'days', 'remarks', 'inventory_saved');
+        $postData = json_decode(file_get_contents('php://input'), true);
+        $arrPurchaseOrderDetail = $this->assignDataToArray($postData, $arrColumns);
+
+        if($arrPurchaseOrderDetail['inventory_saved'] == 0){
+            $orderList = json_decode($postData['order_list']);
+            $inventory = $this->inventory_model->updateInventoryItemCount($orderList);
+
+            if($inventory == true){
+                $purchaseOrder = $this->po_model->updateInventorySaved($arrPurchaseOrderDetail);
+            }
+        }
+        $purchaseOrder = $this->po_model->togglePurchaseOrderDone($arrPurchaseOrderDetail);
+        echo "Successful";
+    }
 }
 ?>
