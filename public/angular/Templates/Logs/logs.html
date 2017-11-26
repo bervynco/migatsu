@@ -26,7 +26,7 @@
             <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="logList.length == 0">
                 <div flex layout layout-align="center center"> No data Available </div>
             </div>
-             <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" 
+             <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values no-animation" 
                 ng-repeat="log in filtered=(logList | filter: searchLogs) | limitTo:10:(currentPage-1)*10">
                 <div flex layout layout-align="center center"> {{log.name}} </div>
                 <div flex layout layout-align="center center"> {{log.page}} </div>
