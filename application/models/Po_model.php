@@ -5,12 +5,14 @@ class po_model extends CI_Model {
                           ->from('purchase_orders')->join('customers','customers.id = purchase_orders.customer_id')
                           ->where('purchase_orders.promised_delivery_date >=', $today)
                           ->where('purchase_orders.promised_delivery_date <', $nextDate)
+                          ->where('purchase_orders.done =', 0)
                           ->order_by('customers.name', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
     function selectAllPurchaseOrders(){
         $query = $this->db->select(array('purchase_orders.*', 'customers.name'))
                           ->from('purchase_orders')->join('customers','customers.id = purchase_orders.customer_id')
+                          ->where('purchase_orders.done =', 0)
                           ->order_by('customers.name', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
@@ -55,6 +57,17 @@ class po_model extends CI_Model {
                                             'inventory_saved'=> 1
                                         )
                                     );
+        return $this->db->affected_rows();
+    }
+
+    function togglePurchaseOrderDone($arrPurchaseOrderDetail){
+        $query = $this->db->where('id', $arrPurchaseOrderDetail['id'])
+                          ->update(
+                                'purchase_orders', 
+                                array(
+                                    'done'=> 1
+                                )
+                            );
         return $this->db->affected_rows();
     }
 }

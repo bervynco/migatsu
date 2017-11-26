@@ -332,7 +332,16 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
                 data: po
             })
         },
-
+        TogglePurchaseOrderDone: function(po){
+            return $http({
+                method: "POST",
+                url: "index.php/PurchaseOrderManagement/togglePurchaseOrderDone",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data:po
+            })
+        },
         /** Suppliers **/
         GetSupplierList: function(){
             return $http({
