@@ -19,7 +19,7 @@
                 <div flex="5"></div>
                 <div flex="25" layout layout-align="center stretch">
                     <md-icon md-svg-src="{{SVG.search}}" my-setter padding="10"></md-icon>
-                    <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?">
+                    <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchUser">
                 </div>
             </div>
             <div layout="row" flex="10" layout layout-align="start stretch" class="table table-header">
@@ -29,7 +29,8 @@
             <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="userList.length == 0">
                 <div flex layout layout-align="center center"> No data Available </div>
             </div>
-            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values" ng-repeat="list in userList"><!-- | limitTo:10:(currentPage-1)*10+1"-->
+            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values no-animation" 
+                ng-repeat="list in filtered = (userList | filter: searchUser) | limitTo:10:(currentPage - 1)*10">
                 <div flex layout layout-align="center center"> {{list.name}} </div>
                 <div flex layout layout-align="center center"> {{list.username}} </div>
                 <div flex layout layout-align="center center"> {{list.role}} </div>
@@ -53,10 +54,7 @@
     <div flex="10" layout="row" layout-align="center stretch">
         <div flex="15" layout layout-align="center center">
             <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
-            <select flex
-                ng-model="currentPage" 
-                ng-options="i for i in _.range(1,(userList.length/10))">
-            </select>
+            <div flex layout layout-align="center center">{{currentPage}}</div>
             <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= userList.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
         </div>
     </div>
