@@ -75,6 +75,15 @@ class ReceivableManagement extends CI_Controller
 
         echo "Successful";
     }
+
+    public function toggleReceivableDone(){
+        $arrColumns = array('id', 'supplier_id', 'po_id', 'delivery_date', 'supplier_dr_id', 'terms', 'due_date',
+                            'remarks');
+        $postData = json_decode(file_get_contents('php://input'), true);
+        $arrReceivableDetail = $this->assignDataToArray($postData, $arrColumns);
+        $receivable = $this->receivable_model->toggleReceivableDone($arrReceivableDetail);
+        echo "Successful";
+    }
 }
 
 ?>

@@ -5,13 +5,16 @@ class receivable_model extends CI_Model {
                            ->join('customers','customers.id = receivables.customer_id')
                            ->where('receivables.due_date >=', $today)
                            ->where('receivables.due_date <', $nextDate)
+                           ->where('done =', 0)
                            ->order_by('customers.name', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
     function selectAllReceivable(){
 
         $query = $this->db->select(array('receivables.*', 'customers.name'))->from('receivables')
-                           ->join('customers','customers.id = receivables.customer_id')->order_by('customers.name', 'asc')->get();
+                           ->join('customers','customers.id = receivables.customer_id')
+                           ->where('receivables.done =', 0)
+                           ->order_by('customers.name', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
 
@@ -40,6 +43,17 @@ class receivable_model extends CI_Model {
     function deleteReceivable($arrReceivableDetail){
         $query = $this->db->where('id', $arrReceivableDetail['id'])->delete('receivables');
 
+        return $this->db->affected_rows();
+    }
+
+    function toggleReceivableDone($arrReceivableDetail){
+        $query = $this->db->where('id', $arrReceivableDetail['id'])
+                          ->update(
+                                'receivables', 
+                                array(
+                                    'done'=> 1
+                                )
+                            );
         return $this->db->affected_rows();
     }
 }

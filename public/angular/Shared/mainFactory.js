@@ -202,6 +202,16 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
                 data:receivable
             })
         },
+        ToggleReceivableDone: function(receivable){
+            return $http({
+                method: "POST",
+                url: "index.php/ReceivableManagement/toggleReceivableDone",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data:receivable
+            })
+        },
         
         /** Payables **/
         GetPayablesToday: function(){

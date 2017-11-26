@@ -47,7 +47,22 @@
 
         return overdueDays;
     }
+    $scope.ToggleDone = function(list){
+        DataFactory.ToggleReceivableDone(list).success(function(response){
+            if(response === "Successful"){
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Receivables Page', action: 'Transaction Done'};
 
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
+            }
+        }).error(function(error){
+
+        });
+    }
     $scope.AddNewReceivable = function(ev){
         $mdDialog.show({
             parent: angular.element(document.body),
