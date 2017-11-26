@@ -36,7 +36,6 @@ class inventory_model extends CI_Model {
 
     function updateInventoryItemCount($arrOrderList){
         foreach($arrOrderList as $index => $arrItem){
-            print_r($arrItem);
             $query = $this->db->select(array('id', 'balance'))->from('inventory')->where('id', $arrItem->id)->get();
             $item = $query->result_array();
 
