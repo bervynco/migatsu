@@ -22,23 +22,24 @@
                 </div>
             </div>
             <div layout="row" flex="10" layout layout-align="start stretch" class="table table-header">
-                <div flex layout layout-align="center center" ng-repeat="field in tableFieldNames">{{field}}</div>
+                <div flex layout layout-align="center center" ng-repeat="field in tableFieldNames" layout-padding>{{field}}</div>
                 <div flex layout layout-align="center center"></div>
             </div>
             <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="inventoryList.length == 0">
                 <div flex layout layout-align="center center"> No data Available </div>
             </div>
             <div layout="row" flex="none" my-setter min-height-in-percent="7" layout layout-align="start stretch" class="table-values no-animation" 
-            ng-class="inventory.status === 'bad' ? 'warning' : ''" ng-repeat="inventory in filtered = (inventoryList | filter:searchInventory) | limitTo:10:(currentPage - 1)*10 | orderBy: 'status'" >
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.name}} </div>
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.product_id}} </div>
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.product_description}} </div>
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.purchase_price}} </div>
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.balance}} </div>
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.threshold}} </div>
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.location}} </div>
-                <div flex layout layout-align="center center" my-setter padding="5"> {{inventory.remarks}} </div>
-                <div flex layout layout-align="start stretch" my-setter padding="5">
+            ng-class="inventory.status === 'bad' ? 'warning' : ''" 
+            ng-repeat="inventory in filtered = (inventoryList | filter:searchInventory) | limitTo:10:(currentPage - 1)*10 | orderBy: 'status'" >
+                <div flex layout layout-align="start center" layout-padding> {{inventory.name}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{inventory.product_id}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{inventory.product_description}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{inventory.purchase_price}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{inventory.balance}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{inventory.threshold}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{inventory.location}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{inventory.remarks}} </div>
+                <div flex layout layout-align="start stretch" >
                     <div flex layout layout-align="start stretch" class="pointer" ng-click="EditInventoryItem(inventory, $event)">
                         <md-tooltip md-direction="top">Edit inventory item</md-tooltip>
                         <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
