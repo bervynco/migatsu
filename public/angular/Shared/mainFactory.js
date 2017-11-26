@@ -252,6 +252,16 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
                 data:payable
             })
         },
+        TogglePayableDone: function(payable){
+            return $http({
+                method: "POST",
+                url: "index.php/PayableManagement/togglePayableDone",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data:payable
+            })
+        },
 
         /** Purchase Order **/
         GetPurchaseOrderToday: function(){
