@@ -68,8 +68,17 @@ class PayableManagement extends CI_Controller
                             'remarks');
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrPayableDetail = $this->assignDataToArray($postData, $arrColumns);
-        $user = $this->payable_model->deletePayable($arrPayableDetail);
+        $payable = $this->payable_model->deletePayable($arrPayableDetail);
 
+        echo "Successful";
+    }
+
+    public function togglePayableDone(){
+        $arrColumns = array('id', 'supplier_id', 'po_id', 'delivery_date', 'supplier_dr_id', 'terms', 'due_date',
+                            'remarks');
+        $postData = json_decode(file_get_contents('php://input'), true);
+        $arrPayableDetail = $this->assignDataToArray($postData, $arrColumns);
+        $payable = $this->payable_model->togglePayableDone($arrPayableDetail);
         echo "Successful";
     }
 }

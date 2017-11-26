@@ -5,6 +5,7 @@ class payable_model extends CI_Model {
                            ->join('suppliers','suppliers.id = payables.supplier_id')
                            ->where('payables.due_date >=', $today)
                            ->where('payables.due_date <', $nextDate)
+                           ->where('done =', 0)
                            ->order_by('suppliers.name', 'asc')->get();
                            
         return($query->num_rows() > 0) ? $query->result_array(): array();
@@ -12,7 +13,9 @@ class payable_model extends CI_Model {
     function selectAllPayable(){
 
         $query = $this->db->select(array('payables.*', 'suppliers.name'))->from('payables')
-                           ->join('suppliers','suppliers.id = payables.supplier_id')->order_by('suppliers.name', 'asc')->get();
+                           ->join('suppliers','suppliers.id = payables.supplier_id')
+                           ->where('payables.done =', 0)
+                           ->order_by('suppliers.name', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
 
@@ -41,6 +44,17 @@ class payable_model extends CI_Model {
     function deletePayable($arrPayableDetail){
         $query = $this->db->where('id', $arrPayableDetail['id'])->delete('payables');
 
+        return $this->db->affected_rows();
+    }
+
+    function togglePayableDone($arrPayableDetail){
+        $query = $this->db->where('id', $arrPayableDetail['id'])
+                          ->update(
+                                'payables', 
+                                array(
+                                    'done'=> 1
+                                )
+                            );
         return $this->db->affected_rows();
     }
 }

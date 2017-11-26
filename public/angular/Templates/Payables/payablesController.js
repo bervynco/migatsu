@@ -34,9 +34,9 @@
     $scope.ChangePage = function(i){
     }
     $scope.NextPage = function(i){
-        if(($scope.currentPage + 1 )* 10 <= $scope.payableList.length){
+        if(($scope.currentPage + 1 )* 10 <= $scope.filtered.length){
             $scope.currentPage = $scope.currentPage + 1;
-            modifyArray($scope.currentPage);
+            // modifyArray($scope.currentPage);
         }
         
     }
@@ -46,6 +46,22 @@
         }
     }
     
+    $scope.ToggleDone = function(list){
+        DataFactory.TogglePayableDone(list).success(function(response){
+            if(response === "Successful"){
+                $scope.logDetails = {name: $scope.userDetails.name, page: 'Payables Page', action: 'Transaction Done'};
+
+                DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                    console.log(response);
+                }).error(function(error){
+
+                });
+                getData();
+            }
+        }).error(function(error){
+
+        });
+    }
     $scope.AddNewPayable = function(ev){
         $mdDialog.show({
             parent: angular.element(document.body),

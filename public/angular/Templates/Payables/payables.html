@@ -36,9 +36,12 @@
             <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="payableList.length == 0">
                 <div flex layout layout-align="center center"> No data Available </div>
             </div>
-            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values pointer" ng-repeat="list in payableList"
-             ng-class="CheckDueDate(list) >= 0 ? 'warning' : ''">
-                <div flex="30" layout layout-align="center center"> {{list.name}} </div>
+            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values pointer no-animation" 
+                ng-repeat="list in filtered = (payableList | filter:searchList) | limitTo:10:(currentPage - 1)*10">
+                <div flex="30" layout layout-align="start stretch">
+                    <div flex="none" my-setter width-in-percent="4" ng-class="CheckDueDate(list) >= 0 ? 'warning' : ''"></div>
+                    <div flex layout layout-align="center center"> {{list.name}} </div>
+                </div>
                 <div flex="none" my-setter width-in-percent="8" layout layout-align="center center"> {{list.po_id}} </div>
                 <div flex layout layout-align="center center"> {{list.delivery_date}} </div>
                 <div flex="none" my-setter width-in-percent="8" layout layout-align="center center"> {{list.supplier_dr_id}} </div>
@@ -46,7 +49,11 @@
                 <div flex layout layout-align="center center"> {{list.due_date}} </div>
                 <div flex="none" my-setter width-in-percent="8" layout layout-align="center center"> {{list.overdue_days}} </div>
                 <div flex layout layout-align="center center"> {{list.remarks}} </div>
-                <div flex layout layout-align="start stretch"> 
+                <div flex layout layout-align="start stretch">
+                    <div flex layout layout-align="start stretch" class="pointer" ng-click="ToggleDone(list)">
+                        <md-tooltip md-direction="top">Click to process this payable as done</md-tooltip>
+                        <md-icon md-svg-src="{{SVG.check}}" layout layout-align="center center"></md-icon>
+                    </div>
                     <div flex layout layout-align="start stretch" class="pointer" ng-click="EditPayable(list, $event)">
                         <md-tooltip md-direction="top">Edit payable item</md-tooltip>
                         <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
@@ -62,11 +69,8 @@
     <div flex="10" layout="row" layout-align="center stretch">
         <div flex="15" layout layout-align="center center">
             <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
-            <select flex
-                ng-model="currentPage" 
-                ng-options="i for i in _.range(1,(payableList.length/10))">
-            </select>
-            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= payableList.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+            <div flex layout layout-align="center center"> {{currentPage}} </div>
+            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
         </div>
     </div>
     <div flex="5"></div>
