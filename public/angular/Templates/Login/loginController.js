@@ -11,7 +11,7 @@
             $scope.loggedInUser = response[0];
             if(response.length != 0){
                 localStorage.setItem("user", JSON.stringify($scope.loggedInUser));
-                $scope.logDetails = {name: $scope.loggedInUser.name, page: 'System Logs Page', action: 'Log In'};
+                $scope.logDetails = {name: $scope.loggedInUser.name, page: 'Login', action: 'Log In'};
 
                 DataFactory.SetPageLog($scope.logDetails).success(function(response){
                     console.log(response);
