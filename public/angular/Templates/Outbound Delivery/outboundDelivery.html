@@ -21,26 +21,36 @@
                 <div flex="5"></div>
                 <div flex="25" layout layout-align="center stretch">
                     <md-icon md-svg-src="{{SVG.search}}" my-setter padding="10"></md-icon>
-                    <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?">
+                    <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchList">
                 </div>
             </div>
             <div layout="row" flex="10" layout layout-align="start stretch" class="table table-header">
-                <div flex layout layout-align="center center" ng-repeat="field in tableFieldNames">{{field}}</div>
+                <div flex layout layout-align="center center" layout-padding> Customer Name</div>
+                <div flex layout layout-align="center center" layout-padding> PO Number </div>
+                <div flex layout layout-align="center center" layout-padding> Amount </div>
+                <div flex layout layout-align="center center" layout-padding> Promised Delivery Date </div>
+                <div flex layout layout-align="center center" layout-padding> Invoice ID </div>
+                <div flex layout layout-align="center center" layout-padding> Supplier DR ID </div>
+                <div flex layout layout-align="center center" layout-padding> Actual Delivery Date </div>
+                <!-- <div flex layout layout-align="center center"> {{list.overdue_days}} </div> -->
+                <div flex layout layout-align="center center" layout-padding> Remarks </div>
+                <!-- <div flex layout layout-align="center center" ng-repeat="field in tableFieldNames">{{field}}</div> -->
                 <div flex layout layout-align="center center"></div>
             </div>
             <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="outboundDeliveryList.length == 0">
                 <div flex layout layout-align="center center"> No data Available </div>
             </div>
-            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values" ng-repeat="list in outboundDeliveryList | limitTo:10:(currentPage-1)*10+1">
-                <div flex layout layout-align="center center"> {{list.customer_name}} </div>
-                <div flex layout layout-align="center center"> {{list.customer_po_id}} </div>
-                <div flex layout layout-align="center center"> {{list.amount}} </div>
-                <div flex layout layout-align="center center"> {{list.promised_delivery_date}} </div>
-                <div flex layout layout-align="center center"> {{list.invoice_id}} </div>
-                <div flex layout layout-align="center center"> {{list.supplier_dr_id}} </div>
-                <div flex layout layout-align="center center"> {{list.actual_delivery_date}} </div>
+            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values no-animation " 
+            ng-repeat="list in filtered = (outboundDeliveryList| filter: searchList) | limitTo:10:(currentPage-1)*10">
+                <div flex layout layout-align="start center" layout-padding> {{list.name}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{list.customer_po_id}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{list.amount}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{list.promised_delivery_date}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{list.invoice_id}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{list.dr_id}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{list.actual_delivery_date}} </div>
                 <!-- <div flex layout layout-align="center center"> {{list.overdue_days}} </div> -->
-                <div flex layout layout-align="center center"> {{list.remarks}} </div>
+                <div flex layout layout-align="start center" layout-padding> {{list.remarks}} </div>
                 <div flex layout layout-align="start stretch">
                     <div flex layout layout-align="start stretch" class="pointer" ng-click="MoveToDelivery(list, $event)">
                         <md-tooltip md-direction="top">Change Delivery Date</md-tooltip>
@@ -50,6 +60,11 @@
             </div>
         </div>
     </div>
-    <div flex="10" layout-layout-align="start stretch"style="background-color: pink;"></div>
-    <div flex="5"></div>
+    <div flex="10" layout="row" layout-align="center stretch">
+        <div flex="15" layout layout-align="center center">
+            <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
+            <div flex layout layout-align="center center"> {{currentPage}}</div>
+            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+        </div>
+    </div>
 </div>

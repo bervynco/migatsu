@@ -456,7 +456,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GetOutboundDeliveryList: function(){
             return $http({
                 method: "GET",
-                url: locationString + "outbound/get/list",
+                url: "index.php/OutboundDeliveryManagement/getAllOutboundDelivery",
                 headers: {
                     'Content-Type': 'application/json'
                 }

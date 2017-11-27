@@ -2,7 +2,6 @@
     $scope.SVG = $scope.ConfigurableItems.SVG;
     $scope.$parent.CheckSessionData("outbound-delivery");
 
-    $scope.tableFieldNames = ['Customer Name', 'PO ID', 'Amount', 'Promised Delivery Date', 'Invoice ID', 'DR ID', 'Actual Delivery Date', 'Remarks'];
     $scope.userDetails = JSON.parse(localStorage.getItem("user"));
     $scope.logDetails = {name: $scope.userDetails.name, page: 'Outbound Delivery Page', action: 'View'};
 
@@ -12,12 +11,15 @@
 
     });
 
-    DataFactory.GetOutboundDeliveryList().success(function(response){
+    function getData(){
+        DataFactory.GetOutboundDeliveryList().success(function(response){
         $scope.outboundDeliveryList = response;
         console.log(response);
     }).error(function(error){
 
     });
+    }
+    
 
     $scope.MoveToDelivery = function(list, ev){
         $mdDialog.show({
@@ -45,4 +47,6 @@
 
         // });
     }
+
+    getData();
 });

@@ -23,21 +23,15 @@ class OutboundDeliveryManagement extends CI_Controller
     }
 
     public function getAllOutboundDelivery(){
-        $arrPurchaseOrder = $this->po_model->selectAllPurchaseOrders();
+        $today = new DateTime(date("Y-m-d"));
+        // $date = new DateTime(date("Y-m-d"));
+        // $date->modify('+7 day');
+        // $nextDate = new DateTime($date->format('Y-m-d'));
+
+        $arrPurchaseOrder = $this->po_model->selectToday($today->format('Y-m-d'), $today->format('Y-m-d'));
+        //$arrPurchaseOrder = $this->po_model->selectAllPurchaseOrders();
 
         foreach($arrPurchaseOrder as $index => $row){
-        //     $row['status'] = 'bad';
-        //     $computedBalance = $row['balance'] / $row['threshold'];
-        //     if($computedBalance > 2){
-        //         $arrInventory[$index]['status'] = 'good';
-        //     }
-        //     else if($computedBalance > 1 && $computedBalance < 1.5){
-        //         $arrInventory[$index]['status'] = 'warning';
-        //     }
-        //     else{
-        //         $arrInventory[$index]['status'] = 'bad';
-        //     }
-
             $arrPurchaseOrder[$index]['amount'] = floatval($arrPurchaseOrder[$index]['amount']);
         }
         echo json_encode($arrPurchaseOrder);
