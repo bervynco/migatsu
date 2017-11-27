@@ -147,9 +147,9 @@
                     <md-tooltip md-direction="right">More details regarding AMAT</md-tooltip>
                     <div flex layout layout-align="start center">Purchase Order</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('delivery')"
-                    ng-class="{'state-active': MainState == 'delivery'}" ng-if="userDetails.role ==='Administrator'">
-                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'delivery'}"></span>
+                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('outbound-delivery')"
+                    ng-class="{'state-active': MainState == 'outbound-delivery '}" ng-if="userDetails.role ==='Administrator'">
+                    <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'outbound-delivery'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <md-tooltip md-direction="right">Scheduled Delivery for today</md-tooltip>
                     <div flex layout layout-align="start center">Outbound Delivery Page</div>
@@ -183,13 +183,13 @@
                     <md-tooltip md-direction="right">Generate various reports</md-tooltip>
                     <div flex layout layout-align="start center">Reports</div>
                 </div>
-                <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('help')"
+                <!-- <div class="item" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" ng-click="ChangeState('help')"
                     ng-class="{'state-active': MainState == 'help'}">
                     <span flex="none" my-setter width-in-percent="3" ng-class="{'state-active-bar': MainState == 'help'}"></span>
                     <span flex="none" my-setter width-in-percent="5"></span>
                     <md-tooltip md-direction="right">More details regarding the system</md-tooltip>
                     <div flex layout layout-align="start center">Help</div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div flex layout="column" layout-align="start stretch">
