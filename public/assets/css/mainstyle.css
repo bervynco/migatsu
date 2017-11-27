@@ -606,6 +606,7 @@ body{
 /* table css */
 .table-header > div{
     border: 0.5px solid rgba(70,70,70,0.7);
+    font-size: 0.80em;
 }
 .table-values > div{
     color: rgba(20,20,20,1);
@@ -615,7 +616,7 @@ body{
     border-style: solid dashed solid;
     border-color: rgba(70,70,70,0.7);
     transition: .3s;
-    font-size:0.85em;
+    font-size:0.65em;
 }
 .table-values:hover{
     background-color: rgba(180,180,180,1);
