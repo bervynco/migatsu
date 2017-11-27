@@ -11,7 +11,7 @@ class supplier_model extends CI_Model {
         return $this->db->insert_id();
     }
 
-    function updateSupplier($arrSupplierDetail){
+    function updateSupplier($arrSupplierDetail){ 
         $query = $this->db->where('id', $arrSupplierDetail['id'])
                           ->update(
                                 'suppliers', 
