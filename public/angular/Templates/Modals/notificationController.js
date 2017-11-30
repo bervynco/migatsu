@@ -6,7 +6,7 @@ app.controller('NotificationController', function ($scope, $rootScope, $interval
 
 	if($scope.page == "login"){
 		if($scope.action == "success"){
-			$scope.icon = Scope.SVG.accept;
+			$scope.icon = $scope.SVG.accept;
 			$scope.message = "Login successful";
 		}
 		else if($scope.action == "invalid"){

@@ -8,22 +8,26 @@ class InventoryManagement extends CI_Controller
         $arrInventory = $this->inventory_model->selectAllInventory();
 
         foreach($arrInventory as $index => $row){
-            $row['status'] = 'bad';
-            $computedBalance = $row['balance'] / $row['threshold'];
-            if($computedBalance > 2){
-                unset($arrInventory[$index]);
-            }
-            else{
-                if($computedBalance > 1 && $computedBalance < 1.5){
-                    $arrInventory[$index]['status'] = 'warning';
+            if($row['threshold'] != 0){
+                $computedBalance = $row['balance'] / $row['threshold'];
+                if($computedBalance > 2){
+                    unset($arrInventory[$index]);
                 }
                 else{
-                    $arrInventory[$index]['status'] = 'bad';
+                    if($computedBalance > 1 && $computedBalance < 1.5){
+                        $arrInventory[$index]['status'] = 'warning';
+                    }
+                    else{
+                        $arrInventory[$index]['status'] = 'bad';
+                    }
                 }
-
-                $arrInventory[$index]['threshold'] = floatval($arrInventory[$index]['threshold']);
-                $arrInventory[$index]['balance'] = floatval($arrInventory[$index]['balance']);
+                
             }
+            // else{
+            //     $arrInventory[$index]['status'] = 'good';
+            // }
+            $arrInventory[$index]['threshold'] = floatval($arrInventory[$index]['threshold']);
+            $arrInventory[$index]['balance'] = floatval($arrInventory[$index]['balance']);
             
         }
         echo json_encode($arrInventory);
@@ -40,17 +44,21 @@ class InventoryManagement extends CI_Controller
 
         foreach($arrInventory as $index => $row){
             $row['status'] = 'bad';
-            $computedBalance = $row['balance'] / $row['threshold'];
-            if($computedBalance > 2){
-                $arrInventory[$index]['status'] = 'good';
-            }
-            else if($computedBalance > 1 && $computedBalance < 1.5){
-                $arrInventory[$index]['status'] = 'warning';
+            if($row['threshold'] != 0){
+                $computedBalance = $row['balance'] / $row['threshold'];
+                if($computedBalance > 2){
+                    $arrInventory[$index]['status'] = 'good';
+                }
+                else if($computedBalance > 1 && $computedBalance < 1.5){
+                    $arrInventory[$index]['status'] = 'warning';
+                }
+                else{
+                    $arrInventory[$index]['status'] = 'bad';
+                }
             }
             else{
-                $arrInventory[$index]['status'] = 'bad';
+                $arrInventory[$index]['status'] = 'good';
             }
-
             $arrInventory[$index]['threshold'] = floatval($arrInventory[$index]['threshold']);
             $arrInventory[$index]['balance'] = floatval($arrInventory[$index]['balance']);
         }
