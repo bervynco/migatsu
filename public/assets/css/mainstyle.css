@@ -652,6 +652,7 @@ body{
     border: 1px solid;
     border-color: rgba(33, 33, 33, .5) transparent rgba(56, 56, 56, 1) transparent;
     transition: .3s;
+    width: 100%;
 }
 .table .list{
     padding:0 2px 0 3px;
@@ -896,4 +897,33 @@ select {
 
 .no-animation{
     animation: none !important;
+}
+
+/* tables */
+.data-table {
+    letter-spacing: 1px;
+    transition: .3s;
+    width: 100%;
+    border-collapse:collapse;
+    /* border: 1px dashed black; */
+}
+.data-table, td, th {
+    border: 1px solid rgba(150,150,150,0.5);
+}
+.data-table > tbody > tr > th {
+    padding: 20px;
+    font-size: 16px;
+    background: rgba(42,63,84,1);
+    color: rgba(255, 255, 255, 1);
+}
+.data-table > tbody > .values:hover {
+    background-color: rgba(235,235,235,1);
+    transition: 0.5s;
+}
+.data-table > tbody > tr > td {
+    padding: 15px;
+    font-size: 13px;
+    background: transparent;
+    color: rgba(0,0,0, 1);
+    padding-left: 15px;
 }

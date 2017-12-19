@@ -22,7 +22,35 @@
                     <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchList">
                 </div>
             </div>
-            <div flex="none" my-setter height-in-percent="8" layout="row" layout layout-align="start stretch" class="table table-header">
+            <table class="data-table">
+                <tr>
+                    <th class=""> Company Name </th>
+                    <th class=""> Address </th>
+                    <th class=""> Tin Number </th>
+                    <th class=""> Phone Number </th>
+                    <th class="">  </th>
+                </tr>
+                <tr class="values no-animation" ng-if="filtered.length == 0">
+                    <td colspan="100%" style="text-align:center">No data available</td>
+                </tr>
+                <tr class="values no-animation" ng-repeat="list in filtered = (supplierList | filter:searchList) | limitTo:10:(currentPage-1)*10">
+                    <td>{{list.name}}</td>
+                    <td>{{list.address}}</td>
+                    <td>{{list.tin}}</td>
+                    <td>{{list.phone_number}}</td>
+                    <td layout layout-align="start stretch">
+                        <div flex layout layout-align="start stretch" class="pointer" ng-click="EditCustomer(list, $event)">
+                            <md-tooltip md-direction="top">Edit customer details</md-tooltip>
+                            <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                        </div>
+                        <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteCustomer(list, $event)">
+                            <md-tooltip md-direction="top">Delete customer details</md-tooltip>
+                            <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- <div flex="none" my-setter height-in-percent="8" layout="row" layout layout-align="start stretch" class="table table-header">
                 <div flex="35" layout layout-align="center center"> 
                     <div flex="none" my-setter width-in-percent="3"></div>
                     <div flex layout layout-align="center center"> Company Name </div>
@@ -61,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div flex="10" layout="row" layout-align="center stretch">
                 <div flex="15" layout layout-align="center center">
                     <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
@@ -71,5 +99,4 @@
             </div> 
         </div>
     </div>
-    <div flex="5"></div>
 </div>
