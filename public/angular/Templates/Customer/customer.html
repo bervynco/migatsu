@@ -33,19 +33,21 @@
                 <tr class="values no-animation" ng-if="filtered.length == 0">
                     <td colspan="100%" style="text-align:center">No data available</td>
                 </tr>
-                <tr class="values no-animation" ng-repeat="list in filtered = (customerList | filter:searchList) | limitTo:10:(currentPage-1)*10">
+                <tr class="values no-animation" ng-repeat="list in filtered = (customerList | filter:searchList) | limitTo:12:(currentPage-1)*12">
                     <td>{{list.name}}</td>
                     <td>{{list.address}}</td>
                     <td>{{list.tin}}</td>
                     <td>{{list.phone_number}}</td>
-                    <td layout layout-align="start stretch">
-                        <div flex layout layout-align="start stretch" class="pointer" ng-click="EditCustomer(list, $event)">
-                            <md-tooltip md-direction="top">Edit customer details</md-tooltip>
-                            <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
-                        </div>
-                        <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteCustomer(list, $event)">
-                            <md-tooltip md-direction="top">Delete customer details</md-tooltip>
-                            <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                    <td class="table-buttons">
+                        <div layout layout-align="start stretch">
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="EditCustomer(list, $event)">
+                                <md-tooltip md-direction="top">Edit customer details</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                            </div>
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteCustomer(list, $event)">
+                                <md-tooltip md-direction="top">Delete customer details</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -59,7 +61,7 @@
                 ng-options="i for i in _.range(1,(filtered.length/10))">
             </div> -->
             <div flex layout layout-align="center center"> {{currentPage}} </div>
-            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*12 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
         </div>
     </div>
 </div>

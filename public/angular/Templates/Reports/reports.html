@@ -15,7 +15,7 @@
 			<div flex="20" layout layout-align="start stretch">
 				<select flex ng-model="selectedReport" ng-change="ChangeReport(selectedReport)">
 					<option value="" disabled selected>Select report</option>
-					<option ng-repeat="list in reportList" value = "{{list}}" >{{list}}</option>
+					<option ng-repeat="list in reportList" value = "{{list.alternative}}" >{{list.name}}</option>
 				</select>
 			</div>
 			<div flex></div>
@@ -30,7 +30,7 @@
 			</div>
 			<div flex></div>
 		</div>
-		<div flex layout="column" layout-align="start stretch" my-setter margin="10" 
+		<!-- <div flex layout="column" layout-align="start stretch" my-setter margin="10" 
 		ng-if="selectedReportType != null && selectedReportType == 'Custom'">
 			<div flex="20" layout layout-align="center center">Step 3. Choose start Date</div>
 			<div flex="20" layout layout-align="start stretch">
@@ -45,7 +45,7 @@
 				<input flex type="date" ng-model="generateReport.end_date">
 			</div>
 			<div flex></div>
-		</div>
+		</div> -->
 		<div flex="20" layout="column" layout-align="center stretch" my-setter margin="10">
 			<div flex="20"></div>
 			<md-button class="md-raised button-accept" ng-click="GenerateReport()">Generate Report</md-button>

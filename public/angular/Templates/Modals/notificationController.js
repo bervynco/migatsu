@@ -20,8 +20,17 @@ app.controller('NotificationController', function ($scope, $rootScope, $interval
 		else{
 			$scope.icon = $scope.SVG.reject;
 			$scope.message = "Unexpected error occured";
+		}	
+	}
+	else if($scope.page == "reports"){
+		if($scope.action == "incomplete"){
+			$scope.icon = $scope.SVG.reject;
+			$scope.message = "Complete all fields.";
 		}
-			
+		else{
+			$scope.icon = $scope.SVG.accept;
+			$scope.message = "Report successfully generated.";
+		}
 	}
 
 });

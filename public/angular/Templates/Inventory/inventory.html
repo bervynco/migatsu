@@ -21,44 +21,52 @@
                     <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchInventory">
                 </div>
             </div>
-            <div layout="row" flex="10" layout layout-align="start stretch" class="table table-header">
-                <div flex="20" layout layout-align="center center">Supplier Name</div>
-                <div flex="15" layout layout-align="center center" layout-padding> Product</div>
-                <div flex layout layout-align="start center" layout-padding> Description </div>
-                <div flex layout layout-align="start center" layout-padding> Price </div>
-                <div flex="10" layout layout-align="start center" layout-padding> Balance </div>
-                <div flex="10" layout layout-align="start center" layout-padding> Threshold </div>
-                <!-- <div flex layout layout-align="start center" layout-padding> Location </div> -->
-                <div flex layout layout-align="start center" layout-padding> Remarks </div>
-                <div flex layout layout-align="center center"></div>
-            </div>
-            <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="inventoryList.length == 0">
-                <div flex layout layout-align="center center"> No data Available </div>
-            </div>
-            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values no-animation" 
-            ng-repeat="inventory in filtered = (inventoryList | filter:searchInventory) | limitTo:10:(currentPage - 1)*10 | orderBy: 'status'" >
-                <div flex="20" layout layout-align="start stretch">
-                    <div flex="none" my-setter width-in-percent="4" ng-class="inventory.status === 'bad' ? 'warning' : ''"></div>
-                    <div flex layout layout-align="start center" layout-padding> {{inventory.name}} </div>
-                </div>
-                <div flex="15" layout layout-align="start center" layout-padding> {{inventory.product_id}} </div>
-                <div flex layout layout-align="start center" layout-padding> {{inventory.product_description}} </div>
-                <div flex layout layout-align="start center" layout-padding> {{inventory.purchase_price}} </div>
-                <div flex="10" layout layout-align="start center" layout-padding> {{inventory.balance}} </div>
-                <div flex="10" layout layout-align="start center" layout-padding> {{inventory.threshold}} </div>
-                <!-- <div flex layout layout-align="start center" layout-padding> {{inventory.location}} </div> -->
-                <div flex layout layout-align="start center" layout-padding> {{inventory.remarks}} </div>
-                <div flex layout layout-align="start stretch" >
-                    <div flex layout layout-align="start stretch" class="pointer" ng-click="EditInventoryItem(inventory, $event)">
-                        <md-tooltip md-direction="top">Edit inventory item</md-tooltip>
-                        <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
-                    </div>
-                    <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteInventoryItem(inventory, $event)">
-                        <md-tooltip md-direction="top">Delete inventory item</md-tooltip>
-                        <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
-                    </div>
-                </div>
-            </div>
+            <table class="data-table">
+                <tr>
+                    <th class=""> Supplier Name </th>
+                    <th class=""> Product </th>
+                    <th class=""> Description </th>
+                    <th class=""> Price </th>
+                    <th class=""> Balance</th>
+                    <th class=""> Threshold </th>
+                    <th class=""> Location </th>
+                    <th class=""> Remarks </th>
+                    <th class="">  </th>
+                </tr>
+                <tr class="values no-animation" ng-if="filtered.length == 0">
+                    <td colspan="100%" style="text-align:center">No data available</td>
+                </tr>
+                <tr class="values no-animation" 
+                    ng-repeat="inventory in filtered = (inventoryList | filter:searchInventory) | limitTo:10:(currentPage - 1)*10 | orderBy: 'status'"
+                    ng-class="inventory.status === 'bad' ? 'warning' : ''">
+                    <td>
+                        <div layout layout-align="start stretch">
+                            <!-- <div flex="none" my-setter width-in-percent="4" ng-class="inventory.status === 'bad' ? 'warning' : ''"></div> -->
+                            <div flex layout layout-align="start center" layout-padding> {{inventory.name}} </div>
+                        </div>
+                    </td>
+                    <td>{{inventory.product_id}}</td>
+                    <td>{{inventory.product_description}}</td>
+                    <td>{{inventory.purchase_price}}</td>
+                    <td>{{inventory.balance}}</td>
+                    <td>{{inventory.threshold}}</td>
+                    <td>{{inventory.location}}</td>
+                    <td>{{inventory.remarks}}</td>
+                    <td class="table-buttons">
+                        <div layout layout-align="start stretch">
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="EditInventoryItem(inventory, $event)">
+                                <md-tooltip md-direction="top">Edit inventory item</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                            </div>
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteInventoryItem(inventory, $event)">
+                                <md-tooltip md-direction="top">Delete inventory item</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
         </div>
     </div>
     <div flex="10" layout="row" layout-align="center stretch">

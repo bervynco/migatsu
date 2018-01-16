@@ -911,8 +911,9 @@ select {
     border: 1px solid rgba(150,150,150,0.5);
 }
 .data-table > tbody > tr > th {
-    padding: 20px;
-    font-size: 16px;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    font-size: 0.75vw;
     background: rgba(42,63,84,1);
     color: rgba(255, 255, 255, 1);
 }
@@ -921,9 +922,17 @@ select {
     transition: 0.5s;
 }
 .data-table > tbody > tr > td {
-    padding: 15px;
-    font-size: 13px;
+    padding: 1vh;
+    /* padding-top: 1vh; */
+    /* padding-bottom: 1vh; */
+    font-size: 0.6vw;
     background: transparent;
     color: rgba(0,0,0, 1);
     padding-left: 15px;
+}
+.data-table > tbody > tr > td > div > div{
+   padding-right: 10px;
+}
+.table-buttons {
+    width:10%;
 }

@@ -21,59 +21,63 @@
                     <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchList">
                 </div>
             </div>
-            <div layout="row" flex="10" layout layout-align="start stretch" class="table table-header">
-                <!-- <div flex layout layout-align="center center" ng-repeat="field in tableFieldNames">{{field}}</div> -->
-                <div flex layout layout-align="center center" layout-padding> Customer Name </div>
-                <div flex layout layout-align="center center" layout-padding> PO # </div>
-                <!-- <div flex layout layout-align="center center"> {{list.quantity}} </div> -->
-                <div flex layout layout-align="center center" layout-padding> Amount </div>
-                <div flex layout layout-align="center center" layout-padding> Promised Delivery Date </div>
-                <div flex layout layout-align="center center" layout-padding> Invoice # </div>
-                <div flex layout layout-align="center center" layout-padding> Supplier DR # </div>
-                <div flex layout layout-align="center center" layout-padding> Actual Delivery Date </div>
-                <!-- <div flex layout layout-align="center center"> {{list.overdue_days}} </div> -->
-                <div flex layout layout-align="center center" layout-padding> Remarks </div>
-                
-                <div flex layout layout-align="center center"></div>
-            </div>
-            <div layout="row" flex="none" my-setter height-in-percent="8" layout layout-align="start stretch" class="table-values" ng-if="purchaseOrderList.length == 0">
-                <div flex layout layout-align="center center"> No data Available </div>
-            </div>
-            <div layout="row" flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="table-values no-animation" 
-            ng-repeat="list in filtered = (purchaseOrderList | filter: searchList) | limitTo:10:(currentPage-1)*10">
-                <div flex layout layout-align="start center" layout-padding> {{list.name}} </div>
-                <div flex layout layout-align="start center" layout-padding> {{list.customer_po_id}} </div>
-                <!-- <div flex layout layout-align="center center"> {{list.quantity}} </div> -->
-                <div flex layout layout-align="start center" layout-padding> {{list.amount}} </div>
-                <div flex layout layout-align="start center" layout-padding> {{list.promised_delivery_date}} </div>
-                <div flex layout layout-align="start center" layout-padding> {{list.invoice_id}} </div>
-                <div flex layout layout-align="start center" layout-padding> {{list.dr_id}} </div>
-                <div flex layout layout-align="start center" layout-padding> {{list.actual_delivery_date}} </div>
-                <!-- <div flex layout layout-align="center center"> {{list.overdue_days}} </div> -->
-                <div flex layout layout-align="center center" layout-padding> {{list.remarks}} </div>
-                <div flex layout layout-align="start stretch">
-                    <div flex layout layout-align="start stretch" class="pointer" ng-click="ToggleDone(list)">
-                        <md-tooltip md-direction="top">Click to process this purchase order as done</md-tooltip>
-                        <md-icon md-svg-src="{{SVG.check}}" layout layout-align="center center"></md-icon>
-                    </div>
-                    <div flex layout layout-align="start stretch" class="pointer" ng-click="ApplyInventoryChanges(list, $event)" ng-if="list.inventory_saved == 0">
-                        <md-tooltip md-direction="top">Apply Inventory Changes</md-tooltip>
-                        <md-icon md-svg-src="{{SVG.move_to}}" layout layout-align="center center"></md-icon>
-                    </div>
-                    <div flex layout layout-align="start stretch" class="pointer" ng-click="MoveToDelivery(list, $event)">
-                        <md-tooltip md-direction="top">Move to outbound delivery</md-tooltip>
-                        <md-icon md-svg-src="{{SVG.delivery}}" layout layout-align="center center"></md-icon>
-                    </div>
-                    <div flex layout layout-align="start stretch" class="pointer" ng-click="EditPurchaseOrder(list, $event)">
-                        <md-tooltip md-direction="top">Edit purchase order item</md-tooltip>
-                        <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
-                    </div>
-                    <div flex layout layout-align="start stretch" class="pointer" ng-click="DeletePurchaseOrder(list, $event)">
-                        <md-tooltip md-direction="top">Delete purchase order item</md-tooltip>
-                        <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
-                    </div>
-                </div>
-            </div>
+             <table class="data-table">
+                <tr>
+                    <th class=""> Customer Name </th>
+                    <th class=""> PO # </th>
+                    <th class=""> Amount</th>
+                    <th class=""> Promised Delivery Date </th>
+                    <th class=""> Invoice #</th>
+                    <th class=""> Supplier DR #</th>
+                    <th class=""> Actual Delivery Date</th>
+                    <th class=""> Remarks </th>
+                    <th class="">  </th>
+                </tr>
+                <tr class="values no-animation" ng-if="filtered.length == 0">
+                    <td colspan="100%" style="text-align:center">No data available</td>
+                </tr>
+                <tr class="values no-animation" 
+                    ng-repeat="list in filtered = (purchaseOrderList | filter: searchList) | limitTo:10:(currentPage-1)*10"
+                    ng-class="CheckDueDate(list) >= 0 ? 'warning' : ''">
+                    <td>
+                        <div layout layout-align="start stretch">
+                            <!-- <div flex="none" my-setter width-in-percent="4" ng-class="inventory.status === 'bad' ? 'warning' : ''"></div> -->
+                            <div flex layout layout-align="start center" layout-padding> {{list.name}}  </div>
+                        </div>
+                    </td>
+                    <td>{{list.customer_po_id}} </td>
+                    <td>{{list.amount}} </td>
+                    <td>{{list.promised_delivery_date}} </td>
+                    <td>{{list.invoice_id}} </td>
+                    <td>{{list.dr_id}} </td>
+                    <td>{{list.actual_delivery_date}}</td>
+                    <td>{{list.remarks}}</td>
+                    <td class="table-buttons">
+                        <div layout layout-align="start stretch">
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="ToggleDone(list)">
+                                <md-tooltip md-direction="top">Click to process this purchase order as done</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.check}}" layout layout-align="center center"></md-icon>
+                            </div>
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="ApplyInventoryChanges(list, $event)" ng-if="list.inventory_saved == 0">
+                                <md-tooltip md-direction="top">Apply Inventory Changes</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.move_to}}" layout layout-align="center center"></md-icon>
+                            </div>
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="MoveToDelivery(list, $event)">
+                                <md-tooltip md-direction="top">Move to outbound delivery</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.delivery}}" layout layout-align="center center"></md-icon>
+                            </div>
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="EditPurchaseOrder(list, $event)">
+                                <md-tooltip md-direction="top">Edit purchase order item</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                            </div>
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="DeletePurchaseOrder(list, $event)">
+                                <md-tooltip md-direction="top">Delete purchase order item</md-tooltip>
+                                <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div flex="10" layout="row" layout-align="center stretch">
@@ -83,5 +87,4 @@
             <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
         </div>
     </div>
-    <div flex="5"></div>
 </div>

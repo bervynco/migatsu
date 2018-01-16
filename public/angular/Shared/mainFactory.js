@@ -437,7 +437,7 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
         GenerateReport: function(report){
             return $http({
                 method: "POST",
-                url: locationString + "reports/generate",
+                url: "index.php/ReportManagement/generateReport",
                 headers: {
                     'Content-Type': 'application/json'
                 },
