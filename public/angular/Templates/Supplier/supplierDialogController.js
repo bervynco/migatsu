@@ -26,7 +26,7 @@
         if($scope.action == "Add"){
             DataFactory.AddNewSupplier($scope.supplier).success(function(response){
                 if(response == "Successful")
-                    $mdDialog.hide("Successful");
+                    $mdDialog.hide($scope.supplier);
             }).error(function(error){
 
             });

@@ -16,7 +16,18 @@
                 <div flex="20" layout="row" layout-align="center stretch" class="settings pointer add-button" ng-click="AddNewSupplier($event);">
                     <div flex layout layout-align="center center" > Add New Supplier </div>
                 </div>
-                <div flex="5"></div>
+                <div flex></div>
+                <div flex="50" layout="row" layout-align="center stretch">
+                    <div flex="15" layout layout-align="center center">
+                        <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 0 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
+                        <!-- <div flex
+                            ng-options="i for i in _.range(1,(filtered.length/10))">
+                        </div> -->
+                        <div flex layout layout-align="center center"> {{currentPage + 1}} </div>
+                        <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*14 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+                    </div>
+                </div>
+                <div flex></div>
                 <div flex="25" layout layout-align="center stretch">
                     <md-icon md-svg-src="{{SVG.search}}" my-setter padding="10"></md-icon>
                     <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchList">
@@ -27,13 +38,13 @@
                     <th class=""> Company Name </th>
                     <th class=""> Address </th>
                     <th class=""> Tin Number </th>
-                    <th class=""> Phone Number </th>
+                    <th class=""> Contact Number </th>
                     <th class="">  </th>
                 </tr>
                 <tr class="values no-animation" ng-if="filtered.length == 0">
                     <td colspan="100%" style="text-align:center">No data available</td>
                 </tr>
-                <tr class="values no-animation" ng-repeat="list in filtered = (supplierList | filter:searchList) | limitTo:12:(currentPage)*12">
+                <tr class="values no-animation" ng-repeat="list in filtered = (supplierList | filter:searchList) | limitTo:14:(currentPage)*14">
                     <td>{{list.name}}</td>
                     <td>{{list.address}}</td>
                     <td>{{list.tin}}</td>
@@ -54,11 +65,11 @@
             </table>
         </div>
     </div>
-    <div flex="10" layout="row" layout-align="center stretch">
+    <!-- <div flex="10" layout="row" layout-align="center stretch">
         <div flex="15" layout layout-align="center center">
             <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 0 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
             <div flex layout layout-align="center center">{{currentPage + 1}}</div>
             <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*12 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
         </div>
-    </div> 
+    </div>  -->
 </div>
