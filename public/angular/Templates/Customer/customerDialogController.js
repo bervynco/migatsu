@@ -24,7 +24,7 @@
         if($scope.action == "Add"){
             DataFactory.AddNewCustomer($scope.customer).success(function(response){
                 if(response == "Successful")
-                    $mdDialog.hide("Successful");
+                    $mdDialog.hide($scope.customer);
             }).error(function(error){
 
             });

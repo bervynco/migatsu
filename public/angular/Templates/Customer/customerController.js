@@ -3,7 +3,7 @@
     $scope.$parent.CheckSessionData('customer');
     $scope.userDetails = JSON.parse(localStorage.getItem("user"));
     $scope.logDetails = {name: $scope.userDetails.name, page: 'Customer Page', action: 'View'};
-    $scope.currentPage = 1;
+    $scope.currentPage = 0;
     DataFactory.SetPageLog($scope.logDetails).success(function(response){
         console.log(response);
     }).error(function(error){
@@ -22,14 +22,14 @@
     $scope.ChangePage = function(i){
     }
     $scope.NextPage = function(i){
-        if(($scope.currentPage + 1 )* 12 <= $scope.filtered.length){
+        if(($scope.currentPage + 1 )* 14 <= $scope.filtered.length){
             $scope.currentPage = $scope.currentPage + 1;
             //modifyArray($scope.currentPage);
         }
         
     }
     $scope.PreviousPage = function(i){
-        if($scope.currentPage != 1){
+        if($scope.currentPage != 0){
             $scope.currentPage = $scope.currentPage - 1;
         }
     }
@@ -45,15 +45,20 @@
             },
             controller: 'CustomerDialogController'
         }).then(function(data){
+            $scope.logDetails = {name: $scope.userDetails.name, page: 'Customers Page', action: 'Add'};
+
+            DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                console.log(response);
+            }).error(function(error){
+
+            });
             if(data == "Successful"){
-                $scope.logDetails = {name: $scope.userDetails.name, page: 'Customers Page', action: 'Add'};
-
-                DataFactory.SetPageLog($scope.logDetails).success(function(response){
-                    console.log(response);
-                }).error(function(error){
-
-                });
                 getData();
+            }
+            else {
+                $scope.filtered.push(data);
+                $scope.currentPage = Math.floor($scope.filtered.length/14);
+                console.log($scope.currentPage);
             }
         });
     }
