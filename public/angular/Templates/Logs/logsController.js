@@ -22,7 +22,7 @@
     $scope.ChangePage = function(i){
     }
     $scope.NextPage = function(i){
-        if(($scope.currentPage + 1 )* 12 <= $scope.filtered.length){
+        if(($scope.currentPage + 1 )* 15 <= $scope.filtered.length){
             $scope.currentPage = $scope.currentPage + 1;
         }
         
