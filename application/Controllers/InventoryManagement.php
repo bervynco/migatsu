@@ -72,7 +72,8 @@ class InventoryManagement extends CI_Controller
         $arrInventoryDetail =  $this->assignDataToArray($postData, $arrColumns);
         $inventory = $this->inventory_model->insertInventory($arrInventoryDetail);
         if($inventory > 0){
-            echo "Successful";
+            echo json_encode($this->inventory_model->selectInventoryItem($inventory));
+            //echo "Successful";
         }
         else{
             echo "Error";

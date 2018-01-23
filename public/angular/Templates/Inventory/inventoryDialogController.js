@@ -26,6 +26,7 @@
     else{
         $scope.dialogHeading = "Edit Inventory Details";
         $scope.inventory = angular.copy(data);
+        $scope.inventory.purchase_price = parseFloat( $scope.inventory.purchase_price);
     }
 
     
@@ -37,8 +38,8 @@
         console.log($scope.inventory);
         if($scope.action == "Add"){
             DataFactory.AddNewInventory($scope.inventory).success(function(response){
-                if(response == "Successful"){
-                    $mdDialog.hide("Successful");
+                if(response != "Error"){
+                    $mdDialog.hide(response);
                 }
             }).error(function(error){
 

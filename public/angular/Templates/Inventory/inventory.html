@@ -15,7 +15,18 @@
                 <div flex="20" layout="row" layout-align="center stretch" class="settings pointer add-button" ng-click="AddNewInventory($event);">
                     <div flex layout layout-align="center center" > Add Inventory Item </div>
                 </div>
-                <div flex="5"></div>
+                <div flex></div>
+                <div flex="50" layout="row" layout-align="center stretch">
+                    <div flex="15" layout layout-align="center center">
+                        <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 0 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
+                        <!-- <div flex
+                            ng-options="i for i in _.range(1,(filtered.length/10))">
+                        </div> -->
+                        <div flex layout layout-align="center center"> {{currentPage + 1}} </div>
+                        <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*14 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+                    </div>
+                </div>
+                <div flex></div>
                 <div flex="25" layout layout-align="center stretch">
                     <md-icon md-svg-src="{{SVG.search}}" my-setter padding="10"></md-icon>
                     <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchInventory">
@@ -37,7 +48,7 @@
                     <td colspan="100%" style="text-align:center">No data available</td>
                 </tr>
                 <tr class="values no-animation" 
-                    ng-repeat="inventory in filtered = (inventoryList | filter:searchInventory) | limitTo:10:(currentPage - 1)*10 | orderBy: 'status'"
+                    ng-repeat="inventory in filtered = (inventoryList | filter:searchInventory) | limitTo:14:(currentPage)*14 | orderBy: 'status'"
                     ng-class="inventory.status === 'bad' ? 'warning' : ''">
                     <td>
                         <div layout layout-align="start stretch">
@@ -69,11 +80,11 @@
             
         </div>
     </div>
-    <div flex="10" layout="row" layout-align="center stretch">
+    <!-- <div flex="10" layout="row" layout-align="center stretch">
         <div flex="15" layout layout-align="center center">
             <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
             <div flex layout layout-align="center center"> {{currentPage}}</div>
             <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
         </div>
-    </div>
+    </div> -->
 </div>
