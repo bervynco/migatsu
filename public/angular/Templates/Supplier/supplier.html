@@ -33,7 +33,7 @@
                 <tr class="values no-animation" ng-if="filtered.length == 0">
                     <td colspan="100%" style="text-align:center">No data available</td>
                 </tr>
-                <tr class="values no-animation" ng-repeat="list in filtered = (supplierList | filter:searchList) | limitTo:10:(currentPage-1)*10">
+                <tr class="values no-animation" ng-repeat="list in filtered = (supplierList | filter:searchList) | limitTo:12:(currentPage)*12">
                     <td>{{list.name}}</td>
                     <td>{{list.address}}</td>
                     <td>{{list.tin}}</td>
@@ -56,9 +56,9 @@
     </div>
     <div flex="10" layout="row" layout-align="center stretch">
         <div flex="15" layout layout-align="center center">
-            <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 1 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
-            <div flex layout layout-align="center center">{{currentPage}}</div>
-            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*10 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
+            <md-icon md-svg-src="{{SVG.left}}" layout layout-align="center center" flex ng-class="currentPage == 0 ? 'not-allowed' : 'pointer'" ng-click="PreviousPage()"></md-icon>
+            <div flex layout layout-align="center center">{{currentPage + 1}}</div>
+            <md-icon md-svg-src="{{SVG.right}}" layout layout-align="center center" flex ng-class="(currentPage + 1)*12 >= filtered.length ? 'not-allowed': 'pointer'" ng-click="NextPage()"></md-icon>
         </div>
     </div> 
 </div>

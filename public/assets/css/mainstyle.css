@@ -911,9 +911,9 @@ select {
     border: 1px solid rgba(150,150,150,0.5);
 }
 .data-table > tbody > tr > th {
-    padding-top: 1.5vh;
-    padding-bottom: 1.5vh;
-    font-size: 0.75vw;
+    /* padding: 1vh;  */
+    height: 35px;
+    font-size: 0.8vw;
     background: rgba(42,63,84,1);
     color: rgba(255, 255, 255, 1);
 }
@@ -922,13 +922,15 @@ select {
     transition: 0.5s;
 }
 .data-table > tbody > tr > td {
-    padding: 1vh;
+    padding: 0.75vh;
+    height:3vh;
+    /* height: 25px; */
     /* padding-top: 1vh; */
     /* padding-bottom: 1vh; */
-    font-size: 0.6vw;
+    font-size: 0.75vw;
     background: transparent;
     color: rgba(0,0,0, 1);
-    padding-left: 15px;
+    /* padding-left: 15px; */
 }
 .data-table > tbody > tr > td > div > div{
    padding-right: 10px;
@@ -936,3 +938,6 @@ select {
 .table-buttons {
     width:10%;
 }
+
+
+/*
