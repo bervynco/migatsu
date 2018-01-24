@@ -58,9 +58,10 @@
                 console.log($scope.payable);
                 if($scope.action == 'Add'){
                     DataFactory.AddNewPayable($scope.payable).success(function(response){
-                        if(response == "Successful"){
-                            $mdDialog.hide("Successful");
+                        if(response != 'Error'){
+                            $mdDialog.hide(response);
                         }
+                        
                     }).error(function(error){
                         $mdDialog.hide("Error");
                     });

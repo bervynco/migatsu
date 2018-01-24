@@ -10,12 +10,22 @@ class payable_model extends CI_Model {
                            
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
+
+    function selectPayableItem($id){
+        $query = $this->db->select(array('payables.*', 'suppliers.name'))->from('payables')
+                           ->join('suppliers','suppliers.id = payables.supplier_id')
+                           ->where('payables.id', $id)
+                           ->get();
+                           
+        return($query->num_rows() > 0) ? $query->first_row(): null;
+    }
+
     function selectAllPayable(){
 
         $query = $this->db->select(array('payables.*', 'suppliers.name'))->from('payables')
                            ->join('suppliers','suppliers.id = payables.supplier_id')
                            ->where('payables.done =', 0)
-                           ->order_by('suppliers.name', 'asc')->get();
+                           ->order_by('payables.due_date', 'desc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
 

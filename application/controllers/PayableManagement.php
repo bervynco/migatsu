@@ -27,8 +27,13 @@ class PayableManagement extends CI_Controller
         foreach($arrPayable as $index => $payable){
             $currDateTime = new DateTime();
             $dueDateTime = new DateTime($payable['due_date']);
-            $diff = $dueDateTime->diff($currDateTime);
-            $interval = $diff->format('%a');
+            if($dueDateTime > $currDateTime){
+                $interval = 0;
+            }
+            else {
+                $diff = $dueDateTime->diff($currDateTime);
+                $interval = $diff->format('%a');
+            }
             $arrPayable[$index]['overdue_days'] = $interval;
         }
         echo json_encode($arrPayable);
@@ -41,7 +46,18 @@ class PayableManagement extends CI_Controller
         $arrPayableDetail =  $this->assignDataToArray($postData, $arrColumns);
         $payable = $this->payable_model->insertPayable($arrPayableDetail);
         if($payable > 0){
-            echo "Successful";
+            $item = $this->payable_model->selectPayableItem($payable);
+            $currDateTime = new DateTime();
+            $dueDateTime = new DateTime($item->due_date);
+            if($dueDateTime > $currDateTime){
+                $interval = 0;
+            }
+            else {
+                $diff = $dueDateTime->diff($currDateTime);
+                $interval = $diff->format('%a');
+            }
+            $item->overdue_days = $interval;
+            echo json_encode($item);
         }
         else{
             echo "Error";
