@@ -48,7 +48,7 @@
     }
 
     $scope.ChangePurchaseOrder = function(id){
-        $scope.receivable_po_id = id;
+        $scope.receivable.po_id = id;
     }
     $scope.SubmitNewReceivableDetails = function(){
         if($scope.receivable.customer_id != null && $scope.receivable.delivery_date != null && $scope.receivable.due_date != null 

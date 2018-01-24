@@ -44,7 +44,20 @@ class ReceivableManagement extends CI_Controller
         $arrReceivableDetail =  $this->assignDataToArray($postData, $arrColumns);
         $receivable = $this->receivable_model->insertReceivable($arrReceivableDetail);
         if($receivable > 0){
-            echo "Successful";
+            $item = $this->receivable_model->selectReceivableItem($receivable);
+            $currDateTime = new DateTime();
+            $dueDateTime = new DateTime($item->due_date);
+            if($dueDateTime > $currDateTime){
+                $interval = 0;
+            }
+            else {
+                $diff = $dueDateTime->diff($currDateTime);
+                $interval = $diff->format('%a');
+            }
+            $item->overdue_days = $interval;
+            $item->amount = floatval($item->amount);
+            $item->terms = intval($item->terms);
+            echo json_encode($item);
         }
         else{
             echo "Error";

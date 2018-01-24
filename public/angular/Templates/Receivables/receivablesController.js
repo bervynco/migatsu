@@ -6,7 +6,7 @@
     $scope.userDetails = JSON.parse(localStorage.getItem("user"));
     $scope.logDetails = {name: $scope.userDetails.name, page: 'Receivables Page', action: 'View'};
     
-    $scope.currentPage = 1;
+    $scope.currentPage = 0;
     $scope.receivableList = [];
     DataFactory.SetPageLog($scope.logDetails).success(function(response){
         console.log(response);
@@ -27,14 +27,14 @@
     $scope.ChangePage = function(i){
     }
     $scope.NextPage = function(i){
-        if(($scope.currentPage + 1 )* 10 <= $scope.receivableList.length){
+        if(($scope.currentPage + 1 )* 14 <= $scope.receivableList.length){
             $scope.currentPage = $scope.currentPage + 1;
             modifyArray($scope.currentPage);
         }
         
     }
     $scope.PreviousPage = function(i){
-        if($scope.currentPage != 1){
+        if($scope.currentPage != 0){
             $scope.currentPage = $scope.currentPage - 1;
         }
     }
@@ -74,16 +74,22 @@
             },
             controller: 'ReceivableDialogController'
         }).then(function(data){
-            if(data == "Successful"){
-                $scope.logDetails = {name: $scope.userDetails.name, page: 'Receivables Page', action: 'Add'};
+            $scope.logDetails = {name: $scope.userDetails.name, page: 'Receivables Page', action: 'Add'};
 
-                DataFactory.SetPageLog($scope.logDetails).success(function(response){
-                    console.log(response);
-                }).error(function(error){
+            DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                console.log(response);
+            }).error(function(error){
 
-                });
+            });
+            if(data != "Successful"){
+                $scope.filtered.push(data);
+                $scope.currentPage = Math.floor($scope.filtered.length/14);
+                console.log($scope.filtered);
+            }
+            else{
                 getData();
             }
+
         });
     }
     $scope.EditReceivable = function(receivable, ev){

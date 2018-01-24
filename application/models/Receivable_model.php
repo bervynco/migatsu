@@ -9,6 +9,16 @@ class receivable_model extends CI_Model {
                            ->order_by('customers.name', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
+
+    function selectReceivableItem($id){
+        $query = $this->db->select(array('receivables.*', 'customers.name'))->from('receivables')
+                           ->join('customers','customers.id = receivables.customer_id')
+                           ->where('receivables.id', $id)
+                           ->get();
+                           
+        return($query->num_rows() > 0) ? $query->first_row(): null;
+    }
+
     function selectAllReceivable(){
 
         $query = $this->db->select(array('receivables.*', 'customers.name'))->from('receivables')
