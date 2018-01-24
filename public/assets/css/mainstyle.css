@@ -260,13 +260,11 @@ div.main-container[ui-view].ui-view-container {
     position: relative;
 }
 
-[ui-view].ng-enter, [ui-view].ng-leave {
+/* [ui-view].ng-enter, [ui-view].ng-leave {
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    /*-webkit-animation-delay: .7s;  Safari 4.0 - 8.0 
-    animation-delay: .7s;*/
     -webkit-transition: all .8s ease-in-out;
     -moz-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
@@ -288,7 +286,7 @@ div.main-container[ui-view].ui-view-container {
 
 [ui-view].ng-leave-active {
     opacity: 0;
-}
+} */
 @font-face {
     font-family: 'Syncopate';
     font-style: normal;
@@ -315,9 +313,9 @@ body {
     cursor: default;
 }
 
-body *.ng-leave {
+/* body *.ng-leave {
     animation: fadeout 1s;
-}
+} */
 
 .span-height {
     height: 100%;

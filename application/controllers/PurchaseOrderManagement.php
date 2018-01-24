@@ -50,7 +50,7 @@ class PurchaseOrderManagement extends CI_Controller
         $arrPurchaseOrderDetail['order_list'] = json_encode($arrPurchaseOrderDetail['order_list']);
         $purchaseOrder = $this->po_model->insertPurchaseOrder($arrPurchaseOrderDetail);
         if($purchaseOrder > 0){
-            echo "Successful";
+            echo json_encode($this->po_model->selectPurchaseOrderItem($purchaseOrder));
         }
         else{
             echo "Error";

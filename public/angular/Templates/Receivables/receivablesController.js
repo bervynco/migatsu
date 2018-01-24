@@ -81,13 +81,12 @@
             }).error(function(error){
 
             });
-            if(data != "Successful"){
-                $scope.filtered.push(data);
-                $scope.currentPage = Math.floor($scope.filtered.length/14);
-                console.log($scope.filtered);
+            if(data == "Error"){
+                getData();
             }
             else{
-                getData();
+                $scope.filtered.push(data);
+                $scope.currentPage = Math.floor($scope.filtered.length/14);
             }
 
         });

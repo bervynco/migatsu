@@ -7,7 +7,7 @@
 
     $scope.userDetails = JSON.parse(localStorage.getItem("user"));
     $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'View'};
-    $scope.currentPage = 1;
+    $scope.currentPage = 0;
 
     DataFactory.SetPageLog($scope.logDetails).success(function(response){
         console.log(response);
@@ -28,7 +28,7 @@
     $scope.ChangePage = function(i){
     }
     $scope.NextPage = function(i){
-        if(($scope.currentPage + 1 )* 10 <= $scope.filtered.length){
+        if(($scope.currentPage + 1 )* 14 <= $scope.filtered.length){
             $scope.currentPage = $scope.currentPage + 1;
             modifyArray($scope.currentPage);
         }
@@ -68,15 +68,20 @@
             },
             controller: 'PurchaseOrderDialogController'
         }).then(function(data){
-            if(data == "Successful"){
-                $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Add'};
+            $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Add'};
 
-                DataFactory.SetPageLog($scope.logDetails).success(function(response){
-                    console.log(response);
-                }).error(function(error){
+            DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                console.log(response);
+            }).error(function(error){
 
-                });
+            });
+            if(data == "Error" || data == "Successful"){
                 getData();
+            }
+            else {
+                $scope.filtered.push(data);
+                $scope.currentPage = Math.floor($scope.filtered.length/14);
+                console.log($scope.filtered);
             }
         });
     }
@@ -141,49 +146,72 @@
         });
     }
 
-    $scope.MoveToDelivery = function(list){
-        var now = moment().format("YYYY-MM-DD HH:mm");
-        console.log(now);
-        list.promised_delivery_date = now;
+    $scope.MoveToDelivery = function(list, ev){
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to move the delivery date of PO# ' + list.customer_po_id + ' to today?')
+            .textContent('This changes will reflect real time.')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
+        $mdDialog.show(confirm).then(function() {
+            var now = moment().format("YYYY-MM-DD HH:mm");
+            console.log(now);
+            list.promised_delivery_date = now;
 
-        DataFactory.EditPurchaseOrder(list).success(function(response){
-            console.log(response);
-            if(response == "Successful"){
-                $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Move Delivery Data'};
+            DataFactory.EditPurchaseOrder(list).success(function(response){
+                console.log(response);
+                if(response == "Successful"){
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Move Delivery Data'};
 
-                DataFactory.SetPageLog($scope.logDetails).success(function(response){
-                    console.log(response);
-                }).error(function(error){
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
 
-                });
-                getData();
-            }
-            
-        }).error(function(error){
-
-        });
-    }
-    $scope.ApplyInventoryChanges = function(list){
-        DataFactory.ApplyInventoryChanges(list).success(function(response){
-            console.log(response);
-            if(response == "Successful" || response == "Conditional Success"){
+                    });
+                    getData();
+                }
                 
-                $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Apply Inventory Changes'};
+            }).error(function(error){
 
-                DataFactory.SetPageLog($scope.logDetails).success(function(response){
-                    console.log(response);
-                }).error(function(error){
+            });
+        }), function() {
+        
+        };
+        
+    }
+    $scope.ApplyInventoryChanges = function(list, ev){
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to apply inventory changes to PO# ' + list.customer_po_id)
+            .textContent('This changes will reflect real time.')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('Cancel');
 
-                });
-                getData();
-            }
-            else{
+        $mdDialog.show(confirm).then(function() {
+            DataFactory.ApplyInventoryChanges(list).success(function(response){
+                console.log(response);
+                if(response == "Successful" || response == "Conditional Success"){
+                    
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Apply Inventory Changes'};
 
-            }
-            
-        }).error(function(error){
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
 
+                    });
+                    $state.reload();
+                }
+                else{
+
+                }
+                
+            }).error(function(error){
+
+            });
+        }, function() {
+        
         });
+        
     }
     getData();
 });

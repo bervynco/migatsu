@@ -9,6 +9,16 @@ class po_model extends CI_Model {
                           ->order_by('customers.name', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
+
+    function selectPurchaseOrderItem($id){
+        $query = $this->db->select(array('purchase_orders.*', 'customers.name'))->from('purchase_orders')
+                           ->join('customers','customers.id = purchase_orders.customer_id')
+                           ->where('purchase_orders.id', $id)
+                           ->get();
+                           
+        return($query->num_rows() > 0) ? $query->first_row(): null;
+    }
+
     function selectAllPurchaseOrders(){
         $query = $this->db->select(array('purchase_orders.*', 'customers.name'))
                           ->from('purchase_orders')->join('customers','customers.id = purchase_orders.customer_id')
