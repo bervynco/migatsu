@@ -35,108 +35,91 @@
 		<div flex layout="row" layout layout-align="start stretch">
 			<div flex layout="column" layout-align="start stretch"  class="card">
 				<div flex="10" layout layout-align="center center" class="transaction-header"> Inventory </div>
-				<div flex layout="column" layout-align="center center" ng-if="inventoryList.length == 0"> No new inventory transactions for today. </div>
-				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="inventoryList.length != 0">
-					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
-						<div flex layout layout-align="center center">Product</div>
-						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex="20" layout layout-align="center center">Balance</div>
-						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex="20" layout layout-align="center center">Threshold</div>
-					</div>
-					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in inventoryList" class="cell-content">
-							<div flex layout layout-align="center center"> {{list.product_id}} </div>
-							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex="20" layout layout-align="center center"> {{list.balance}} </div>
-							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex="20" layout layout-align="center center"> {{list.threshold}} </div>
-						</div>
-					</div>
-				</div>
+				<table class="data-table">
+					<tr>
+						<th class=""> Product </th>
+						<th class=""> Balance</th>
+						<th class=""> Threshold </th>
+					</tr>
+					<tr class="values no-animation" ng-if="filtered.length == 0">
+						<td colspan="100%" style="text-align:center">No inventory red flags.</td>
+					</tr>
+					<tr class="values no-animation" ng-repeat="inventory in inventoryList">
+						<td>{{inventory.product_id}}</td>
+						<td>{{inventory.balance}}</td>
+						<td>{{inventory.threshold}}</td>
+					</tr>
+				</table>
 			</div>
 			<div flex="none" my-setter width-in-percent="0.5"></div>
 			<div flex layout="column" layout-align="start stretch"  class="card">
 				<div flex="10" layout layout-align="center center" class="transaction-header"> Payables </div>
-				<div flex layout="column" layout-align="center center" ng-if="payablesList.length == 0"> No new payable transactions for today. </div>
-				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="payablesList.length != 0">
-					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
-						<div flex="30"layout layout-align="center center">Supplier Name</div>
-						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex layout layout-align="center center">PO Number</div>
-					</div>
-					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in payablesList" class="cell-content">
-							<div flex="30" layout layout-align="center center"> {{list.name}} </div>
-							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex layout layout-align="center center"> {{list.po_id}} </div>
-						</div>
-					</div>
-				</div>
+				<table class="data-table">
+					<tr>
+						<th class=""> Supplier Name </th>
+						<th class=""> PO Number</th>
+					</tr>
+					<tr class="values no-animation" ng-if="payableList.length == 0">
+						<td colspan="100%" style="text-align:center">No payable transactions due for the next 7 days.</td>
+					</tr>
+					<tr class="values no-animation" ng-repeat="list in payablesList">
+						<td>{{list.name}}</td>
+						<td>{{list.po_id}}</td>
+					</tr>
+				</table>
 			</div>
 			<div flex="none" my-setter width-in-percent="0.5"></div>
 			<div flex layout="column" layout-align="start stretch"  class="card">
 				<div flex="10" layout layout-align="center center" class="transaction-header"> Receivables </div>
-				<div flex layout="column" layout-align="center center" ng-if="receivablesList.length == 0"> No new receivable transactions for today. </div>
-				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="receivablesList.length != 0">
-					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
-						<div flex layout layout-align="center center">Customer Name</div>
-						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex="30" layout layout-align="center center">Amount</div>
-					</div>
-					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in receivablesList" class="cell-content">
-							<div flex layout layout-align="center center"> {{list.name}} </div>
-							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex="30" layout layout-align="center center"> {{list.amount}} </div>
-						</div>
-					</div>
-				</div>
+				<table class="data-table">
+					<tr>
+						<th class=""> Customer Name </th>
+						<th class=""> PO Number</th>
+					</tr>
+					<tr class="values no-animation" ng-if="receivableList.length == 0">
+						<td colspan="100%" style="text-align:center">No receivable transactions due for the next 7 days.</td>
+					</tr>
+					<tr class="values no-animation" ng-repeat="list in receivablesList">
+						<td>{{list.name}}</td>
+						<td>{{list.amount}}</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 		<div flex layout="row" layout layout-align="start stretch">
 			<div flex layout="column" layout-align="start stretch"  class="card">
 				<div flex="10" layout layout-align="center center" class="transaction-header"> Purchase Order </div>
-				<div flex layout="column" layout-align="center center" ng-if="poList.length == 0"> No new purchase order transactions for today. </div>
-				<div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="poList.length != 0">
-					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
-						<div flex layout layout-align="center center">PO Number</div>
-						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex layout layout-align="center center">Promised Delivery Date</div>
-					</div>
-					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in poList" class="cell-content">
-							<div flex layout layout-align="center center"> {{list.customer_po_id}} </div>
-							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex layout layout-align="center center"> {{list.promised_delivery_date}} </div>
-						</div>
-					</div>
-				</div>
+				<table class="data-table">
+					<tr>
+						<th class=""> PO Number </th>
+						<th class=""> Promised Delivery Date</th>
+					</tr>
+					<tr class="values no-animation" ng-if="poList.length == 0">
+						<td colspan="100%" style="text-align:center">No PO transactions delivery due for the next 7 days.</td>
+					</tr>
+					<tr class="values no-animation" ng-repeat="list in poList">
+						<td>{{list.customer_po_id}}</td>
+						<td>{{list.promised_delivery_date}}</td>
+					</tr>
+				</table>
 			</div>
 			<div flex="none" my-setter width-in-percent="0.5"></div>
 			<div flex layout="column" layout-align="start stretch"  class="card">
 				<div flex="10" layout layout-align="center center" class="transaction-header"> Outbound Delivery </div>
-				<div flex layout="column" layout-align="center center" ng-if="deliveryList.length == 0"> No outbound delivery transactions for today. </div>
-				 <div flex layout="column" layout-align="start stretch" my-setter padding="3" ng-if="deliveryList.length != 0">
-					<div flex="none" my-setter height-in-percent="7" layout layout-align="start stretch" class="cell-header">
-						<div flex layout layout-align="center center">PO Number</div>
-						<div flex="none" my-setter width-in-percent="0.2" style="background-color:white"></div>
-						<div flex layout layout-align="center center">Promised Delivery Date</div>
-					</div>
-					<div flex layout="column" layout-align="start stretch">
-						<div flex="none" my-setter height-in-percent="9" layout layout-align="start stretch" ng-repeat="list in deliveryList" class="cell-content">
-							<div flex layout layout-align="center center"> {{list.customer_po_id}} </div>
-							<div flex="none" my-setter width-in-percent="0.2" style="background-color:black"></div>
-							<div flex layout layout-align="center center"> {{list.promised_delivery_date}} </div>
-						</div>
-					</div>
-				</div> 
+				<table class="data-table">
+					<tr>
+						<th class=""> PO Number </th>
+						<th class=""> Promised Delivery Date</th>
+					</tr>
+					<tr class="values no-animation" ng-if="deliveryList.length == 0">
+						<td colspan="100%" style="text-align:center">No outbound delivery transactions due for the next 7 days.</td>
+					</tr>
+					<tr class="values no-animation" ng-repeat="list in deliveryList">
+						<td>{{list.customer_po_id}}</td>
+						<td>{{list.promised_delivery_date}}</td>
+					</tr>
+				</table>
 			</div>
-			<!-- <div flex="none" my-setter width-in-percent="0.5"></div>
-			<div flex layout="column" layout-align="start stretch"  class="card">
-				<div flex="10" layout layout-align="center center" class="transaction-header"> Reports Generated</div>
-				<div flex layout="column" layout-align="center center"> No outbound delivery transactions for today. </div>
-			</div> -->
 		</div>
 	</div>
 </div>
