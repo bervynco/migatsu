@@ -27,6 +27,10 @@ app.controller('NotificationController', function ($scope, $rootScope, $interval
 			$scope.icon = $scope.SVG.reject;
 			$scope.message = "Complete all fields.";
 		}
+		else if($scope.action == 'error'){
+			$scope.icon = $scope.SVG.reject;
+			$scope.message = "No Data to be exported.";
+		}
 		else{
 			$scope.icon = $scope.SVG.accept;
 			$scope.message = "Report successfully generated.";

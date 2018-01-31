@@ -73,8 +73,14 @@ app.controller('ReportsController', function ($scope, $rootScope, $interval, Dat
 				}).error(function(error){
 
 				});
-				$scope.$parent.ShowCustomToast(null, 'successful', 'reports');
-				$window.location.href = response;
+				if(response != 'Error'){
+					$scope.$parent.ShowCustomToast(null, 'successful', 'reports');
+					$window.location.href = response;
+				}
+				else {
+					$scope.$parent.ShowCustomToast(null, 'error', 'reports');
+				}
+				
 				
 			}).error(function(error){
 

@@ -29,32 +29,35 @@ class ReportManagement extends CI_Controller
         else;
 
         $reportData = $this->report_model->selectReportData($postData['name'], $postData['type'], $param);
-        $titles = array_keys($reportData[0]);
+        if(count($reportData) > 0){
+            $titles = array_keys($reportData[0]);
         
-        if($postData['name'] == 'payables' || $postData['name'] == 'receivables'){
-            array_push($titles, 'overdue_days');
-            foreach($reportData as $index => $report){
-                $currDateTime = new DateTime();
-                $dueDateTime = new DateTime($report['due_date']);
-                if($dueDateTime > $currDateTime){
-                    $interval = 0;
+            if($postData['name'] == 'payables' || $postData['name'] == 'receivables'){
+                array_push($titles, 'overdue_days');
+                foreach($reportData as $index => $report){
+                    $currDateTime = new DateTime();
+                    $dueDateTime = new DateTime($report['due_date']);
+                    if($dueDateTime > $currDateTime){
+                        $interval = 0;
+                    }
+                    else {
+                        $diff = $dueDateTime->diff($currDateTime);
+                        $interval = $diff->format('%a');
+                    }
+                    $reportData[$index]['overdue_days'] = $interval;
                 }
-                else {
-                    $diff = $dueDateTime->diff($currDateTime);
-                    $interval = $diff->format('%a');
-                }
-                $reportData[$index]['overdue_days'] = $interval;
             }
+            $writer = new XLSXWriter();
+            array_unshift($reportData, $titles);
+            $writer->writeSheet($reportData);
+            $now = strtotime("now");
+            $fileLocation = "reports/".$now.".xlsx";
+            $writer->writeToFile($fileLocation);
+
+            echo $fileLocation;
         }
-        $writer = new XLSXWriter();
-        array_unshift($reportData, $titles);
-        $writer->writeSheet($reportData);
-        $now = strtotime("now");
-        $fileLocation = "reports/".$now.".xlsx";
-        $writer->writeToFile($fileLocation);
-
-        echo $fileLocation;
-        
-
+        else {
+            echo 'Error';
+        }
     }
 }
