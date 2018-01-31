@@ -33,92 +33,102 @@
 	</div>
 	<div flex layout="column" layout-align="start stretch" layout-padding>
 		<div flex layout="row" layout layout-align="start stretch">
-			<div flex layout="column" layout-align="start stretch"  class="card">
-				<div flex="10" layout layout-align="center center" class="transaction-header"> Inventory </div>
-				<table class="data-table">
-					<tr>
-						<th class=""> Product </th>
-						<th class=""> Balance</th>
-						<th class=""> Threshold </th>
-					</tr>
-					<tr class="values no-animation" ng-if="inventoryList.length == 0">
-						<td colspan="100%" style="text-align:center">No inventory red flags.</td>
-					</tr>
-					<tr class="values no-animation" ng-repeat="inventory in inventoryList">
-						<td>{{inventory.product_id}}</td>
-						<td>{{inventory.balance}}</td>
-						<td>{{inventory.threshold}}</td>
-					</tr>
-				</table>
+			<div flex layout="column" layout-align="start stretch"  class="card" style="overflow-y:auto">
+				<div flex="none" layout layout-align="center center" class="transaction-header" style="height:10%"> Inventory </div>
+				<div flex layout layout-align="start stretch" style="overflow-y:auto">
+					<table class="data-table">
+						<tr>
+							<th class=""> Product </th>
+							<th class=""> Balance</th>
+							<th class=""> Threshold </th>
+						</tr>
+						<tr class="values no-animation" ng-if="inventoryList.length == 0">
+							<td colspan="100%" style="text-align:center">No inventory red flags.</td>
+						</tr>
+						<tr class="values no-animation" ng-repeat="inventory in inventoryList">
+							<td>{{inventory.product_id}}</td>
+							<td>{{inventory.balance}}</td>
+							<td>{{inventory.threshold}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div flex="none" my-setter width-in-percent="0.5"></div>
 			<div flex layout="column" layout-align="start stretch"  class="card">
-				<div flex="10" layout layout-align="center center" class="transaction-header"> Payables </div>
-				<table class="data-table">
-					<tr>
-						<th class=""> Supplier Name </th>
-						<th class=""> PO Number</th>
-					</tr>
-					<tr class="values no-animation" ng-if="payableList.length == 0">
-						<td colspan="100%" style="text-align:center">No payable transactions due for the next 7 days.</td>
-					</tr>
-					<tr class="values no-animation" ng-repeat="list in payablesList">
-						<td>{{list.name}}</td>
-						<td>{{list.po_id}}</td>
-					</tr>
-				</table>
+				<div flex="none" layout layout-align="center center" class="transaction-header" style="height: 10%"> Payables </div>
+				<div flex layout layout-align="start stretch" style="overflow-y:auto">
+					<table class="data-table">
+						<tr>
+							<th class=""> Supplier Name </th>
+							<th class=""> PO Number</th>
+						</tr>
+						<tr class="values no-animation" ng-if="payableList.length == 0">
+							<td colspan="100%" style="text-align:center">No payable transactions due for the next 7 days.</td>
+						</tr>
+						<tr class="values no-animation" ng-repeat="list in payablesList">
+							<td>{{list.name}}</td>
+							<td>{{list.po_id}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div flex="none" my-setter width-in-percent="0.5"></div>
 			<div flex layout="column" layout-align="start stretch"  class="card">
-				<div flex="10" layout layout-align="center center" class="transaction-header"> Receivables </div>
-				<table class="data-table">
-					<tr>
-						<th class=""> Customer Name </th>
-						<th class=""> PO Number</th>
-					</tr>
-					<tr class="values no-animation" ng-if="receivablesList.length == 0">
-						<td colspan="100%" style="text-align:center">No receivable transactions due for the next 7 days.</td>
-					</tr>
-					<tr class="values no-animation" ng-repeat="list in receivablesList">
-						<td>{{list.name}}</td>
-						<td>{{list.amount}}</td>
-					</tr>
-				</table>
+				<div flex="none" layout layout-align="center center" class="transaction-header" style="height:10%"> Receivables </div>
+				<div flex layout layout-align="start stretch" style="overflow-y:auto">
+					<table class="data-table">
+						<tr>
+							<th class=""> Customer Name </th>
+							<th class=""> PO Number</th>
+						</tr>
+						<tr class="values no-animation" ng-if="receivablesList.length == 0">
+							<td colspan="100%" style="text-align:center">No receivable transactions due for the next 7 days.</td>
+						</tr>
+						<tr class="values no-animation" ng-repeat="list in receivablesList">
+							<td>{{list.name}}</td>
+							<td>{{list.amount}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div flex layout="row" layout layout-align="start stretch">
 			<div flex layout="column" layout-align="start stretch"  class="card">
-				<div flex="10" layout layout-align="center center" class="transaction-header"> Purchase Order </div>
-				<table class="data-table">
-					<tr>
-						<th class=""> PO Number </th>
-						<th class=""> Promised Delivery Date</th>
-					</tr>
-					<tr class="values no-animation" ng-if="poList.length == 0">
-						<td colspan="100%" style="text-align:center">No PO transactions delivery due for the next 7 days.</td>
-					</tr>
-					<tr class="values no-animation" ng-repeat="list in poList">
-						<td>{{list.customer_po_id}}</td>
-						<td>{{list.promised_delivery_date}}</td>
-					</tr>
-				</table>
+				<div flex="none" layout layout-align="center center" class="transaction-header" style="height:10%"> Purchase Order </div>
+				<div flex layout layout-align="start stretch" style="overflow-y:auto">
+					<table class="data-table">
+						<tr>
+							<th class=""> PO Number </th>
+							<th class=""> Promised Delivery Date</th>
+						</tr>
+						<tr class="values no-animation" ng-if="poList.length == 0">
+							<td colspan="100%" style="text-align:center">No PO transactions delivery due for the next 7 days.</td>
+						</tr>
+						<tr class="values no-animation" ng-repeat="list in poList">
+							<td>{{list.customer_po_id}}</td>
+							<td>{{list.promised_delivery_date}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div flex="none" my-setter width-in-percent="0.5"></div>
 			<div flex layout="column" layout-align="start stretch"  class="card">
-				<div flex="10" layout layout-align="center center" class="transaction-header"> Outbound Delivery </div>
-				<table class="data-table">
-					<tr>
-						<th class=""> PO Number </th>
-						<th class=""> Promised Delivery Date</th>
-					</tr>
-					<tr class="values no-animation" ng-if="deliveryList.length == 0">
-						<td colspan="100%" style="text-align:center">No outbound delivery transactions due for the next 7 days.</td>
-					</tr>
-					<tr class="values no-animation" ng-repeat="list in deliveryList">
-						<td>{{list.customer_po_id}}</td>
-						<td>{{list.promised_delivery_date}}</td>
-					</tr>
-				</table>
+				<div flex="none" layout layout-align="center center" class="transaction-header" style="height:10%"> Outbound Delivery </div>
+				<div flex layout layout-align="start stretch" style="overflow-y:auto">
+					<table class="data-table">
+						<tr>
+							<th class=""> PO Number </th>
+							<th class=""> Promised Delivery Date</th>
+						</tr>
+						<tr class="values no-animation" ng-if="deliveryList.length == 0">
+							<td colspan="100%" style="text-align:center">No outbound delivery transactions due for the next 7 days.</td>
+						</tr>
+						<tr class="values no-animation" ng-repeat="list in deliveryList">
+							<td>{{list.customer_po_id}}</td>
+							<td>{{list.promised_delivery_date}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
