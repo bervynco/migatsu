@@ -21,14 +21,10 @@ class InventoryManagement extends CI_Controller
                         $arrInventory[$index]['status'] = 'bad';
                     }
                 }
-                
             }
-            // else{
-            //     $arrInventory[$index]['status'] = 'good';
-            // }
-            $arrInventory[$index]['threshold'] = floatval($arrInventory[$index]['threshold']);
-            $arrInventory[$index]['balance'] = floatval($arrInventory[$index]['balance']);
-            
+            else {
+                $arrInventory[$index]['status'] = 'good';
+            }
         }
         echo json_encode($arrInventory);
     }
