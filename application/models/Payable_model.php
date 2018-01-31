@@ -36,6 +36,7 @@ class payable_model extends CI_Model {
     }
 
     function updatePayable($arrPayableDetail){
+        // print_r($arrPayableDetail);
         $query = $this->db->where('id', $arrPayableDetail['id'])
                           ->update(
                                 'payables', 

@@ -1,7 +1,6 @@
 <?php
 class inventory_model extends CI_Model {
     function selectAllInventory(){
-
         $query = $this->db->select(array('inventory.*', 'suppliers.name'))->from('inventory')->join('suppliers','suppliers.id = inventory.supplier_id')->order_by('product_id', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }

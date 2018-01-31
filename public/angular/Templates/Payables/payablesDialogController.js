@@ -31,16 +31,14 @@
         }
     }
     else{
-        console.log(data);
         $scope.dialogHeading = "Edit Payable Details";
         $scope.payable = angular.copy(data);
         $scope.payable.delivery_date = new Date($scope.payable.delivery_date);
         $scope.payable.due_date = new Date($scope.payable.due_date);
         $scope.selectedSupplier = $scope.payable.supplier_id;
-        console.log($scope.payable);
+        // $scope.payable.supplier_dr_id = parseInt($scope.payable.supplier_dr_id);
+        $scope.payable.terms = parseInt($scope.payable.terms);
     }
-
-   
 
     $scope.ChangeSupplier = function(list){
         $scope.payable.supplier_id = list;
@@ -54,8 +52,8 @@
                 format("YYYY-MM-DD HH:mm");
                 $scope.payable.due_date = moment($scope.payable.due_date).
                 format("YYYY-MM-DD HH:mm");
-
-                console.log($scope.payable);
+                
+                console.log($scope.action);
                 if($scope.action == 'Add'){
                     DataFactory.AddNewPayable($scope.payable).success(function(response){
                         if(response != 'Error'){
