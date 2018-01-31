@@ -80,14 +80,5 @@ app.controller('ReportsController', function ($scope, $rootScope, $interval, Dat
 
 			});
 		}
-		// if($scope.generateReport.start_date != null){
-		// 	$scope.generateReport.start_date = moment($scope.generateReport.start_date).
-		// 	format("YYYY-MM-DD HH:mm");
-		// }
-		// if($scope.generateReport.end_date != null){
-		// 	$scope.generateReport.end_date = moment($scope.generateReport.end_date).
-		// 	format("YYYY-MM-DD HH:mm");
-		// }
-		
 	}
 });
