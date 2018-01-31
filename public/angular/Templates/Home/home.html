@@ -41,7 +41,7 @@
 						<th class=""> Balance</th>
 						<th class=""> Threshold </th>
 					</tr>
-					<tr class="values no-animation" ng-if="filtered.length == 0">
+					<tr class="values no-animation" ng-if="inventoryList.length == 0">
 						<td colspan="100%" style="text-align:center">No inventory red flags.</td>
 					</tr>
 					<tr class="values no-animation" ng-repeat="inventory in inventoryList">
@@ -76,7 +76,7 @@
 						<th class=""> Customer Name </th>
 						<th class=""> PO Number</th>
 					</tr>
-					<tr class="values no-animation" ng-if="receivableList.length == 0">
+					<tr class="values no-animation" ng-if="receivablesList.length == 0">
 						<td colspan="100%" style="text-align:center">No receivable transactions due for the next 7 days.</td>
 					</tr>
 					<tr class="values no-animation" ng-repeat="list in receivablesList">
