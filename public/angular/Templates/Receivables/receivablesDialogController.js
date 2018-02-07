@@ -61,7 +61,7 @@
 
                 if($scope.action == 'Add'){
                     DataFactory.AddNewReceivable($scope.receivable).success(function(response){
-                        $mdDialog.hide("Successful");
+                        $mdDialog.hide(response);
                     }).error(function(error){
                         $mdDialog.hide("Error");
                     });

@@ -46,20 +46,28 @@
         }
     }
     
-    $scope.ToggleDone = function(list){
-        DataFactory.TogglePayableDone(list).success(function(response){
-            if(response === "Successful"){
-                $scope.logDetails = {name: $scope.userDetails.name, page: 'Payables Page', action: 'Transaction Done'};
+    $scope.ToggleDone = function(list, ev){
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to toggle ' + list.name + "'s" + ' as done and archived?')
+            .textContent("This item will be archived and not deleted.")
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('No');
+        $mdDialog.show(confirm).then(function() {
+            DataFactory.TogglePayableDone(list).success(function(response){
+                if(response === "Successful"){
+                    $scope.logDetails = {name: $scope.userDetails.name, page: 'Payables Page', action: 'Transaction Done'};
 
-                DataFactory.SetPageLog($scope.logDetails).success(function(response){
-                    console.log(response);
-                }).error(function(error){
+                    DataFactory.SetPageLog($scope.logDetails).success(function(response){
+                        console.log(response);
+                    }).error(function(error){
 
-                });
-                getData();
-            }
-        }).error(function(error){
+                    });
+                    getData();
+                }
+            }).error(function(error){
 
+            });
         });
     }
     $scope.AddNewPayable = function(ev){

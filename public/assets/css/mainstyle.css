@@ -259,34 +259,6 @@
 div.main-container[ui-view].ui-view-container {
     position: relative;
 }
-
-/* [ui-view].ng-enter, [ui-view].ng-leave {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    -webkit-transition: all .8s ease-in-out;
-    -moz-transition: all .8s ease-in-out;
-    -o-transition: all .8s ease-in-out;
-    transition: all .8s ease-in-out;
-}
-
-[ui-view].ng-enter {
-    opacity: 0;
-}
-
-[ui-view].ng-enter-active {
-    opacity: 1;
-}
-
-[ui-view].ng-leave {
-    position: absolute;
-    opacity: 1;
-}
-
-[ui-view].ng-leave-active {
-    opacity: 0;
-} */
 @font-face {
     font-family: 'Syncopate';
     font-style: normal;

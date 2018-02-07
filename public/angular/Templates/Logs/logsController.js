@@ -6,7 +6,7 @@
     $scope.userDetails = JSON.parse(localStorage.getItem("user"));
     $scope.logDetails = {name: $scope.userDetails.name, page: 'System Logs Page', action: 'View'};
 
-    $scope.currentPage = 1;
+    $scope.currentPage = 0;
     DataFactory.SetPageLog($scope.logDetails).success(function(response){
         console.log(response);
     }).error(function(error){

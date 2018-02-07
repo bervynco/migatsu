@@ -70,8 +70,8 @@
                     <td>{{list.remarks}}</td>
                     <td class="table-buttons">
                         <div layout layout-align="start stretch">
-                            <div flex layout layout-align="start stretch" class="pointer" ng-click="ToggleDone(list)">
-                                <md-tooltip md-direction="top">Click to process this receivable as done</md-tooltip>
+                            <div flex layout layout-align="start stretch" class="pointer" ng-click="ToggleDone(list, $event)">
+                                <md-tooltip md-direction="top">Click to process this receivable as done and archived</md-tooltip>
                                 <md-icon md-svg-src="{{SVG.check}}" layout layout-align="center center"></md-icon>
                             </div>
                             <div flex layout layout-align="start stretch" class="pointer" ng-click="EditReceivable(list, $event)">
