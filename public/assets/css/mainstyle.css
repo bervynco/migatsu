@@ -908,6 +908,10 @@ select {
 .table-buttons {
     width:10%;
 }
-
+.input-required {
+    color: red;
+    font-weight:bolder;
+    padding-left: 5px;
+}
 
 /*

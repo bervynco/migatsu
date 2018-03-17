@@ -32,36 +32,38 @@
                     <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchList">
                 </div>
             </div>
-            <table class="data-table">
-                <tr>
-                    <th class=""> Company Name </th>
-                    <th class=""> Address </th>
-                    <th class=""> Tin Number </th>
-                    <th class=""> Contact Number </th>
-                    <th class="">  </th>
-                </tr>
-                <tr class="values no-animation" ng-if="filtered.length == 0">
-                    <td colspan="100%" style="text-align:center">No data available</td>
-                </tr>
-                <tr class="values no-animation" ng-repeat="list in filtered = (customerList | filter:searchList) | limitTo:14:(currentPage)*14">
-                    <td>{{list.name}}</td>
-                    <td>{{list.address}}</td>
-                    <td>{{list.tin}}</td>
-                    <td>{{list.phone_number}}</td>
-                    <td class="table-buttons">
-                        <div layout layout-align="start stretch">
-                            <div flex layout layout-align="start stretch" class="pointer" ng-click="EditCustomer(list, $event)">
-                                <md-tooltip md-direction="top">Edit customer details</md-tooltip>
-                                <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+            <div flex layout layout-align="start stretch" style="overflow-y:auto">
+                <table class="data-table">
+                    <tr>
+                        <th class=""> Company Name </th>
+                        <th class=""> Address </th>
+                        <th class=""> Tin Number </th>
+                        <th class=""> Contact Number </th>
+                        <th class="">  </th>
+                    </tr>
+                    <tr class="values no-animation" ng-if="filtered.length == 0">
+                        <td colspan="100%" style="text-align:center">No data available</td>
+                    </tr>
+                    <tr class="values no-animation" ng-repeat="list in filtered = (customerList | filter:searchList) | limitTo:14:(currentPage)*14">
+                        <td>{{list.name}}</td>
+                        <td>{{list.address}}</td>
+                        <td>{{list.tin}}</td>
+                        <td>{{list.phone_number}}</td>
+                        <td class="table-buttons">
+                            <div layout layout-align="start stretch">
+                                <div flex layout layout-align="start stretch" class="pointer" ng-click="EditCustomer(list, $event)">
+                                    <md-tooltip md-direction="top">Edit customer details</md-tooltip>
+                                    <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                                </div>
+                                <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteCustomer(list, $event)">
+                                    <md-tooltip md-direction="top">Delete customer details</md-tooltip>
+                                    <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                                </div>
                             </div>
-                            <div flex layout layout-align="start stretch" class="pointer" ng-click="DeleteCustomer(list, $event)">
-                                <md-tooltip md-direction="top">Delete customer details</md-tooltip>
-                                <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     

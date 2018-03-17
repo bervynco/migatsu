@@ -6,13 +6,13 @@
             <md-icon md-svg-src="{{SVG.clear}}" layout layout-align="center center"></md-icon>
         </div>
     </div>
-    <div flex class="dialog-content" layout="column" layout-align="start stretch">
+    <ng-form name="dialogForm" flex class="dialog-content" layout="column" layout-align="start stretch" ng-submit="SubmitNewCustomerDetails()">
         <div flex="15" layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Customer Name: </div>
+                <div flex layout layout-align="end center"> Customer Name: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <input flex type="text" placeholder="Customer Name" ng-model="customer.name">
+            <input flex type="text" placeholder="Customer Name" ng-model="customer.name" ng-required="true">
         </div>
         <div flex="15" layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="center center">
@@ -38,7 +38,9 @@
         <div flex=="60"></div>
         <div flex="10" layout layout-align="start stretch">
             <div flex></div>
-            <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewCustomerDetails()">Submit</md-button>
+            <md-button flex="10" class="md-raised button-submit" 
+                ng-disabled="dialogForm.$error.required.length > 0"
+                ng-click="SubmitNewCustomerDetails()">Submit</md-button>
         </div>
-    </div>
+    </ng-form>
 </md-dialog>

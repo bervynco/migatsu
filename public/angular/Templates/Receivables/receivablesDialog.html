@@ -6,34 +6,35 @@
             <md-icon md-svg-src="{{SVG.clear}}" layout layout-align="center center"></md-icon>
         </div>
     </div>
-    <div flex class="dialog-content" layout="column" layout-align="start stretch">
+    <ng-form name="dialogForm" flex class="dialog-content" layout="column" layout-align="start stretch" ng-submit="SubmitNewReceivableDetails()">
         <div flex layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Customer Name: </div>
+                <div flex layout layout-align="end center"> Customer Name: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
             <select flex
                 ng-model="receivable.customer_id" 
                 ng-options="list.id as list.name for list in customerList"
+                ng-required="true"
                 >
             </select>
         </div>
         <div flex layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Purchase Order ID: </div>
+                <div flex layout layout-align="end center"> Purchase Order ID: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <select flex ng-model="selectedPurchaseOrder" ng-change="ChangePurchaseOrder(selectedPurchaseOrder)">
+            <select flex ng-model="selectedPurchaseOrder" ng-change="ChangePurchaseOrder(selectedPurchaseOrder)" ng-required="true">
                 <option value="" disabled selected>Select purchase order</option>
                 <option ng-repeat="list in purchaseOrderList" value = "{{list.customer_po_id}}" >{{list.customer_po_id}}</option>
             </select>
         </div>
         <div flex layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Delivery Date: </div>
+                <div flex layout layout-align="end center"> Delivery Date: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <input flex type="date" ng-model="receivable.delivery_date" format="dd/MM/yyyy">
+            <input flex type="date" ng-model="receivable.delivery_date" format="dd/MM/yyyy" ng-required="true">
         </div>
         
         <div flex layout layout-align="start stretch" my-setter padding="10">
@@ -59,10 +60,10 @@
         </div>
         <div flex layout layout-align="start stretch" my-setter padding="10">
              <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Due Date: </div>
+                <div flex layout layout-align="end center"> Due Date: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <input flex type="date" ng-model="receivable.due_date">
+            <input flex type="date" ng-model="receivable.due_date" ng-required="true">
         </div>
         <div flex layout layout-align="start stretch" my-setter padding="10">
              <div flex="20" layout layout-align="start stretch">
@@ -74,7 +75,10 @@
         <div flex></div>
         <div flex="10" layout layout-align="start stretch">
             <div flex></div>
-            <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewReceivableDetails()">Submit</md-button>
+            <md-button flex="10" class="md-raised button-submit" 
+            ng-disabled="dialogForm.$error.required.length > 0"
+            ng-click="SubmitNewReceivableDetails()">Submit
+        </md-button>
         </div>
-    </div>
+    </ng-form>
 </md-dialog>

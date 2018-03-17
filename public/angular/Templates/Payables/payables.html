@@ -10,7 +10,7 @@
     </div>
     <div flex layout layout-align="start stretch" my-setter padding="10">
         <div layout="column" flex layout layout-align="start stretch">
-            <div flex="10" layout="row" layout-align="start stretch" class="table-menu">
+            <div flex="none" layout="row" layout-align="start stretch" class="table-menu">
                 <div flex></div>
                 <div flex="20" layout="row" layout-align="center stretch" class="settings pointer add-button" ng-click="AddNewPayable($event);">
                     <div flex layout layout-align="center center" > Add New Payable </div>
@@ -32,53 +32,56 @@
                     <input type="text" flex my-setter layout layout-align="center center" placeholder="What are you looking for?" ng-model="searchList">
                 </div>
             </div>
-            <table class="data-table">
-                <tr>
-                    <th class=""> Supplier Name </th>
-                    <th class=""> PO # </th>
-                    <th class=""> Delivery Date </th>
-                    <th class=""> Supplier DR #</th>
-                    <th class=""> Due Date</th>
-                    <th class=""> Overdue Days </th>
-                    <th class=""> Remarks </th>
-                    <th class="">  </th>
-                </tr>
-                <tr class="values no-animation" ng-if="filtered.length == 0">
-                    <td colspan="100%" style="text-align:center">No data available</td>
-                </tr>
-                <tr class="values no-animation" 
-                    ng-repeat="list in filtered = (payableList | filter:searchList) | limitTo:14:(currentPage)*14"
-                    ng-class="CheckDueDate(list) >= 0 ? 'warning' : ''">
-                    <td>
-                        <div layout layout-align="start stretch">
-                            <!-- <div flex="none" my-setter width-in-percent="4" ng-class="inventory.status === 'bad' ? 'warning' : ''"></div> -->
-                            <div flex layout layout-align="start center" layout-padding> {{list.name}}  </div>
-                        </div>
-                    </td>
-                    <td>{{list.po_id}} </td>
-                    <td>{{list.delivery_date}} </td>
-                    <td>{{list.supplier_dr_id}} </td>
-                    <td>{{list.due_date}}</td>
-                    <td>{{list.overdue_days}}</td>
-                    <td>{{list.remarks}}</td>
-                    <td class="table-buttons">
-                        <div layout layout-align="start stretch">
-                            <div flex layout layout-align="start stretch" class="pointer" ng-click="ToggleDone(list, $event)">
-                                <md-tooltip md-direction="top">Click to process this payable as done and archived</md-tooltip>
-                                <md-icon md-svg-src="{{SVG.check}}" layout layout-align="center center"></md-icon>
+            <div flex layout layout-align="start stretch" style="overflow-y:auto">
+
+                <table class="data-table">
+                    <tr>
+                        <th class=""> Supplier Name </th>
+                        <th class=""> PO # </th>
+                        <th class=""> Delivery Date </th>
+                        <th class=""> Supplier DR #</th>
+                        <th class=""> Due Date</th>
+                        <th class=""> Overdue Days </th>
+                        <th class=""> Remarks </th>
+                        <th class="">  </th>
+                    </tr>
+                    <tr class="values no-animation" ng-if="filtered.length == 0">
+                        <td colspan="100%" style="text-align:center">No data available</td>
+                    </tr>
+                    <tr class="values no-animation" 
+                        ng-repeat="list in filtered = (payableList | filter:searchList) | limitTo:14:(currentPage)*14"
+                        ng-class="CheckDueDate(list) >= 0 ? 'warning' : ''">
+                        <td>
+                            <div layout layout-align="start stretch">
+                                <!-- <div flex="none" my-setter width-in-percent="4" ng-class="inventory.status === 'bad' ? 'warning' : ''"></div> -->
+                                <div flex layout layout-align="start center" layout-padding> {{list.name}}  </div>
                             </div>
-                            <div flex layout layout-align="start stretch" class="pointer" ng-click="EditPayable(list, $event)">
-                                <md-tooltip md-direction="top">Edit payable item</md-tooltip>
-                                <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                        </td>
+                        <td>{{list.po_id}} </td>
+                        <td>{{list.delivery_date}} </td>
+                        <td>{{list.supplier_dr_id}} </td>
+                        <td>{{list.due_date}}</td>
+                        <td>{{list.overdue_days}}</td>
+                        <td>{{list.remarks}}</td>
+                        <td class="table-buttons">
+                            <div layout layout-align="start stretch">
+                                <div flex layout layout-align="start stretch" class="pointer" ng-click="ToggleDone(list, $event)">
+                                    <md-tooltip md-direction="top">Click to process this payable as done and archived</md-tooltip>
+                                    <md-icon md-svg-src="{{SVG.check}}" layout layout-align="center center"></md-icon>
+                                </div>
+                                <div flex layout layout-align="start stretch" class="pointer" ng-click="EditPayable(list, $event)">
+                                    <md-tooltip md-direction="top">Edit payable item</md-tooltip>
+                                    <md-icon md-svg-src="{{SVG.edit}}" layout layout-align="center center"></md-icon>
+                                </div>
+                                <div flex layout layout-align="start stretch" class="pointer" ng-click="DeletePayable(list, $event)">
+                                    <md-tooltip md-direction="top">Delete payable item</md-tooltip>
+                                    <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
+                                </div>
                             </div>
-                            <div flex layout layout-align="start stretch" class="pointer" ng-click="DeletePayable(list, $event)">
-                                <md-tooltip md-direction="top">Delete payable item</md-tooltip>
-                                <md-icon md-svg-src="{{SVG.remove_bin}}" layout layout-align="center center"></md-icon>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <!-- <div flex="10" layout="row" layout-align="center stretch">

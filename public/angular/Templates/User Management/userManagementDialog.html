@@ -6,50 +6,53 @@
             <md-icon md-svg-src="{{SVG.clear}}" layout layout-align="center center"></md-icon>
         </div>
     </div>
-    <div flex class="dialog-content" layout="column" layout-align="start stretch">
+    <ng-form name="dialogForm" flex class="dialog-content" layout="column" layout-align="start stretch" ng-submit="SubmitNewUserDetails()">
         <div flex="10" layout layout-align="center center" class="warning-message" ng-if="errorMessage != null">{{errorMessage}}</div>
         <div flex="15" layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Full Name: </div>
+                <div flex layout layout-align="end center"> Full Name: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <input flex type="text" placeholder="Employee Name" ng-model="user.name" ng-if="action == 'Add'">
-            <input flex type="text" placeholder="Employee Name" ng-model="user.name" disabled ng-if="action == 'Edit'">
+            <input flex type="text" placeholder="Employee Name" ng-model="user.name" ng-if="action == 'Add'" ng-required="true">
+            <input flex type="text" placeholder="Employee Name" ng-model="user.name" disabled ng-if="action == 'Edit'" ng-required="true">
         </div>
         <div flex="15" layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Username: </div>
+                <div flex layout layout-align="end center"> Username: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <input flex type="text" placeholder="Username" ng-model="user.username">
+            <input flex type="text" placeholder="Username" ng-model="user.username" ng-required="true">
         </div>
         <div flex="15" layout layout-align="start stretch" my-setter padding="10" ng-if="action == 'Add'">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Temporary Password: </div>
+                <div flex layout layout-align="end center"> Temporary Password: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <input flex type="password" placeholder="Temporary Password" ng-model="password.password">
+            <input flex type="password" placeholder="Temporary Password" ng-model="password.password" ng-required="true">
         </div>
         <div flex="15" layout layout-align="start stretch" my-setter padding="10"  ng-if="action == 'Add'">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Confirm Password: </div>
+                <div flex layout layout-align="end center"> Confirm Password: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <input flex type="password" placeholder="Confirm Password" ng-model="password.confirmPassword">
+            <input flex type="password" placeholder="Confirm Password" ng-model="password.confirmPassword" ng-required="true">
         </div>
         <div flex="15" layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="start stretch">
-                <div flex layout layout-align="end center"> Role: </div>
+                <div flex layout layout-align="end center"> Role: <i class="input-required"> * </i></div>
             </div>
             <div flex="5"></div>
-            <select flex ng-model="selectedRole" ng-change="ChangeRole(selectedRole)">
+            <select flex ng-model="selectedRole" ng-change="ChangeRole(selectedRole)" ng-required="true">
                 <option value="" disabled selected>Select role</option>
                 <option ng-repeat="list in roleList" value = "{{list.role}}" >{{list.role}}</option>
             </select>
         </div>
         <div flex="10" layout layout-align="start stretch">
             <div flex></div>
-            <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewUserDetails()">Submit</md-button>
+            <md-button flex="10" class="md-raised button-submit" 
+                ng-click="SubmitNewUserDetails()" 
+                ng-disabled="dialogForm.$error.required.length > 0 || password.confirmPassword != password.password">Submit
+            </md-button>
         </div>
-    </div>
+    </ng-form>
 </md-dialog>

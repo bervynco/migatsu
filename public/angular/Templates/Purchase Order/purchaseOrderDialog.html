@@ -6,39 +6,39 @@
             <md-icon md-svg-src="{{SVG.clear}}" layout layout-align="center center"></md-icon>
         </div>
     </div>
-    <div flex class="dialog-content" layout="row" layout-align="start stretch">
+    <ng-form name="dialogForm" flex class="dialog-content" layout="row" layout-align="start stretch" ng-submit="SubmitNewPurchaseOrderDetails()">
         <div flex layout="column" layout-align="strt stretch">
             <div flex layout layout-align="start stretch" my-setter padding="10">
                 <div flex="30" layout layout-align="start stretch">
-                    <div flex layout layout-align="end center"> Customer Name: </div>
+                    <div flex layout layout-align="end center"> Customer Name: <i class="input-required"> * </i></div>
                 </div>
                 <div flex="5"></div>
                 <select flex
                     ng-model="po.customer_id" 
                     ng-options="list.id as list.name for list in customerList"
-                    >
+                    ng-required="true">
                 </select>
             </div>
             <div flex layout layout-align="start stretch" my-setter padding="10">
                 <div flex="30" layout layout-align="start stretch">
-                    <div flex layout layout-align="end center"> PO Number </div>
+                    <div flex layout layout-align="end center"> PO Number <i class="input-required"> * </i></div>
                 </div>
                 <div flex="5"></div>
-                <input flex type="text" placeholder="PO Number" ng-model="po.customer_po_id">
+                <input flex type="text" placeholder="PO Number" ng-model="po.customer_po_id" ng-required="true">
             </div>
             <div flex layout layout-align="start stretch" my-setter padding="10">
                 <div flex="30" layout layout-align="start stretch">
-                    <div flex layout layout-align="end center"> Promised Delivery Date: </div>
+                    <div flex layout layout-align="end center"> Promised Delivery Date: <i class="input-required"> * </i></div>
                 </div>
                 <div flex="5"></div>
-                <input flex type="date" ng-model="po.promised_delivery_date">
+                <input flex type="date" ng-model="po.promised_delivery_date" ng-required="true">
             </div>
             <div flex layout layout-align="start stretch" my-setter padding="10">
                 <div flex="30" layout layout-align="start stretch">
-                    <div flex layout layout-align="end center"> Actual Delivery Date: </div>
+                    <div flex layout layout-align="end center"> Actual Delivery Date: <i class="input-required"> * </i></div>
                 </div>
                 <div flex="5"></div>
-                <input flex type="date" ng-model="po.actual_delivery_date">
+                <input flex type="date" ng-model="po.actual_delivery_date" ng-required="true">
             </div>
             <div flex layout layout-align="start stretch" my-setter padding="10">
                 <div flex="30" layout layout-align="start stretch">
@@ -81,12 +81,12 @@
                             <select flex
                                 ng-model="po.order_list[$index].id" 
                                 ng-options="list.id as list.product_id for list in inventoryList"
-                                >
+                               ng-required="true" >
                             </select>
                         </div>
                         <div flex="none" my-setter width-in-percent="1"></div>
                         <div flex="20" layout layout-align="center stretch">
-                            <input flex type="number" placeholder="Quantity" ng-model="po.order_list[$index].quantity">
+                            <input flex type="number" placeholder="Quantity" ng-model="po.order_list[$index].quantity" ng-required="true">
                         </div>
                         <div flex="none" my-setter width-in-percent="1"></div>
                         <div flex layout layout-align="center stretch">
@@ -102,10 +102,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div flex="10" layout layout-align="start stretch" class="dialog-content">
-        <div flex></div>
-        <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewPurchaseOrderDetails()">Submit</md-button>
-    </div>
+        <div flex="10" layout layout-align="start stretch" class="dialog-content">
+            <div flex></div>
+            <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewPurchaseOrderDetails()" ng-disabled="dialogForm.$error.required.length > 0">Submit</md-button>
+        </div>
+    </ng-form>
+    
         
 </md-dialog>

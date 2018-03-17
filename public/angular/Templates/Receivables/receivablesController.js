@@ -92,6 +92,9 @@
             if(data == "Error"){
                 getData();
             }
+            else if(data == "Cancel"){
+                //do nothing
+            }
             else{
                 $scope.filtered.push(data);
                 $scope.currentPage = Math.floor($scope.filtered.length/14);
