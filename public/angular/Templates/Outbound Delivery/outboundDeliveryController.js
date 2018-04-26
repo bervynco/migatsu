@@ -28,12 +28,16 @@
     }
 
     function getData(){
-        DataFactory.GetOutboundDeliveryList().success(function(response){
-        $scope.outboundDeliveryList = response;
-        console.log(response);
-    }).error(function(error){
+        DataFactory.GetOutboundDeliveryToday().success(function(response){
+            console.log(response);
+            $scope.outboundDeliveryList = response;
+        
+            // DataFactory.GetOutboundDeliveryList().success(function(response){
+            // $scope.outboundDeliveryList = response;
+            // console.log(response);
+        }).error(function(error){
 
-    });
+        });
     }
     
 

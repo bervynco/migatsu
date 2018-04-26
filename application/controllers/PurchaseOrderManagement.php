@@ -61,7 +61,10 @@ class PurchaseOrderManagement extends CI_Controller
         $arrColumns = array('id', 'customer_id', 'customer_po_id', 'order_list', 'promised_delivery_date', 'actual_delivery_date', 'invoice_id', 'amount', 'dr_id', 'remarks');
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrPurchaseOrderDetail = $this->assignDataToArray($postData, $arrColumns);
-        $arrPurchaseOrderDetail['order_list'] = json_encode($arrPurchaseOrderDetail['order_list']);
+        if(gettype($arrPurchaseOrderDetail['order_list']) != "string"){
+            $arrPurchaseOrderDetail['order_list'] = json_encode($arrPurchaseOrderDetail['order_list']);
+        }
+        
         $purchaseOrder = $this->po_model->updatePurchaseOrder($arrPurchaseOrderDetail);
         echo "Successful";
     }
@@ -109,7 +112,29 @@ class PurchaseOrderManagement extends CI_Controller
             }
         }
         $purchaseOrder = $this->po_model->togglePurchaseOrderDone($arrPurchaseOrderDetail);
-        echo "Successful";
+        $status = $this->addPurchaseOrderToReceivable($arrPurchaseOrderDetail);
+        
+        echo $status;
     }
+    public function addPurchaseOrderToReceivable($purchaseOrder){
+        $receivableDBKeys = array('id', 'customer_id', 'po_id', 'delivery_date', 'amount', 'invoice_id', 'terms', 'due_date', 'overdue_days', 'remarks', 'done');
+        
+        $arrReceivables = array(
+            'customer_id' => $purchaseOrder['customer_id'],
+            'po_id' => $purchaseOrder['customer_po_id'],
+            'delivery_date' => $purchaseOrder['actual_delivery_date'],
+            'amount' => $purchaseOrder['amount'],
+            'remarks' => $purchaseOrder['remarks'],
+            'done' => 0
+        );
+
+        $receivableID = $this->receivable_model->insertReceivable($arrReceivables);
+
+        if($receivableID > 0)
+            return "Successful";
+        else
+            return "Failed";
+    }
+    
 }
 ?>

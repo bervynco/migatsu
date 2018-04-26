@@ -159,7 +159,7 @@
         $mdDialog.show(confirm).then(function() {
             var now = moment().format("YYYY-MM-DD HH:mm");
             console.log(now);
-            list.promised_delivery_date = now;
+            list.actual_delivery_date = now;
 
             DataFactory.EditPurchaseOrder(list).success(function(response){
                 console.log(response);
