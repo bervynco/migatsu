@@ -4,7 +4,7 @@
     $scope.SVG = ConfigurableItems.SVG;
     $scope.action = action;
 
-    DataFactory.GetInventoryList().success(function(response){
+    DataFactory.GetInventoryPOList().success(function(response){
         console.log(response);
         $scope.inventoryList = response;
     }).error(function(error){

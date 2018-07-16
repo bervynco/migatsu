@@ -1,12 +1,114 @@
 
-<md-dialog my-setter width-in-percent="50" height-in-percent="70" layout="column" layout-align="start stretch">
+<md-dialog my-setter width-in-percent="70" height-in-percent="70" layout="column" layout-align="start stretch">
     <div flex="10" layout layout-align="start stretch" class="dialog-header">
         <div flex layout layout-align="start center" > {{dialogHeading}} </div>
         <div flex="5" layout layout-align="start stretch" class="pointer" ng-click="Close()">
             <md-icon md-svg-src="{{SVG.clear}}" layout layout-align="center center"></md-icon>
         </div>
     </div>
-    <ng-form name="dialogForm" flex class="dialog-content" layout="column" layout-align="start stretch" ng-submit="SubmitNewPayableDetails()">
+    <ng-form ng-if="action == 'Add'" name="dialogForm" flex class="dialog-content" layout="column" layout-align="start stretch" ng-submit="SubmitNewPayableDetails()">
+        <div flex layout="row" layout-align="start stretch">
+            <div flex layout="column" layout-align="strt stretch">
+                <div flex layout layout-align="start stretch" my-setter padding="10">
+                <div flex="20" layout layout-align="start stretch">
+                    <div flex layout layout-align="end center"> Supplier Name: <i class="input-required"> * </i></div>
+                </div>
+                <div flex="5"></div>
+                <select flex
+                    ng-model="payable.supplier_id" 
+                    ng-options="list.id as list.name for list in supplierList"
+                    ng-required="true"
+                    >
+                </select>
+            </div>
+            <div flex layout layout-align="start stretch" my-setter padding="10">
+                <div flex="20" layout layout-align="start stretch">
+                    <div flex layout layout-align="end center"> Delivery Date: </div>
+                </div>
+                <div flex="5"></div>
+                <input flex type="date" ng-model="payable.delivery_date">
+            </div>
+            <div flex layout layout-align="start stretch" my-setter padding="10">
+                <div flex="20" layout layout-align="start stretch">
+                    <div flex layout layout-align="end center"> Supplier PO ID: <i class="input-required"> * </i></div>
+                </div>
+                <div flex="5"></div>
+                <input flex type="text" ng-model="payable.po_id" ng-required="true">
+                <!-- <select flex
+                    ng-model="payable.po_id" 
+                    ng-options="list.customer_po_id as list.customer_po_id for list in purchaseOrderList"
+                    >
+                </select> -->
+                <!-- <select flex ng-model="selectedPurchaseOrder" ng-change="ChangePurchaseOrder(selectedPurchaseOrder)">
+                    <option value="" disabled selected>Select purchase order</option>
+                    <option ng-repeat="list in purchaseOrderList" value = "{{list.customer_po_id}}" >{{list.customer_po_id}}</option>
+                </select> -->
+            </div>
+            <div flex layout layout-align="start stretch" my-setter padding="10">
+                <div flex="20" layout layout-align="start stretch">
+                    <div flex layout layout-align="end center"> Supplier DR ID: </div>
+                </div>
+                <div flex="5"></div>
+                <input flex type="text" placeholder="Supplier DR ID" ng-model="payable.supplier_dr_id">
+            </div>
+            <div flex layout layout-align="start stretch" my-setter padding="10">
+                <div flex="20" layout layout-align="start stretch">
+                    <div flex layout layout-align="end center"> Terms: </div>
+                </div>
+                <div flex="5"></div>
+                <input flex type="number" placeholder="Terms" ng-model="payable.terms">
+            </div>
+            <div flex layout layout-align="start stretch" my-setter padding="10">
+                <div flex="20" layout layout-align="start stretch">
+                    <div flex layout layout-align="end center"> Due Date: <i class="input-required"> * </i></div>
+                </div>
+                <div flex="5"></div>
+                <input flex type="date" ng-model="payable.due_date" ng-required="true">
+            </div>
+            <div flex layout layout-align="start stretch" my-setter padding="10">
+                <div flex="20" layout layout-align="start stretch">
+                    <div flex layout layout-align="end center"> Remarks: </div>
+                </div>
+                <div flex="5"></div>
+                <textarea ng-model="payable.remarks" rows="4" cols="90" flex></textarea>
+            </div>
+            </div>
+            <div flex layout="column" layout-align="start stretch">
+                <div flex="none" layout layout-align="start stretch" my-setter padding="10" style="overflow-y:auto;">
+                    <div flex="25" layout layout-align="start stretch">
+                        <div flex layout layout-align="end center"> Orders: </div>
+                    </div>
+                    <div flex="5"></div>
+                    <div flex="none" layout="column" layout-align="start stretch" height-in-percent="10">
+                        <div flex layout="row" layout-align="start stretch" ng-repeat="list in order_list track by $index" my-setter padding="5">
+                            <div flex="none" my-setter width-in-percent="1"></div>
+                            <div flex="20" layout layout-align="center stretch">
+                                <input flex type="text" placeholder="Product Code" ng-model="order_list[$index].product_code" ng-required="true">
+                            </div>
+                            <div flex="20" layout layout-align="center stretch">
+                                <input flex type="number" placeholder="Quantity" ng-model="order_list[$index].quantity" ng-required="true">
+                            </div>
+                            <div flex="none" my-setter width-in-percent="1"></div>
+                            <div flex layout layout-align="center stretch">
+                                <input flex type="text" placeholder="Product Description" ng-model="order_list[$index].description">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div flex="10" layout layout-align="start stretch">
+                    <div flex="15"></div>
+                    <div flex layout layout-align="start stretch">
+                        <md-button flex class="md-raised buttons-submit" ng-click="AddNewOrder()"> Add New Order </md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div flex="10" layout layout-align="start stretch" class="dialog-content">
+            <div flex></div>
+            <md-button flex="10" class="md-raised button-submit" ng-click="SubmitNewPayableDetails($event)" ng-disabled="dialogForm.$error.required.length > 0">Submit</md-button>
+        </div>
+    </ng-form>
+    <ng-form ng-if="action == 'Edit'" name="dialogForm" flex class="dialog-content" layout="column" layout-align="start stretch" ng-submit="SubmitNewPayableDetails()">
         <div flex layout layout-align="start stretch" my-setter padding="10">
             <div flex="20" layout layout-align="start stretch">
                 <div flex layout layout-align="end center"> Supplier Name: <i class="input-required"> * </i></div>

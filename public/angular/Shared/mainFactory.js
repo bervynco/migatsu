@@ -283,6 +283,15 @@ mainFactory.factory('DataFactory', ['$http', function ($http) {
                 }
             })
         },
+        GetInventoryPOList: function(){
+            return $http({
+                method: "GET",
+                url: "index.php/InventoryManagement/getAllInventoryForPurchaseOrder",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+        },
         GetPurchaseOrderList: function(){
             return $http({
                 method: "GET",

@@ -44,7 +44,8 @@ class receivable_model extends CI_Model {
                                     'delivery_date' => $arrReceivableDetail['delivery_date'],
                                     'invoice_id' => $arrReceivableDetail['invoice_id'],
                                     'terms' => $arrReceivableDetail['terms'],
-                                    'remarks' => $arrReceivableDetail['remarks']
+                                    'remarks' => $arrReceivableDetail['remarks'],
+                                    'done' => $arrReceivableDetail['done']
                                 )
                             );
         return $this->db->affected_rows();

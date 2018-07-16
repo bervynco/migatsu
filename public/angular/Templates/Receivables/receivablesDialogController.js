@@ -12,6 +12,7 @@
 
     DataFactory.GetPurchaseOrderList().success(function(response){
         $scope.purchaseOrderList = response;
+        console.log($scope.purchaseOrderList);
     }).error(function(error){
 
     });
@@ -68,6 +69,7 @@
                 }
                 else if($scope.action == "Edit"){
                     DataFactory.EditReceivable($scope.receivable).success(function(response){
+                        console.log(response);
                         $mdDialog.hide("Successful");
                     }).error(function(error){
                         $mdDialog.hide("Error");

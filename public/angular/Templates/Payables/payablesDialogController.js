@@ -29,6 +29,14 @@
             overdue_days: '',
             remarks: ''
         }
+
+        $scope.order_list= [
+                {
+                    product_code: '',
+                    quantity: '',
+                    description: ''
+                }
+        ];
     }
     else{
         $scope.dialogHeading = "Edit Payable Details";
@@ -40,11 +48,19 @@
         $scope.payable.terms = parseInt($scope.payable.terms);
     }
 
+    $scope.AddNewOrder = function(){
+        $scope.order_list.push({
+            product_code: '',
+            quantity: '',
+            description: ''
+        });
+
+    }
+
     $scope.ChangeSupplier = function(list){
         $scope.payable.supplier_id = list;
     }
     $scope.SubmitNewPayableDetails = function(){
-        console.log($scope.payable);
         if($scope.payable.supplier_id != null && $scope.payable.delivery_date != null && $scope.payable.due_date != null 
             && $scope.payable.supplier_dr_id != null && $scope.payable.terms != null){
                 //$scope.payable.po_id != null && 
@@ -53,8 +69,8 @@
                 $scope.payable.due_date = moment($scope.payable.due_date).
                 format("YYYY-MM-DD HH:mm");
                 
-                console.log($scope.action);
                 if($scope.action == 'Add'){
+                    $scope.payable.order_list = $scope.order_list;
                     DataFactory.AddNewPayable($scope.payable).success(function(response){
                         if(response != 'Error'){
                             $mdDialog.hide(response);

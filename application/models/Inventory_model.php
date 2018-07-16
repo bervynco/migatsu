@@ -5,6 +5,10 @@ class inventory_model extends CI_Model {
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
 
+    function selectPOInventory(){
+        $query = $this->db->select(array('inventory.*', 'suppliers.name'))->from('inventory')->join('suppliers','suppliers.id = inventory.supplier_id')->where("inventory.balance > 0")->order_by('product_id', 'asc')->get();
+        return($query->num_rows() > 0) ? $query->result_array(): array();
+    }
     function selectInventoryItem($id){
         $query = $this->db->select(array('inventory.*', 'suppliers.name'))->from('inventory')->join('suppliers','suppliers.id = inventory.supplier_id')->where('inventory.id', $id)->get();
         return($query->num_rows() > 0) ? $query->first_row(): null;
@@ -15,6 +19,17 @@ class inventory_model extends CI_Model {
         return $this->db->insert_id();
     }
 
+    function insertInventoryFromPayable($supplierID, $list){
+        $query = $this->db->insert('inventory', array(
+                'supplier_id' => $supplierID,
+                'balance' => $list['quantity'],
+                'product_description' => $list['description'],
+                'product_id' => $list['product_code']
+            )         
+        );
+
+        return $this->db->insert_id();
+    }
     function updateInventory($arrInventoryDetail){
         $query = $this->db->where('id', $arrInventoryDetail['id'])
                           ->update(
@@ -40,22 +55,37 @@ class inventory_model extends CI_Model {
     }
 
     function updateInventoryItemCount($arrOrderList){
+        $balanceFlag = 0;
         foreach($arrOrderList as $index => $arrItem){
-            $query = $this->db->select(array('id', 'balance'))->from('inventory')->where('id', $arrItem->id)->get();
+            $query = $this->db->select(array('id', 'balance', 'threshold'))->from('inventory')->where('id', $arrItem->id)->get();
             $item = $query->result_array();
 
             foreach($item as $indexItem => $arrInventoryItem){
-                $queryInventory = $this->db->where('id', $arrInventoryItem['id'])
-                                    ->update(
-                                        'inventory', 
-                                        array(
-                                            'balance'=> $arrInventoryItem['balance'] - $arrItem->quantity
-                                        )
-                                    );
+                // $currBalance = $arrInventoryItem['balance'];
+                $proposedBalance = $arrInventoryItem['balance'] - $arrItem->quantity;
+
+                // print_r($currBalance);
+                // echo '<br>';
+                // print_r($proposedBalance);
+                // echo '<br><br>';
+                if($proposedBalance >= 0){
+                    $queryInventory = $this->db->where('id', $arrInventoryItem['id'])
+                        ->update(
+                            'inventory', 
+                            array(
+                                'balance'=> $proposedBalance
+                            )
+                        );
+                }
+                else{
+                    $balanceFlag = 1;
+                    break;
+                }
+                
             }
         }
 
-        return true;
+        return $balanceFlag;
     }
 }
 ?>

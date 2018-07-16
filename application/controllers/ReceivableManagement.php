@@ -42,8 +42,15 @@ class ReceivableManagement extends CI_Controller
                             'remarks');
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrReceivableDetail =  $this->assignDataToArray($postData, $arrColumns);
+        if($arrReceivableDetail['invoice_id'] != null){
+            $arrReceivableDetail['done'] = 1;
+        }
+        else {
+            $arrReceivableDetail['done'] = 0;
+        }
+
         $receivable = $this->receivable_model->insertReceivable($arrReceivableDetail);
-        if($receivable > 0){
+        if($receivable > 0 && $arrReceivableDetail['done'] == 0){
             $item = $this->receivable_model->selectReceivableItem($receivable);
             $currDateTime = new DateTime();
             $dueDateTime = new DateTime($item->due_date);
@@ -59,9 +66,10 @@ class ReceivableManagement extends CI_Controller
             $item->terms = intval($item->terms);
             echo json_encode($item);
         }
-        else{
-            echo "Error";
-        };
+        else {
+            echo "Cancel";
+        }
+        
     }
 
     public function editReceivable(){
@@ -70,6 +78,12 @@ class ReceivableManagement extends CI_Controller
 
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrReceivableDetail =  $this->assignDataToArray($postData, $arrColumns);
+        if($arrReceivableDetail['invoice_id'] != null){
+            $arrReceivableDetail['done'] = 1;
+        }
+        else {
+            $arrReceivableDetail['done'] = 0;
+        }
         $receivable = $this->receivable_model->updateReceivable($arrReceivableDetail);
         if($receivable > 0){
             echo "Successful";

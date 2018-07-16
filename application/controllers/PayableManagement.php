@@ -23,7 +23,6 @@ class PayableManagement extends CI_Controller
 
     public function getAllPayable(){
         $arrPayable = $this->payable_model->selectAllPayable();
-
         foreach($arrPayable as $index => $payable){
             $currDateTime = new DateTime();
             $dueDateTime = new DateTime($payable['due_date']);
@@ -41,11 +40,17 @@ class PayableManagement extends CI_Controller
 
     public function addNewPayable(){
         $arrColumns = array('supplier_id', 'po_id', 'delivery_date', 'supplier_dr_id', 'terms', 'due_date',
-                            'remarks');
+                            'remarks', 'order_list');
         $postData = json_decode(file_get_contents('php://input'), true);
+        $inventoryData = $postData['order_list'];
+        unset($postData['order_list']);
+        unset($arrColumns[7]);
         $arrPayableDetail =  $this->assignDataToArray($postData, $arrColumns);
         $payable = $this->payable_model->insertPayable($arrPayableDetail);
         if($payable > 0){
+            foreach($inventoryData as $index => $row){
+                $this->inventory_model->insertInventoryFromPayable($postData['supplier_id'], $inventoryData[$index]);
+            }
             $item = $this->payable_model->selectPayableItem($payable);
             $currDateTime = new DateTime();
             $dueDateTime = new DateTime($item->due_date);

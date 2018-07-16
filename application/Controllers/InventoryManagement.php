@@ -35,6 +35,11 @@ class InventoryManagement extends CI_Controller
         return $insertArray;
     }
 
+    public function getAllInventoryForPurchaseOrder(){
+        $arrInventory = $this->inventory_model->selectPOInventory();
+
+        echo json_encode($arrInventory);
+    }
     public function getAllInventory(){
         $arrInventory = $this->inventory_model->selectAllInventory();
 
@@ -60,7 +65,7 @@ class InventoryManagement extends CI_Controller
         }
         echo json_encode($arrInventory);
     }
-
+    
     public function addNewInventory(){
         $arrColumns = array('product_id', 'product_description', 'location', 'balance', 'purchase_price', 
             'threshold', 'supplier_id', 'remarks');
@@ -68,6 +73,8 @@ class InventoryManagement extends CI_Controller
         $arrInventoryDetail =  $this->assignDataToArray($postData, $arrColumns);
         $inventory = $this->inventory_model->insertInventory($arrInventoryDetail);
         if($inventory > 0){
+            $payable = array();
+            $payableStatus = $this->payable_model->insertPayable($inventory);
             echo json_encode($this->inventory_model->selectInventoryItem($inventory));
             //echo "Successful";
         }

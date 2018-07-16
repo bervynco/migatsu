@@ -68,6 +68,8 @@
                 //do nothing
             }
             else{
+                data.balance = parseInt(data.balance);
+                data.threshold = parseInt(data.balance);
                 $scope.filtered.push(data);
                 $scope.currentPage = Math.floor($scope.filtered.length/14);
             }

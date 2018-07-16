@@ -87,13 +87,13 @@ class PurchaseOrderManagement extends CI_Controller
         $orderList = json_decode($postData['order_list']);
         $inventory = $this->inventory_model->updateInventoryItemCount($orderList);
 
-        if($inventory == true){
+        if($inventory == 1){
+            echo "Current stock is insufficient. Check current stocks";
+        }
+        else {
             $purchaseOrder = $this->po_model->updateInventorySaved($arrPurchaseOrderDetail);
 
             echo "Successful";
-        }
-        else {
-            echo "Error";
         }
     }
 

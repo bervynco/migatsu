@@ -6,7 +6,7 @@
     $scope.userDetails = JSON.parse(localStorage.getItem("user"));
     $scope.logDetails = {name: $scope.userDetails.name, page: 'Payables Page', action: 'View'};
     $scope.currentPage = 0;
-
+    $scope.action = null;
     DataFactory.SetPageLog($scope.logDetails).success(function(response){
         console.log(response);
     }).error(function(error){
@@ -71,6 +71,7 @@
         });
     }
     $scope.AddNewPayable = function(ev){
+        $scope.action = "Add";
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,
@@ -101,6 +102,7 @@
         });
     }
     $scope.EditPayable = function(payable, ev){
+        $scope.action = "Edit";
         $mdDialog.show({
             parent: angular.element(document.body),
             targetEvent: ev,

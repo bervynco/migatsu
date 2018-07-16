@@ -193,8 +193,17 @@
         $mdDialog.show(confirm).then(function() {
             DataFactory.ApplyInventoryChanges(list).success(function(response){
                 console.log(response);
-                if(response == "Successful" || response == "Conditional Success"){
-                    
+                if(response != "Successful"){
+                    var alert = $mdDialog.alert()
+                        .title(response)
+                        .clickOutsideToClose(true)
+                        .targetEvent(ev)
+                        .ok('Yes')
+                    $mdDialog.show(alert).then(function(){
+                        
+                    })
+                }
+                else{
                     $scope.logDetails = {name: $scope.userDetails.name, page: 'Purchase Order Page', action: 'Apply Inventory Changes'};
 
                     DataFactory.SetPageLog($scope.logDetails).success(function(response){
@@ -203,9 +212,6 @@
 
                     });
                     $state.reload();
-                }
-                else{
-
                 }
                 
             }).error(function(error){
