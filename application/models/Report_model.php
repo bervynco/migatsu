@@ -15,8 +15,7 @@ class report_model extends CI_Model {
                            ->order_by('customers.name', 'asc');
         }
         else if($name == 'inventory'){
-            $query = $this->db->select(array('inventory.*', 'suppliers.name'))->from('inventory')
-                           ->join('suppliers','suppliers.id = inventory.supplier_id')
+            $query = $this->db->from('inventory')
                            ->order_by('product_id', 'asc');
 
         }
