@@ -13,8 +13,8 @@
     if($scope.action == "Add"){
         $scope.dialogHeading = "Add New Inventory";
         $scope.inventory = {
-            supplier_id: '',
             product_code: '',
+            uom: '',
             product_description: '',
             purchase_price: '',
             balance: '',

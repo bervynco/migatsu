@@ -32,7 +32,7 @@
 
         $scope.order_list= [
                 {
-                    product_code: '',
+                    product_id: '',
                     quantity: '',
                     description: ''
                 }
@@ -50,7 +50,8 @@
 
     $scope.AddNewOrder = function(){
         $scope.order_list.push({
-            product_code: '',
+            product_id: '',
+            uom: '',
             quantity: '',
             description: ''
         });

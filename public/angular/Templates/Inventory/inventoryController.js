@@ -9,7 +9,7 @@
 
     DataFactory.SetPageLog($scope.logDetails).success(function(response){
     }).error(function(error){
-
+        
     });
     
     function getData(){

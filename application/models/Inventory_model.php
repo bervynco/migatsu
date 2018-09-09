@@ -1,12 +1,13 @@
 <?php
 class inventory_model extends CI_Model {
     function selectAllInventory(){
-        $query = $this->db->select(array('inventory.*', 'suppliers.name'))->from('inventory')->join('suppliers','suppliers.id = inventory.supplier_id')->order_by('product_id', 'asc')->get();
+        // $query = $this->db->select(array('inventory.*', 'suppliers.name'))->from('inventory')->join('suppliers','suppliers.id = inventory.supplier_id')->order_by('product_id', 'asc')->get();
+        $query = $this->db->from('inventory')->order_by('product_id', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
 
     function selectPOInventory(){
-        $query = $this->db->select(array('inventory.*', 'suppliers.name'))->from('inventory')->join('suppliers','suppliers.id = inventory.supplier_id')->where("inventory.balance > 0")->order_by('product_id', 'asc')->get();
+        $query = $this->db->from('inventory')->where("inventory.balance > 0")->order_by('product_id', 'asc')->get();
         return($query->num_rows() > 0) ? $query->result_array(): array();
     }
     function selectInventoryItem($id){
@@ -18,11 +19,15 @@ class inventory_model extends CI_Model {
 
         return $this->db->insert_id();
     }
-
-    function insertInventoryFromPayable($supplierID, $list){
+    
+    function getInventoryFromProductId($productId) {
+        $query = $this->db->from("inventory")->where('product_id', $productId)->get();
+        return($query->num_rows() > 0) ? $query->result_array(): null;
+    }
+    function insertInventoryFromPayable($list){
         $query = $this->db->insert('inventory', array(
-                'supplier_id' => $supplierID,
                 'balance' => $list['quantity'],
+                'uom' => $list['uom'],
                 'product_description' => $list['description'],
                 'product_id' => $list['product_code']
             )         
@@ -37,10 +42,10 @@ class inventory_model extends CI_Model {
                                 array(
                                     'product_id'=> $arrInventoryDetail['product_id'], 
                                     'product_description' => $arrInventoryDetail['product_description'], 
+                                    'uom' => $arrInventoryDetail['uom'],
                                     'purchase_price' => $arrInventoryDetail['purchase_price'],
                                     'location' => $arrInventoryDetail['location'],
                                     'remarks' => $arrInventoryDetail['remarks'],
-                                    'supplier_id' => $arrInventoryDetail['supplier_id'],
                                     'balance'=> $arrInventoryDetail['balance'],
                                     'threshold'=> $arrInventoryDetail['threshold']
                                 )
@@ -48,6 +53,23 @@ class inventory_model extends CI_Model {
         return $this->db->affected_rows();
     }
 
+    function updateInventoryFromPayable($arrInventoryDetail){
+        $query = $this->db->where('id', $arrInventoryDetail['id'])
+                          ->update(
+                                'inventory', 
+                                array(
+                                    'product_id'=> $arrInventoryDetail['product_id'], 
+                                    'product_description' => $arrInventoryDetail['product_description'], 
+                                    'uom' => $arrInventoryDetail['uom'],
+                                    'purchase_price' => $arrInventoryDetail['purchase_price'],
+                                    'location' => $arrInventoryDetail['location'],
+                                    'remarks' => $arrInventoryDetail['remarks'],
+                                    'balance'=> $arrInventoryDetail['balance'],
+                                    'threshold'=> $arrInventoryDetail['threshold']
+                                )
+                            );
+        return $this->db->affected_rows();
+    }
     function deleteInventory($arrInventoryDetail){
         $query = $this->db->where('id', $arrInventoryDetail['id'])->delete('inventory');
 
@@ -63,11 +85,6 @@ class inventory_model extends CI_Model {
             foreach($item as $indexItem => $arrInventoryItem){
                 // $currBalance = $arrInventoryItem['balance'];
                 $proposedBalance = $arrInventoryItem['balance'] - $arrItem->quantity;
-
-                // print_r($currBalance);
-                // echo '<br>';
-                // print_r($proposedBalance);
-                // echo '<br><br>';
                 if($proposedBalance >= 0){
                     $queryInventory = $this->db->where('id', $arrInventoryItem['id'])
                         ->update(

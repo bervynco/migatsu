@@ -83,9 +83,12 @@
                         <div flex layout="row" layout-align="start stretch" ng-repeat="list in order_list track by $index" my-setter padding="5">
                             <div flex="none" my-setter width-in-percent="1"></div>
                             <div flex="20" layout layout-align="center stretch">
-                                <input flex type="text" placeholder="Product Code" ng-model="order_list[$index].product_code" ng-required="true">
+                                <input flex type="text" placeholder="Product Code" ng-model="order_list[$index].product_id" ng-required="true">
                             </div>
-                            <div flex="20" layout layout-align="center stretch">
+                            <div flex="15" layout layout-align="center stretch">
+                                <input flex type="text" placeholder="UOM" ng-model="order_list[$index].uom" ng-required="true">
+                            </div>
+                            <div flex="10" layout layout-align="center stretch">
                                 <input flex type="number" placeholder="Quantity" ng-model="order_list[$index].quantity" ng-required="true">
                             </div>
                             <div flex="none" my-setter width-in-percent="1"></div>

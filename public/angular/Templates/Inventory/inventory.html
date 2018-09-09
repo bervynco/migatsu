@@ -36,8 +36,8 @@
             <div flex layout layout-align="start stretch" style="overflow-y:auto">
                 <table class="data-table">
                     <tr>
-                        <th class=""> Supplier Name </th>
                         <th class=""> Product Code</th>
+                        <th class=""> UOM </th>
                         <th class=""> Description </th>
                         <th class=""> Price </th>
                         <th class=""> Balance</th>
@@ -55,10 +55,10 @@
                         <td>
                             <div layout layout-align="start stretch">
                                 <!-- <div flex="none" my-setter width-in-percent="4" ng-class="inventory.status === 'bad' ? 'warning' : ''"></div> -->
-                                <div flex layout layout-align="start center" layout-padding> {{inventory.name}} </div>
+                                <div flex layout layout-align="start center" layout-padding> {{inventory.product_id}} </div>
                             </div>
                         </td>
-                        <td>{{inventory.product_id}}</td>
+                        <td>{{inventory.uom}}</td>
                         <td>{{inventory.product_description}}</td>
                         <td>{{inventory.purchase_price}}</td>
                         <td>{{inventory.balance}}</td>

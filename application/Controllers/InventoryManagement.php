@@ -68,7 +68,7 @@ class InventoryManagement extends CI_Controller
     
     public function addNewInventory(){
         $arrColumns = array('product_id', 'product_description', 'location', 'balance', 'purchase_price', 
-            'threshold', 'supplier_id', 'remarks');
+            'threshold', 'remarks');
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrInventoryDetail =  $this->assignDataToArray($postData, $arrColumns);
         $inventory = $this->inventory_model->insertInventory($arrInventoryDetail);
@@ -85,8 +85,8 @@ class InventoryManagement extends CI_Controller
     }
 
     public function editInventory(){
-        $arrColumns = array('id', 'product_id', 'product_description', 'location', 'balance', 'purchase_price', 
-            'threshold', 'supplier_id', 'remarks');
+        $arrColumns = array('id', 'product_id', 'uom', 'product_description', 'location', 'balance', 'purchase_price', 
+            'threshold', 'remarks');
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrInventoryDetail = $this->assignDataToArray($postData, $arrColumns);
         $inventory = $this->inventory_model->updateInventory($arrInventoryDetail);
@@ -96,7 +96,7 @@ class InventoryManagement extends CI_Controller
 
     public function deleteInventory(){
         $arrColumns = array('id', 'product_id', 'product_description', 'location', 'balance', 'purchase_price', 
-            'threshold', 'supplier_id', 'remarks');
+            'threshold', 'remarks');
         $postData = json_decode(file_get_contents('php://input'), true);
         $arrInventoryDetail = $this->assignDataToArray($postData, $arrColumns);
         $inventory = $this->inventory_model->deleteInventory($arrInventoryDetail);

@@ -49,7 +49,17 @@ class PayableManagement extends CI_Controller
         $payable = $this->payable_model->insertPayable($arrPayableDetail);
         if($payable > 0){
             foreach($inventoryData as $index => $row){
-                $this->inventory_model->insertInventoryFromPayable($postData['supplier_id'], $inventoryData[$index]);
+                $inventory = $this->inventory_model->getInventoryFromProductId($row['product_id']);
+                if(count($inventory) > 0){
+                    $inventory[0]['balance'] = $inventory[0]['balance'] + $row['quantity'];
+                    $inventory[0]['uom'] = $row['uom'];
+                    $inventory[0]['product_description'] = $row['description'];
+                    $this->inventory_model->updateInventory($inventory[0]);
+                }
+                else{
+                    $this->inventory_model->insertInventoryFromPayable($inventoryData[$index]);
+                }
+                    
             }
             $item = $this->payable_model->selectPayableItem($payable);
             $currDateTime = new DateTime();
