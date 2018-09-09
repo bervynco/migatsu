@@ -55,6 +55,12 @@
 
     }
 
+     $scope.removeItem = function(idx){
+        if($scope.po.order_list.length > 1){
+            $scope.po.order_list.splice(idx, 1);
+        }
+    }
+
     $scope.SubmitNewPurchaseOrderDetails = function(){
         console.log($scope.po);
         for(var k = 0; k < $scope.po.order_list.length; k++){

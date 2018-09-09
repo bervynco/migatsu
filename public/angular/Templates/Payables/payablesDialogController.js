@@ -61,6 +61,12 @@
     $scope.ChangeSupplier = function(list){
         $scope.payable.supplier_id = list;
     }
+
+    $scope.removeItem = function(idx){
+        if($scope.order_list.length > 1){
+            $scope.order_list.splice(idx, 1);
+        }
+    }
     $scope.SubmitNewPayableDetails = function(){
         if($scope.payable.supplier_id != null && $scope.payable.delivery_date != null && $scope.payable.due_date != null 
             && $scope.payable.supplier_dr_id != null && $scope.payable.terms != null){

@@ -90,8 +90,11 @@
                                 <input flex type="number" placeholder="Quantity" ng-model="po.order_list[$index].quantity" ng-required="true">
                             </div>
                             <div flex="none" my-setter width-in-percent="1"></div>
-                            <div flex layout layout-align="center stretch">
+                            <div flex="50" layout layout-align="center stretch">
                                 <input flex type="text" placeholder="Description" ng-model="po.order_list[$index].description">
+                            </div>
+                            <div flex="10" layout layout-align="center stretch" class="pointer"ng-click="removeItem($index)">
+                                <md-icon md-svg-src="{{SVG.cross}}" layout layout-align="center center"></md-icon>
                             </div>
                         </div>
                     </div>
