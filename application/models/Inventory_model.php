@@ -29,7 +29,7 @@ class inventory_model extends CI_Model {
                 'balance' => $list['quantity'],
                 'uom' => $list['uom'],
                 'product_description' => $list['description'],
-                'product_id' => $list['product_code']
+                'product_id' => $list['product_id']
             )         
         );
 

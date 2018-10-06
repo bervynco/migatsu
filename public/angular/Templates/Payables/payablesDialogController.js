@@ -68,8 +68,8 @@
         }
     }
     $scope.SubmitNewPayableDetails = function(){
-        if($scope.payable.supplier_id != null && $scope.payable.delivery_date != null && $scope.payable.due_date != null 
-            && $scope.payable.supplier_dr_id != null && $scope.payable.terms != null){
+        
+        if($scope.payable.supplier_id != null && $scope.payable.due_date != null){
                 //$scope.payable.po_id != null && 
                 $scope.payable.delivery_date = moment($scope.payable.delivery_date).
                 format("YYYY-MM-DD HH:mm");
